@@ -1,0 +1,21 @@
+.left_panel{
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #6A1B9A, #3D5AFE);
+}
+
+.login_logo_text{
+    -fx-text-fill:white;
+    -fx-font-size: 28px;
+    -fx-letter-spacing: 2px;
+}
+
+.image_container{
+    -fx-max-width: 10px;
+}
+
+.login_bottom_text{
+    -fx-text-fill:white;
+}
+.welcome_bottom_text{
+    -fx-text-fill:white;
+    -fx-font-size: 27px;
+}
