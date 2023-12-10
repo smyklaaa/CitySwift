@@ -1,7 +1,5 @@
 package com.example.cityswift.server.util;
 
-
-
 import com.example.cityswift.server.config.DbConfig;
 
 import java.sql.Connection;

@@ -18,12 +18,12 @@ public class Javafx extends Application {
 
         @Override
         public void start(Stage stage) throws IOException {
-//            FXMLLoader fxmlLoader = new FXMLLoader(Javafx.class.getResource("/view/login/loginView.fxml"));
-//            Scene scene = new Scene(fxmlLoader.load(), 749, 484);
-//            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/view/login/loginStyle.css")).toExternalForm());
-//            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/common/commonStyle.css")).toExternalForm());
-//            stage.initStyle(StageStyle.UNDECORATED);
-//            stage.setScene(scene);
-//            stage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader(Javafx.class.getResource("/view/login/loginView.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 749, 484);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/view/login/loginStyle.css")).toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/common/commonStyle.css")).toExternalForm());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(scene);
+            stage.show();
         }
 }
