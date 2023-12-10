@@ -1,0 +1,19 @@
+.basic_input{
+    -fx-background-color: none;
+    -fx-border-color: transparent transparent #2c2c2c transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-font-size: 12px;
+    -fx-prompt-text-fill: #2c2c2c;
+}
+
+.basic_button{
+    -fx-background-color: #3D5AFE;
+    -fx-text-fill: white;
+    -fx-padding: 8px 30px;
+}
+
+.non_fill_button{
+    -fx-background-color: none;
+    -fx-text-fill:  #3D5AFE;
+    -fx-padding: 8px 30px;
+}
