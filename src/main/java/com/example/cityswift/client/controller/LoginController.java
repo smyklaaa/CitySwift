@@ -65,4 +65,7 @@ public class LoginController {
 
         return null;
     }
+
+    public void signonButton(ActionEvent actionEvent) {
+    }
 }
