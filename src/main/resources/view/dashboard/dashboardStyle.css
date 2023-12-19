@@ -1,3 +1,9 @@
-#dashboardActionPanel{
+#dashbord_left_panel_container {
 
+}
+
+.dashbord_left_panel_button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
 }

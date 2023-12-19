@@ -1,8 +1,9 @@
 package com.example.cityswift.server.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UserModel {
+public class UserModel implements Serializable {
     private int id;
     private String firstName;
     private String lastName;

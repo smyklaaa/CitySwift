@@ -1,7 +1,6 @@
 package com.example.cityswift.server;
 
 
-
 import com.example.cityswift.dto.ServerResponse;
 import com.example.cityswift.server.util.AppLogger;
 import com.example.cityswift.server.util.ClientHandlerCallable;
