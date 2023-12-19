@@ -20,7 +20,7 @@ public class HandleClientAction {
                 serverResponse = AddressService.ifUsersInParticularArea((ParticularArea) clientRequest.getData());
                 break;
             case "signup":
-                serverResponse = UserService.register((CreateUserData) clientRequest.getData());
+                serverResponse = UserService.signup((CreateUserData) clientRequest.getData());
                 break;
             default:
                 serverResponse.setResultCode(404);

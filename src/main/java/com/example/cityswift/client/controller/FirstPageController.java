@@ -66,15 +66,13 @@ public class FirstPageController {
         return null;
     }
 
-
-
-
     public void signupButtonOn(ActionEvent event) {
         ReactionMessageLabel.setText("Próba rejstracji");
         try {
             SceneSwitcher.switchScene(event, "/view/signup/signupView.fxml");
         } catch (IOException e) {
             ReactionMessageLabel.setText("Błąd ładowania sceny");
+            System.out.println(e);
         }
 
 

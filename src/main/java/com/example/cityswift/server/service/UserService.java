@@ -29,12 +29,12 @@ public class UserService {
         }
     }
 
-    public static ServerResponse register(CreateUserData createUserData){
+    public static ServerResponse signup(CreateUserData createUserData){
         int userId = userRepository.insertUser(createUserData);
         if(userId > 0){
             return ServerResponseService.createPositiveServerResponse(new UserToken(userId));
         }else{
-            return ServerResponseService.serverErrorResponse();
+            return ServerResponseService.userExistErrorResponse();
         }
     }
 }
