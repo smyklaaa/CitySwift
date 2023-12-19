@@ -16,18 +16,9 @@ public class CreateUserData implements Serializable {
     private String mobile;
     private LocalDate dateOfBirth;
 
-    public CreateUserData() {
-    }
 
-    public CreateUserData(String firstName, String lastName, String mail, String password, String mobile) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mail = mail;
-        this.password = password;
-        this.mobile = mobile;
-    }
-
-    public CreateUserData(String firstName, String lastName, String mail, String password, String mobile, LocalDate dateOfBirth) {
+    public CreateUserData(String firstName, String lastName, String mail, String password, String mobile,
+                          String address ,LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
@@ -77,7 +68,7 @@ public class CreateUserData implements Serializable {
     }
 
     public LocalDate getDateOfBirth() {
-        return LocalDate.of(1990, 1, 1);
+        return this.dateOfBirth;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {

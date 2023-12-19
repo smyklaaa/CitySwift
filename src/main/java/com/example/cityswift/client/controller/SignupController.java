@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class SignupController {
 
@@ -28,7 +29,7 @@ public class SignupController {
     @FXML
     private TextField addressTextField;
     @FXML
-    private DatePicker birthdayDataPicker;
+    private DatePicker birthdayDatePicker;
     @FXML
     private Label reactionMessageLabel;
 
@@ -40,11 +41,12 @@ public class SignupController {
                 && !surnameTextField.getText().isBlank()
                 && !nameTextField.getText().isBlank()
                 && !mobileTextField.getText().isBlank()
-                && !addressTextField.getText().isBlank()) {
+                && !addressTextField.getText().isBlank()
+                && birthdayDatePicker.getValue() !=null ) {
 
             ServerResponse serverResponse = sendSignupRequest(nameTextField.getText(), surnameTextField.getText(),
                     mailTextField.getText(), passwordField.getText(), mobileTextField.getText(),
-                    addressTextField.getText());
+                    addressTextField.getText(), birthdayDatePicker.getValue());
 
             handleSignupResponse(event, serverResponse);
 
@@ -54,11 +56,11 @@ public class SignupController {
     }
 
     private ServerResponse sendSignupRequest(String name, String surname, String mail, String password,
-                                             String mobile, String address) {
+                                             String mobile, String address, LocalDate birthday) {
         NetworkClient networkClient = new NetworkClient();
 
         try {
-            CreateUserData newUserData = new CreateUserData(name, surname, mail, password, mobile);
+            CreateUserData newUserData = new CreateUserData(name, surname, mail, password, mobile,address, birthday);
             ClientRequest request = new ClientRequest("signup", newUserData);
 
             return networkClient.sendRequest(request);
