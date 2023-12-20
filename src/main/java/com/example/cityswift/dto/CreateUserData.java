@@ -15,16 +15,23 @@ public class CreateUserData implements Serializable {
     private String password;
     private String mobile;
     private LocalDate dateOfBirth;
-
+    private String street;
+    private String postalCode;
+    private String homeNr;
+    private String doorKeyNr;
 
     public CreateUserData(String firstName, String lastName, String mail, String password, String mobile,
-                          String address ,LocalDate dateOfBirth) {
+                          String street, String postalCode, String homeNr, String doorKeyNr, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
         this.password = password;
         this.mobile = mobile;
         this.dateOfBirth = dateOfBirth;
+        this.street = street;
+        this.postalCode = postalCode;
+        this.homeNr = homeNr;
+        this.doorKeyNr = doorKeyNr;
     }
 
     public String getFirstName() {
@@ -74,4 +81,20 @@ public class CreateUserData implements Serializable {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+    public String getStreet() {return street;}
+
+    public void setStreet(String street) {this.street = street;}
+
+    public String getPostalCode() {return postalCode;}
+
+    public void setPostalCode(String postalCode) {this.postalCode = postalCode;}
+
+    public String getHomeNr() { return homeNr;}
+
+    public void setHomeNr(String homeNr) { this.homeNr = homeNr;}
+
+    public String getDoorKeyNr() { return doorKeyNr;}
+
+    public void setDoorKeyNr(String doorKeyNr) { this.doorKeyNr = doorKeyNr;}
 }
+

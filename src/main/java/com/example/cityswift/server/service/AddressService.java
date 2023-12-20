@@ -2,16 +2,14 @@ package com.example.cityswift.server.service;
 
 
 
-import com.example.cityswift.dto.ListOfAddressInArea;
-import com.example.cityswift.dto.ParticularArea;
-import com.example.cityswift.dto.ServerResponse;
+import com.example.cityswift.dto.*;
 import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.repository.AddressRepository;
 
 import java.util.List;
 
 public class AddressService {
-    private static final AddressRepository addressRepository = new AddressRepository();
+    private static final AddressRepository  addressRepository = new AddressRepository();
 
     public static ServerResponse ifUsersInParticularArea(ParticularArea userArea){
         List<AddressModel> givenUserArea = addressRepository.fetchUsersInAddressArea(userArea);
@@ -22,6 +20,15 @@ public class AddressService {
 
         }else{
             return ServerResponseService.notFoundServerResponse();
+        }
+    }
+
+    public static ServerResponse signup(CreateUserData createUserData, Integer userId){
+        int insertUserAddress = addressRepository.insertUserAddress(createUserData, userId);
+        if(insertUserAddress > 0){
+            return ServerResponseService.createPositiveServerResponse(new UserToken(userId));
+        }else{
+            return ServerResponseService.userExistErrorResponse();
         }
     }
 }

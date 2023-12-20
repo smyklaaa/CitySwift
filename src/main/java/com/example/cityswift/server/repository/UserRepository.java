@@ -8,9 +8,7 @@ import com.example.cityswift.server.mapper.ToUserModelMapper;
 import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.model.UserModel;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +48,13 @@ public class UserRepository {
         params.add(createUserData.getMobile());
         params.add(createUserData.getDateOfBirth());
         return repository.insert(sql, params);
+    }
+
+    public Optional<UserModel> getUserByMail(String mail){
+        String sql = "SELECT * FROM app_user WHERE mail = ? ";
+        List<Object> params = new ArrayList<>();
+        params.add(mail);
+        return repository.fetchSingleRow(sql, mapper, params);
     }
 
 }
