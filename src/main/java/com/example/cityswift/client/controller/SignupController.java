@@ -55,6 +55,7 @@ public class SignupController {
                 && !nameTextField.getText().isBlank()
                 && !mobileTextField.getText().isBlank()
                 && !postalCodeTextField.getText().isBlank()
+                && checkPostalCodeRequirements(postalCodeTextField.getText())
                 && !streetNameTextField.getText().isBlank()
                 && !homeNrTextField.getText().isBlank()
                 && !doorKeyTextField.getText().isBlank()
@@ -120,6 +121,19 @@ public class SignupController {
             incorrectDataMessageLabel.setText("Twoje hasło nie zawiera min jednej małej litery," +
                                                 "\ndużej litery lub cyfry");
             passwordField.clear();
+            return  false;
+        }else return true;
+    }
+
+    public boolean checkPostalCodeRequirements(String postalCode) {
+
+        if (postalCode.length() != 5) {
+            incorrectDataMessageLabel.setText("Twój kod pocztowy ma nieodpowiednia długość");
+            postalCodeTextField.clear();
+            return false;
+        } else if (!postalCode.matches("\\d+")) {
+            incorrectDataMessageLabel.setText("Twój kod pocztowy zawiera inne znaki niż cyfry");
+            postalCodeTextField.clear();
             return  false;
         }else return true;
     }
