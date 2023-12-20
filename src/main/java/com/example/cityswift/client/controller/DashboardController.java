@@ -26,15 +26,18 @@ public class DashboardController {
     }
 
     @FXML
+    private void loadFriends() {
+        loadContent("/view/friends/friendsView.fxml", "Znajomi");
+    }
+
+    @FXML
     private void loadSettings() {
         loadContent("/view/settings/settingsView.fxml", "Ustawienia");
     }
 
     @FXML
     private void initialize() {
-        ServerResponse userBasicData = NetworkClient.sendRequest(new ClientRequest("getUserBasicData", UserSession.getUserToken().getToken()));
         loadContent("/view/home/homeView.fxml", "Home");
-        System.out.println("TEST");
     }
 
     private void loadContent(String fxml, String panelNameText) {

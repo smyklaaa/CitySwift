@@ -22,6 +22,9 @@ public class HandleClientAction {
             case "signup":
                 serverResponse = UserService.signup((CreateUserData) clientRequest.getData());
                 break;
+            case "searchUser":
+                serverResponse = UserService.userSearch((String) clientRequest.getData());
+                break;
             default:
                 serverResponse.setResultCode(404);
                 serverResponse.setResultMessage("Action not found");
