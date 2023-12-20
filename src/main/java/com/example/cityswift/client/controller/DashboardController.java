@@ -1,9 +1,5 @@
 package com.example.cityswift.client.controller;
 
-import com.example.cityswift.client.util.NetworkClient;
-import com.example.cityswift.client.util.UserSession;
-import com.example.cityswift.dto.ClientRequest;
-import com.example.cityswift.dto.ServerResponse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -32,9 +28,7 @@ public class DashboardController {
 
     @FXML
     private void initialize() {
-        ServerResponse userBasicData = NetworkClient.sendRequest(new ClientRequest("getUserBasicData", UserSession.getUserToken().getToken()));
         loadContent("/view/home/homeView.fxml", "Home");
-        System.out.println("TEST");
     }
 
     private void loadContent(String fxml, String panelNameText) {

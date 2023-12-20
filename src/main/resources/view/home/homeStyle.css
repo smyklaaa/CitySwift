@@ -1,8 +1,8 @@
-.tile_container{
+.tile_container {
     -fx-padding: 10px;
 }
 
-.tile{
+.tile {
     -fx-background-color: #ffffff;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
