@@ -61,7 +61,8 @@ public class SignupController {
                 && !homeNrTextField.getText().isBlank()
                 && !doorKeyTextField.getText().isBlank()
                 && !cityTextField.getText().isBlank()
-                && birthdayDatePicker.getValue() != null) {
+                && birthdayDatePicker.getValue() != null
+                && checkIfUserOverEighteen(birthdayDatePicker.getValue())) {
 
             checkPasswordRequirements(passwordField.getText());
             while (passwordField.getText().isBlank()) {
@@ -161,5 +162,19 @@ public class SignupController {
         }
     }
 
+
+    public boolean checkIfUserOverEighteen(LocalDate date) {
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate ageLimitDate = currentDate.minusYears(18);
+
+        if(date.isAfter(ageLimitDate)){
+            incorrectDataMessageLabel.setText("Musisz mieć powyżej 18 lat aby się zarejstrować");
+            return false;
+        }else{
+            incorrectDataMessageLabel.setText("");
+            return true;
+        }
+    }
 
 }
