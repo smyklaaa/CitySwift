@@ -1,6 +1,8 @@
 package com.example.cityswift.server.model;
 
-public class AddressModel {
+import java.io.Serializable;
+
+public class AddressModel implements Serializable {
     private int id;
     private String street;
     private String postalCode;
