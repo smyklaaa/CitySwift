@@ -49,6 +49,7 @@ public class SignupController {
     public void signupButtonOn(ActionEvent event) {
 
         if (!mailTextField.getText().isBlank()
+                && checkMailRequirements(mailTextField.getText())
                 && !passwordField.getText().isBlank()
                 && checkPasswordRequirements(passwordField.getText())
                 && !surnameTextField.getText().isBlank()
@@ -119,10 +120,13 @@ public class SignupController {
             return false;
         } else if (!matcher.matches()) {
             incorrectDataMessageLabel.setText("Twoje hasło nie zawiera min jednej małej litery," +
-                                                "\ndużej litery lub cyfry");
+                    "\ndużej litery lub cyfry");
             passwordField.clear();
-            return  false;
-        }else return true;
+            return false;
+        } else {
+            incorrectDataMessageLabel.setText("");
+            return true;
+        }
     }
 
     public boolean checkPostalCodeRequirements(String postalCode) {
@@ -134,8 +138,28 @@ public class SignupController {
         } else if (!postalCode.matches("\\d+")) {
             incorrectDataMessageLabel.setText("Twój kod pocztowy zawiera inne znaki niż cyfry");
             postalCodeTextField.clear();
-            return  false;
-        }else return true;
+            return false;
+        } else {
+            incorrectDataMessageLabel.setText("");
+            return true;
+        }
     }
+
+    public boolean checkMailRequirements(String mail) {
+
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(mail);
+
+        if (!matcher.matches()) {
+            incorrectDataMessageLabel.setText("Podałeś zły format maila");
+            mailTextField.clear();
+            return false;
+        } else {
+            incorrectDataMessageLabel.setText("");
+            return true;
+        }
+    }
+
 
 }
