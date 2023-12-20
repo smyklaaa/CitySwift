@@ -19,8 +19,8 @@ public class HandleClientAction {
             case "getUsersLivingInArea":
                 serverResponse = AddressService.ifUsersInParticularArea((ParticularArea) clientRequest.getData());
                 break;
-            case "register":
-                serverResponse = UserService.register((CreateUserData) clientRequest.getData());
+            case "signup":
+                serverResponse = UserService.signup((CreateUserData) clientRequest.getData());
                 break;
             default:
                 serverResponse.setResultCode(404);

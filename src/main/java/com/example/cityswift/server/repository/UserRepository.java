@@ -8,7 +8,9 @@ import com.example.cityswift.server.mapper.ToUserModelMapper;
 import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.model.UserModel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

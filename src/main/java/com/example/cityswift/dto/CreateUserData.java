@@ -3,6 +3,7 @@ package com.example.cityswift.dto;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class CreateUserData implements Serializable {
     @Serial
@@ -15,10 +16,9 @@ public class CreateUserData implements Serializable {
     private String mobile;
     private LocalDate dateOfBirth;
 
-    public CreateUserData() {
-    }
 
-    public CreateUserData(String firstName, String lastName, String mail, String password, String mobile, LocalDate dateOfBirth) {
+    public CreateUserData(String firstName, String lastName, String mail, String password, String mobile,
+                          String address ,LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
@@ -68,7 +68,7 @@ public class CreateUserData implements Serializable {
     }
 
     public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+        return this.dateOfBirth;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {

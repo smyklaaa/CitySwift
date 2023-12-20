@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.FirstPageController">
     <left>
         <AnchorPane prefHeight="530.0" prefWidth="500.0" styleClass="left_panel" BorderPane.alignment="CENTER">
             <children>
@@ -41,9 +41,10 @@
             <children>
                 <TextField fx:id="usernameTextField" layoutX="25.0" layoutY="167.0" prefHeight="26.0" prefWidth="200.0" promptText="Login" styleClass="basic_input" />
                 <PasswordField fx:id="passwordTextField" layoutX="25.0" layoutY="229.0" prefHeight="26.0" prefWidth="200.0" promptText="Hasło" styleClass="basic_input" />
-                <Button fx:id="loginButton" layoutX="97.0" layoutY="302.0" mnemonicParsing="false" onAction="#loginButtonOn" styleClass="basic_button" text="Zaloguj" />
-                <Button fx:id="forgotPassword" layoutX="65.0" layoutY="349.0" mnemonicParsing="false" styleClass="non_fill_button" text="Zapomniałeś hasła?" />
-                <Label fx:id="loginMessageLabel" layoutX="35.0" layoutY="86.0" prefHeight="18.0" prefWidth="179.0" />
+                <Button fx:id="loginButton" layoutX="56.0" layoutY="292.0" mnemonicParsing="false" onAction="#loginButtonOn" prefHeight="25.0" prefWidth="138.0" styleClass="basic_button" text="Zaloguj" />
+                <Button fx:id="forgotPassword" layoutX="56.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" styleClass="non_fill_button" text="Zapomniałeś hasła?" />
+                <Label fx:id="ReactionMessageLabel" layoutX="35.0" layoutY="86.0" prefHeight="18.0" prefWidth="179.0" />
+            <Button fx:id="signupButton" layoutX="57.0" layoutY="337.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="25.0" prefWidth="137.0" styleClass="basic_button" text="Rejstracja" />
             </children>
         </AnchorPane>
     </center>

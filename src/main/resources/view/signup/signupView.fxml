@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="677.0" styleClass="background" stylesheets="@signupStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.SignupController">
+   <children>
+      <TextField fx:id="mailTextField" layoutX="153.0" layoutY="64.0" prefHeight="25.0" prefWidth="353.0" promptText="mail" />
+      <TextField fx:id="nameTextField" layoutX="153.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="imie" />
+      <TextField fx:id="surnameTextField" layoutX="152.0" layoutY="210.0" prefHeight="25.0" prefWidth="353.0" promptText="nazwisko" />
+      <TextField fx:id="mobileTextField" layoutX="153.0" layoutY="260.0" prefHeight="25.0" prefWidth="353.0" promptText="numer telefonu" />
+      <TextField fx:id="addressTextField" layoutX="152.0" layoutY="307.0" prefHeight="25.0" prefWidth="353.0" promptText="adres" />
+      <PasswordField fx:id="passwordField" layoutX="153.0" layoutY="112.0" prefHeight="25.0" prefWidth="353.0" promptText="hasło" />
+      <Button fx:id="signupButton" layoutX="200.0" layoutY="400.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="32.0" prefWidth="242.0" text="Zarejstruj się" />
+      <DatePicker fx:id="birthdayDatePicker" layoutX="153.0" layoutY="348.0" prefHeight="25.0" prefWidth="353.0" promptText="data urodzenia" />
+      <Label fx:id="reactionMessageLabel" layoutX="155.0" layoutY="34.0" prefHeight="17.0" prefWidth="353.0" />
+   </children>
+</AnchorPane>

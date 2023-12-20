@@ -17,11 +17,11 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class LoginController {
+public class FirstPageController {
     @FXML
     private Button cancelButton;
     @FXML
-    private Label loginMessageLabel;
+    private Label ReactionMessageLabel;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -29,11 +29,11 @@ public class LoginController {
 
     public void loginButtonOn(ActionEvent event) {
         if (!usernameTextField.getText().isBlank() && !passwordTextField.getText().isBlank()) {
-            loginMessageLabel.setText("Próba logowania");
+            ReactionMessageLabel.setText("Próba logowania");
             ServerResponse serverResponse = sendLoginRequest(usernameTextField.getText(), passwordTextField.getText());
             handleUserLoginResponse(serverResponse, event);
         } else {
-            loginMessageLabel.setText("Podaj login oraz hasło");
+            ReactionMessageLabel.setText("Podaj login oraz hasło");
         }
     }
 
@@ -43,10 +43,10 @@ public class LoginController {
                 UserSession.setUserToken((UserToken) serverResponse.getData());
                 SceneSwitcher.switchScene(event, "/view/dashboard/dashboardView.fxml");
             } catch (IOException e) {
-                loginMessageLabel.setText("Błąd ładowania sceny");
+                ReactionMessageLabel.setText("Błąd ładowania sceny");
             }
         } else {
-            loginMessageLabel.setText("Niepoprawny login lub hasło");
+            ReactionMessageLabel.setText("Niepoprawny login lub hasło");
         }
     }
 
@@ -60,9 +60,23 @@ public class LoginController {
             return networkClient.sendRequest(request);
 
         } catch (Exception e) {
-            loginMessageLabel.setText("Błąd połączenia z serwerem");
+            ReactionMessageLabel.setText("Błąd połączenia z serwerem");
         }
 
         return null;
     }
+
+    public void signupButtonOn(ActionEvent event) {
+        ReactionMessageLabel.setText("Próba rejstracji");
+        try {
+            SceneSwitcher.switchScene(event, "/view/signup/signupView.fxml");
+        } catch (IOException e) {
+            ReactionMessageLabel.setText("Błąd ładowania sceny");
+            System.out.println(e);
+        }
+
+
+    }
+
+
 }

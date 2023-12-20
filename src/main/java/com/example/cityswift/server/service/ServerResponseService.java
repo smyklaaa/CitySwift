@@ -45,4 +45,13 @@ public class ServerResponseService {
 
         return serverResponse;
     }
+
+    public static ServerResponse userExistErrorResponse () {
+        ServerResponse serverResponse = new ServerResponse();
+
+        serverResponse.setResultCode(409);
+        serverResponse.setResultMessage("User already exist in database");
+
+        return serverResponse;
+    }
 }
