@@ -29,7 +29,8 @@ public class AddressRepository {
     }
 
     public int insertUserAddress(CreateUserData createUserData, Integer userId) {
-        String sql = "INSERT INTO address (street, postal_code, home_number, door_key, is_main, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO address (street, postal_code, home_number, door_key, is_main, user_id,city) " +
+                "VALUES (?,?, ?, ?, ?, ?, ?)";
         List<Object> params = new ArrayList<>();
         params.add(createUserData.getStreet());
         params.add(createUserData.getPostalCode());
@@ -37,6 +38,7 @@ public class AddressRepository {
         params.add(createUserData.getDoorKeyNr());
         params.add(true);
         params.add(userId);
+        params.add(createUserData.getCity());
         return repository.insert(sql, params);
     }
 }

@@ -38,6 +38,8 @@ public class SignupController {
     private DatePicker birthdayDatePicker;
     @FXML
     private Label reactionMessageLabel;
+    @FXML
+    private TextField cityTextField;
 
 
     public void signupButtonOn(ActionEvent event) {
@@ -51,11 +53,12 @@ public class SignupController {
                 && !streetNameTextField.getText().isBlank()
                 && !homeNrTextField.getText().isBlank()
                 && !doorKeyTextField.getText().isBlank()
+                && !cityTextField.getText().isBlank()
                 && birthdayDatePicker.getValue() !=null ) {
 
             ServerResponse serverResponse = sendSignupRequest(nameTextField.getText(), surnameTextField.getText(),
                     mailTextField.getText(), passwordField.getText(), mobileTextField.getText(),
-                    streetNameTextField.getText(), postalCodeTextField.getText(),homeNrTextField.getText(),
+                    cityTextField.getText(), streetNameTextField.getText(), postalCodeTextField.getText(),homeNrTextField.getText(),
                     doorKeyTextField.getText(),birthdayDatePicker.getValue());
 
             handleSignupResponse(event, serverResponse);
@@ -66,12 +69,12 @@ public class SignupController {
     }
 
     private ServerResponse sendSignupRequest(String name, String surname, String mail, String password,
-                                             String mobile, String street,String postalCode,String homeNr,
+                                             String mobile, String city, String street,String postalCode,String homeNr,
                                              String doorKeyNr, LocalDate birthday) {
         NetworkClient networkClient = new NetworkClient();
 
         try {
-            CreateUserData newUserData = new CreateUserData(name, surname, mail, password, mobile,street,postalCode,
+            CreateUserData newUserData = new CreateUserData(name, surname, mail, password, mobile,city,street,postalCode,
                     homeNr,doorKeyNr, birthday);
             ClientRequest request = new ClientRequest("signup", newUserData);
 
