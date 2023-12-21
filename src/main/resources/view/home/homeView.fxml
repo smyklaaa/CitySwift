@@ -2,11 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="599.0" style="-fx-background-color: #F3F2F7;" stylesheets="@homeStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="599.0" style="-fx-background-color: #F3F2F7;" stylesheets="@homeStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.HomeController">
    <children>
       <VBox prefHeight="465.0" prefWidth="200.0" style="-fx-pref-width: 200px;">
          <children>
@@ -55,30 +57,116 @@
       </VBox>
       <VBox prefHeight="465.0" prefWidth="200.0" style="-fx-pref-width: 200px;">
          <children>
-            <HBox prefHeight="265.0" prefWidth="200.0" styleClass="tile_container">
+            <HBox prefHeight="232.0" prefWidth="200.0" styleClass="tile_container">
                <children>
-                  <VBox alignment="CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
+                  <VBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
                      <children>
-                        <Label styleClass="header_label" text="2.23 PLN">
+                        <Label text="Podstawowe dane">
                            <font>
-                              <Font name="System Bold" size="19.0" />
+                              <Font size="13.0" />
                            </font>
                         </Label>
-                        <Label styleClass="description_label" text="Aktualna cena za kilometr" />
+                        <VBox id="basic_data_container" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="2">
+                           <children>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="54.0" styleClass="label_description" text="Imię">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="nameLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="61.0" styleClass="label_description" text="Nazwisko">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="surnameLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="54.0" styleClass="label_description" text="Data ur.">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="birthLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="54.0" styleClass="label_description" text="Tel.">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="mobileLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="200.0" prefWidth="200.0" styleClass="tile_container">
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="232.0" prefWidth="200.0" styleClass="tile_container">
                <children>
-                  <VBox alignment="CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
+                  <VBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
                      <children>
-                        <Label styleClass="header_label" text="732">
+                        <Label text="Adres podstawowy">
                            <font>
-                              <Font name="System Bold" size="19.0" />
+                              <Font size="13.0" />
                            </font>
                         </Label>
-                        <Label styleClass="description_label" text="Nadanych paczek dzisiaj" />
+                        <VBox id="basic_data_container" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="2">
+                           <children>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="54.0" styleClass="label_description" text="Ulica">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="streetLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="61.0" styleClass="label_description" text="Miasto">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="cityLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="54.0" styleClass="label_description" text="Kod">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="codeLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="26.0" prefWidth="145.0" style="-fx-padding: 5px 7px;" styleClass="label_container">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="54.0" styleClass="label_description" text="Numer">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="homeNumberLabel" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="82.0" styleClass="label_data" text="Jarosław" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>
@@ -105,7 +193,12 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
                      <children>
-                        <Label styleClass="description_label" text="Paczek nadanych przez ciebie" />
+                        <Label styleClass="description_label" text="Znajomi" />
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="162.0" prefWidth="142.0" />
+                          </content>
+                        </ScrollPane>
                      </children>
                   </VBox>
                </children>

@@ -1,9 +1,5 @@
 package com.example.cityswift.client.controller;
 
-import com.example.cityswift.client.util.NetworkClient;
-import com.example.cityswift.client.util.UserSession;
-import com.example.cityswift.dto.ClientRequest;
-import com.example.cityswift.dto.ServerResponse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

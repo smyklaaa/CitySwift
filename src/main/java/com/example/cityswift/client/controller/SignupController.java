@@ -27,7 +27,13 @@ public class SignupController {
     @FXML
     private TextField mobileTextField;
     @FXML
-    private TextField addressTextField;
+    private TextField postalCodeTextField;
+    @FXML
+    private TextField streetNameTextField;
+    @FXML
+    private TextField homeNrTextField;
+    @FXML
+    private TextField doorKeyTextField;
     @FXML
     private DatePicker birthdayDatePicker;
     @FXML
@@ -41,12 +47,16 @@ public class SignupController {
                 && !surnameTextField.getText().isBlank()
                 && !nameTextField.getText().isBlank()
                 && !mobileTextField.getText().isBlank()
-                && !addressTextField.getText().isBlank()
+                && !postalCodeTextField.getText().isBlank()
+                && !streetNameTextField.getText().isBlank()
+                && !homeNrTextField.getText().isBlank()
+                && !doorKeyTextField.getText().isBlank()
                 && birthdayDatePicker.getValue() !=null ) {
 
             ServerResponse serverResponse = sendSignupRequest(nameTextField.getText(), surnameTextField.getText(),
                     mailTextField.getText(), passwordField.getText(), mobileTextField.getText(),
-                    addressTextField.getText(), birthdayDatePicker.getValue());
+                    streetNameTextField.getText(), postalCodeTextField.getText(),homeNrTextField.getText(),
+                    doorKeyTextField.getText(),birthdayDatePicker.getValue());
 
             handleSignupResponse(event, serverResponse);
 
@@ -56,11 +66,13 @@ public class SignupController {
     }
 
     private ServerResponse sendSignupRequest(String name, String surname, String mail, String password,
-                                             String mobile, String address, LocalDate birthday) {
+                                             String mobile, String street,String postalCode,String homeNr,
+                                             String doorKeyNr, LocalDate birthday) {
         NetworkClient networkClient = new NetworkClient();
 
         try {
-            CreateUserData newUserData = new CreateUserData(name, surname, mail, password, mobile,address, birthday);
+            CreateUserData newUserData = new CreateUserData(name, surname, mail, password, mobile,street,postalCode,
+                    homeNr,doorKeyNr, birthday);
             ClientRequest request = new ClientRequest("signup", newUserData);
 
             return networkClient.sendRequest(request);

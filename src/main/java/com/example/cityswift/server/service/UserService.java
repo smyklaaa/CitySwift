@@ -36,9 +36,11 @@ public class UserService {
     }
 
     public static ServerResponse signup(CreateUserData createUserData){
-        int userId = userRepository.insertUser(createUserData);
-        if(userId > 0){
-            return ServerResponseService.createPositiveServerResponse(new UserToken(userId));
+        int isUserInserted = userRepository.insertUser(createUserData);
+        Optional<UserModel> userByMail = userRepository.getUserByMail(createUserData.getMail());
+        AddressService.signup(createUserData, userByMail.get().getId());
+        if(isUserInserted > 0){
+            return ServerResponseService.createPositiveServerResponse(new UserToken(isUserInserted));
         }else{
             return ServerResponseService.userExistErrorResponse();
         }
