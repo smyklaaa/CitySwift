@@ -28,6 +28,7 @@
                   <Button mnemonicParsing="false" styleClass="dashbord_left_panel_button" stylesheets="@dashboardStyle.css" text="Nadaj paczkę" />
                   <Button mnemonicParsing="false" styleClass="dashbord_left_panel_button" text="Historia zamówień" />
                   <Button mnemonicParsing="false" styleClass="dashbord_left_panel_button" text="Zostań kurierem" />
+                  <Button layoutX="33.0" layoutY="164.0" mnemonicParsing="false" onAction="#loadFriends" styleClass="dashbord_left_panel_button" text="Znajomi" />
                   <Button mnemonicParsing="false" onAction="#loadSettings" styleClass="dashbord_left_panel_button" text="Ustawienia" />
                </children>
             </VBox>

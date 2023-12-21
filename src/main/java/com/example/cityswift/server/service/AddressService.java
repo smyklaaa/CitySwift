@@ -14,10 +14,7 @@ public class AddressService {
     public static ServerResponse ifUsersInParticularArea(ParticularArea userArea){
         List<AddressModel> givenUserArea = addressRepository.fetchUsersInAddressArea(userArea);
         if(!givenUserArea.isEmpty()){
-
             return ServerResponseService.createPositiveServerResponse(new ListOfAddressInArea(givenUserArea));
-
-
         }else{
             return ServerResponseService.notFoundServerResponse();
         }

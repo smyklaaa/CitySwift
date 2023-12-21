@@ -22,6 +22,11 @@ public class DashboardController {
     }
 
     @FXML
+    private void loadFriends() {
+        loadContent("/view/friends/friendsView.fxml", "Znajomi");
+    }
+
+    @FXML
     private void loadSettings() {
         loadContent("/view/settings/settingsView.fxml", "Ustawienia");
     }

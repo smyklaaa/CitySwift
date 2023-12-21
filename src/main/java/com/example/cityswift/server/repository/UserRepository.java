@@ -57,4 +57,13 @@ public class UserRepository {
         return repository.fetchSingleRow(sql, mapper, params);
     }
 
+    public List<UserModel> fetchUserSearch(String userSearch) {
+        String sql = "SELECT * FROM app_user WHERE first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ?";
+        List<Object> params = new ArrayList<>();
+        params.add('%'+userSearch+'%');
+        params.add('%'+userSearch+'%');
+        params.add('%'+userSearch+'%');
+        params.add('%'+userSearch+'%');
+        return repository.fetchMultipleRow(sql, mapper, params);
+    }
 }
