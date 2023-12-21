@@ -9,17 +9,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="677.0" styleClass="background" stylesheets="@signupStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.SignupController">
    <children>
-      <TextField fx:id="mailTextField" layoutX="155.0" layoutY="51.0" prefHeight="25.0" prefWidth="353.0" promptText="mail" />
-      <TextField fx:id="nameTextField" layoutX="155.0" layoutY="146.0" prefHeight="25.0" prefWidth="353.0" promptText="imie" />
-      <TextField fx:id="surnameTextField" layoutX="154.0" layoutY="197.0" prefHeight="25.0" prefWidth="353.0" promptText="nazwisko" />
-      <TextField fx:id="mobileTextField" layoutX="155.0" layoutY="247.0" prefHeight="25.0" prefWidth="353.0" promptText="numer telefonu" />
-      <TextField fx:id="streetNameTextField" layoutX="154.0" layoutY="294.0" prefHeight="25.0" prefWidth="353.0" promptText="nazwa ulicy" />
-      <PasswordField fx:id="passwordField" layoutX="155.0" layoutY="99.0" prefHeight="25.0" prefWidth="353.0" promptText="hasło" />
-      <Button fx:id="signupButton" layoutX="201.0" layoutY="424.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="32.0" prefWidth="242.0" text="Zarejstruj się" />
-      <DatePicker fx:id="birthdayDatePicker" layoutX="157.0" layoutY="380.0" prefHeight="25.0" prefWidth="353.0" promptText="data urodzenia" />
-      <Label fx:id="reactionMessageLabel" layoutX="155.0" layoutY="25.0" prefHeight="17.0" prefWidth="353.0" styleClass="signup_label_text" stylesheets="@signupStyle.css" />
-      <TextField fx:id="postalCodeTextField" layoutX="154.0" layoutY="335.0" prefHeight="25.0" prefWidth="140.0" promptText="kod pocztowy" />
-      <TextField fx:id="homeNrTextField" layoutX="315.0" layoutY="335.0" prefHeight="25.0" prefWidth="90.0" promptText="nr budynku" />
-      <TextField fx:id="doorKeyTextField" layoutX="417.0" layoutY="335.0" prefHeight="25.0" prefWidth="90.0" promptText="nr mieszkania" />
+      <TextField fx:id="mailTextField" layoutX="63.0" layoutY="94.0" prefHeight="39.0" prefWidth="261.0" promptText="mail" />
+      <TextField fx:id="nameTextField" layoutX="63.0" layoutY="153.0" prefHeight="39.0" prefWidth="261.0" promptText="imie" />
+      <TextField fx:id="surnameTextField" layoutX="340.0" layoutY="153.0" prefHeight="39.0" prefWidth="261.0" promptText="nazwisko" />
+      <TextField fx:id="mobileTextField" layoutX="63.0" layoutY="210.0" prefHeight="39.0" prefWidth="261.0" promptText="numer telefonu" />
+      <TextField fx:id="streetNameTextField" layoutX="344.0" layoutY="210.0" prefHeight="39.0" prefWidth="255.0" promptText="nazwa ulicy" />
+      <PasswordField fx:id="passwordField" layoutX="340.0" layoutY="94.0" prefHeight="39.0" prefWidth="261.0" promptText="hasło" />
+      <Button fx:id="signupButton" layoutX="211.0" layoutY="421.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="32.0" prefWidth="242.0" text="Zarejstruj się" />
+      <DatePicker fx:id="birthdayDatePicker" layoutX="340.0" layoutY="278.0" prefHeight="39.0" prefWidth="261.0" promptText="data urodzenia" />
+      <Label fx:id="reactionMessageLabel" layoutX="63.0" layoutY="36.0" prefHeight="32.0" prefWidth="261.0" styleClass="signup_label_text" stylesheets="@signupStyle.css" />
+      <TextField fx:id="postalCodeTextField" layoutX="63.0" layoutY="339.0" prefHeight="39.0" prefWidth="255.0" promptText="kod pocztowy" />
+      <TextField fx:id="homeNrTextField" layoutX="339.0" layoutY="339.0" prefHeight="39.0" prefWidth="121.0" promptText="nr budynku" />
+      <TextField fx:id="doorKeyTextField" layoutX="483.0" layoutY="339.0" prefHeight="39.0" prefWidth="121.0" promptText="nr mieszkania" />
+      <TextField fx:id="cityTextField" layoutX="66.0" layoutY="272.0" prefHeight="39.0" prefWidth="255.0" promptText="miasto" />
+      <Label fx:id="incorrectDataMessageLabel" layoutX="341.0" layoutY="36.0" prefHeight="52.0" prefWidth="261.0" styleClass="signup_label_text" stylesheets="@signupStyle.css" />
    </children>
 </AnchorPane>

@@ -19,8 +19,9 @@ public class CreateUserData implements Serializable {
     private String postalCode;
     private String homeNr;
     private String doorKeyNr;
+    private String city;
 
-    public CreateUserData(String firstName, String lastName, String mail, String password, String mobile,
+    public CreateUserData(String firstName, String lastName, String mail, String password, String mobile,String city,
                           String street, String postalCode, String homeNr, String doorKeyNr, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,7 +33,12 @@ public class CreateUserData implements Serializable {
         this.postalCode = postalCode;
         this.homeNr = homeNr;
         this.doorKeyNr = doorKeyNr;
+        this.city = city;
     }
+
+    public String getCity() {return city;}
+
+    public void setCity(String city) {this.city = city;}
 
     public String getFirstName() {
         return firstName;
