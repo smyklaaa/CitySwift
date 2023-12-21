@@ -12,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.FirstPageController">
     <left>
-        <AnchorPane prefHeight="530.0" prefWidth="500.0" styleClass="left_panel" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="530.0" prefWidth="500.0" styleClass="left_panel" stylesheets="@loginStyle.css" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitWidth="210" layoutX="150.0" layoutY="30" preserveRatio="true">
                     <Image url="@../../image/logo_white.png" />
@@ -37,14 +37,14 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="512.0" prefWidth="249.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="512.0" prefWidth="249.0" stylesheets="@loginStyle.css" BorderPane.alignment="CENTER">
             <children>
-                <TextField fx:id="usernameTextField" layoutX="25.0" layoutY="167.0" prefHeight="26.0" prefWidth="200.0" promptText="Login" styleClass="basic_input" />
-                <PasswordField fx:id="passwordTextField" layoutX="25.0" layoutY="229.0" prefHeight="26.0" prefWidth="200.0" promptText="Hasło" styleClass="basic_input" />
-                <Button fx:id="loginButton" layoutX="56.0" layoutY="292.0" mnemonicParsing="false" onAction="#loginButtonOn" prefHeight="25.0" prefWidth="138.0" styleClass="basic_button" text="Zaloguj" />
-                <Button fx:id="forgotPassword" layoutX="56.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" styleClass="non_fill_button" text="Zapomniałeś hasła?" />
+                <TextField fx:id="usernameTextField" layoutX="25.0" layoutY="167.0" prefHeight="26.0" prefWidth="200.0" promptText="Login" styleClass="basic_input" stylesheets="@loginStyle.css" />
+                <PasswordField fx:id="passwordTextField" layoutX="25.0" layoutY="229.0" prefHeight="26.0" prefWidth="200.0" promptText="Hasło" styleClass="basic_input" stylesheets="@loginStyle.css" />
+                <Button fx:id="loginButton" layoutX="56.0" layoutY="292.0" mnemonicParsing="false" onAction="#loginButtonOn" prefHeight="25.0" prefWidth="138.0" styleClass="basic_button" stylesheets="@loginStyle.css" text="Zaloguj" />
+                <Button fx:id="forgotPassword" layoutX="56.0" layoutY="382.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" styleClass="non_fill_button" stylesheets="@loginStyle.css" text="Zapomniałeś hasła?" />
                 <Label fx:id="ReactionMessageLabel" layoutX="35.0" layoutY="86.0" prefHeight="18.0" prefWidth="179.0" />
-            <Button fx:id="signupButton" layoutX="57.0" layoutY="337.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="25.0" prefWidth="137.0" styleClass="basic_button" text="Rejstracja" />
+            <Button fx:id="signupButton" layoutX="57.0" layoutY="337.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="25.0" prefWidth="137.0" styleClass="basic_button" stylesheets="@loginStyle.css" text="Rejstracja" />
             </children>
         </AnchorPane>
     </center>

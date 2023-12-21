@@ -19,3 +19,15 @@
     -fx-text-fill:white;
     -fx-font-size: 27px;
 }
+
+.basic_button{
+    -fx-background-color: #3D5AFE;
+    -fx-text-fill: white;
+    -fx-padding: 8px 30px;
+}
+
+.non_fill_button{
+    -fx-background-color: none;
+    -fx-text-fill:  #3D5AFE;
+    -fx-padding: 8px 30px;
+}
