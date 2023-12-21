@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,26 +49,9 @@ public class SignupController {
 
     public void signupButtonOn(ActionEvent event) {
 
-        if (!mailTextField.getText().isBlank()
-                && checkMailRequirements(mailTextField.getText())
-                && !passwordField.getText().isBlank()
-                && checkPasswordRequirements(passwordField.getText())
-                && !surnameTextField.getText().isBlank()
-                && !nameTextField.getText().isBlank()
-                && !mobileTextField.getText().isBlank()
-                && !postalCodeTextField.getText().isBlank()
-                && checkPostalCodeRequirements(postalCodeTextField.getText())
-                && !streetNameTextField.getText().isBlank()
-                && !homeNrTextField.getText().isBlank()
-                && !doorKeyTextField.getText().isBlank()
-                && !cityTextField.getText().isBlank()
-                && birthdayDatePicker.getValue() != null
-                && checkIfUserOverEighteen(birthdayDatePicker.getValue())) {
+        if (isFormValid()) {
 
             checkPasswordRequirements(passwordField.getText());
-            while (passwordField.getText().isBlank()) {
-                checkPasswordRequirements(passwordField.getText());
-            }
 
             ServerResponse serverResponse = sendSignupRequest(nameTextField.getText(), surnameTextField.getText(),
                     mailTextField.getText(), passwordField.getText(), mobileTextField.getText(),
@@ -146,6 +130,22 @@ public class SignupController {
         }
     }
 
+    public boolean checkMobileRequirements(String mobile) {
+
+        if (mobile.length() != 9) {
+            incorrectDataMessageLabel.setText("Twój nr telefonu ma nieodpowiednia długość");
+            mobileTextField.clear();
+            return false;
+        } else if (!mobile.matches("\\d+")) {
+            incorrectDataMessageLabel.setText("Twój nr telefonu zawiera inne znaki niż cyfry");
+            mobileTextField.clear();
+            return false;
+        } else {
+            incorrectDataMessageLabel.setText("");
+            return true;
+        }
+    }
+
     public boolean checkMailRequirements(String mail) {
 
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
@@ -174,6 +174,29 @@ public class SignupController {
         }else{
             incorrectDataMessageLabel.setText("");
             return true;
+        }
+    }
+
+    public boolean  isFormValid(){
+        if (!mailTextField.getText().isBlank()
+                && checkMailRequirements(mailTextField.getText())
+                && !passwordField.getText().isBlank()
+                && checkPasswordRequirements(passwordField.getText())
+                && !surnameTextField.getText().isBlank()
+                && !nameTextField.getText().isBlank()
+                && !mobileTextField.getText().isBlank()
+                && checkMobileRequirements(mobileTextField.getText())
+                && !postalCodeTextField.getText().isBlank()
+                && checkPostalCodeRequirements(postalCodeTextField.getText())
+                && !streetNameTextField.getText().isBlank()
+                && !homeNrTextField.getText().isBlank()
+                && !doorKeyTextField.getText().isBlank()
+                && !cityTextField.getText().isBlank()
+                && birthdayDatePicker.getValue() != null
+                && checkIfUserOverEighteen(birthdayDatePicker.getValue())){
+            return true;
+        }else {
+            return false;
         }
     }
 
