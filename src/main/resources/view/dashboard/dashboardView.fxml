@@ -25,9 +25,9 @@
             <VBox alignment="CENTER" prefHeight="259.0" prefWidth="150.0" spacing="10">
                <children>
                   <Button mnemonicParsing="false" onAction="#loadHome" styleClass="dashbord_left_panel_button" text="Home" />
-                  <Button mnemonicParsing="false" styleClass="dashbord_left_panel_button" stylesheets="@dashboardStyle.css" text="Nadaj paczkę" />
-                  <Button mnemonicParsing="false" styleClass="dashbord_left_panel_button" text="Historia zamówień" />
-                  <Button mnemonicParsing="false" styleClass="dashbord_left_panel_button" text="Zostań kurierem" />
+                  <Button mnemonicParsing="false" onAction="#loadSendPackage" styleClass="dashbord_left_panel_button" stylesheets="@dashboardStyle.css" text="Nadaj paczkę" />
+                  <Button mnemonicParsing="false" onAction="#loadOrderHistory" styleClass="dashbord_left_panel_button" text="Historia zamówień" />
+                  <Button mnemonicParsing="false" onAction="#loadBecomeCourier" styleClass="dashbord_left_panel_button" text="Zostań kurierem" />
                   <Button layoutX="33.0" layoutY="164.0" mnemonicParsing="false" onAction="#loadFriends" styleClass="dashbord_left_panel_button" text="Znajomi" />
                   <Button mnemonicParsing="false" onAction="#loadSettings" styleClass="dashbord_left_panel_button" text="Ustawienia" />
                </children>
