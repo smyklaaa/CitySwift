@@ -6,8 +6,16 @@ public class FriendshipModel {
     private Integer appUserId1;
     private Integer appUserId2;
     private Date friendshipDate;
+    private boolean isAccepted;
 
     public FriendshipModel() {
+    }
+
+    public FriendshipModel(Integer appUserId1, Integer appUserId2, Date friendshipDate, boolean isAccepted) {
+        this.appUserId1 = appUserId1;
+        this.appUserId2 = appUserId2;
+        this.friendshipDate = friendshipDate;
+        this.isAccepted = isAccepted;
     }
 
     public Integer getAppUserId1() {
@@ -32,5 +40,9 @@ public class FriendshipModel {
 
     public void setFriendshipDate(Date friendshipDate) {
         this.friendshipDate = friendshipDate;
+    }
+
+    public boolean getIsAccepted() {
+        return isAccepted;
     }
 }

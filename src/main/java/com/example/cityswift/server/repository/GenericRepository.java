@@ -2,6 +2,7 @@ package com.example.cityswift.server.repository;
 
 
 import com.example.cityswift.server.Server;
+import com.example.cityswift.server.exceptions.SimpleException;
 import com.example.cityswift.server.interfaces.RowMapper;
 import com.example.cityswift.server.util.AppLogger;
 
@@ -34,7 +35,7 @@ public class GenericRepository<T> {
 
         } catch (SQLException e) {
             AppLogger.severe("SQLException in GenericRepository.fetchMultipleData", e);
-            throw new RuntimeException("Error fetching data", e);
+            throw new SimpleException(500, "Error fetching data");
         } finally {
             Server.getConnectionPool().returnConnection(connection);
         }
@@ -60,7 +61,7 @@ public class GenericRepository<T> {
 
         } catch (SQLException e) {
             AppLogger.severe("SQLException in GenericRepository.fetchMultipleData", e);
-            throw new RuntimeException("Error fetching data", e);
+            throw new SimpleException(500, "Error fetching data");
         } finally {
             Server.getConnectionPool().returnConnection(connection);
         }
@@ -80,7 +81,7 @@ public class GenericRepository<T> {
 
         } catch (SQLException e) {
             AppLogger.severe("SQLException in GenericRepository.insert", e);
-            throw new RuntimeException("Error executing insert", e);
+            throw new SimpleException(500, "Error executing insert");
         } finally {
             Server.getConnectionPool().returnConnection(connection);
         }
@@ -93,5 +94,25 @@ public class GenericRepository<T> {
             stmt.setObject(i + 1, params.get(i));
         }
         return stmt;
+    }
+
+    public int update(String sql, List<Object> params) {
+        AppLogger.info("Executing update statement: " + sql);
+        Connection connection = null;
+
+        try {
+            connection = Server.getConnectionPool().borrowConnection();
+            PreparedStatement stmt = prepareStatement(connection, sql, params);
+            int affectedRows = stmt.executeUpdate();
+
+            AppLogger.info("Update executed, number of affected rows: " + affectedRows);
+            return affectedRows;
+
+        } catch (SQLException e) {
+            AppLogger.severe("SQLException in GenericRepository.update", e);
+            throw new SimpleException(500, "Error executing update");
+        } finally {
+            Server.getConnectionPool().returnConnection(connection);
+        }
     }
 }

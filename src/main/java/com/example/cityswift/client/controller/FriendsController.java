@@ -21,17 +21,62 @@ public class FriendsController {
     private ListView<String> userListView;
 
     @FXML
+    private ListView<String> requestList;
+
+    @FXML
     private void searchFriends() {
-        ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest("searchUser", friendsTextField.getText()));
+        ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest("searchUser", friendsTextField.getText(), UserSession.getUserToken().getToken()));
         List<BasicUserData> usersFound = (List<BasicUserData>) serverResponse.getData();
 
         ObservableList<String> userDisplayList = FXCollections.observableArrayList();
 
-        for (BasicUserData basicUserData : usersFound) {
-            String displayText =  basicUserData.getUserModel().getFirstName() + " " + basicUserData.getUserModel().getLastName();
+        if(usersFound != null){
+            for (BasicUserData basicUserData : usersFound) {
+                String displayText = basicUserData.getUserModel().getPublicToken() + " " + basicUserData.getUserModel().getFirstName() + " " + basicUserData.getUserModel().getLastName();
+                userDisplayList.add(displayText);
+            }
+            userListView.setItems(userDisplayList);
+        }
+    }
+
+    @FXML
+    private void addFriend(){
+        String selectedUser = userListView.getSelectionModel().getSelectedItem();
+        String[] selectedUserSplit = selectedUser.split(" ");
+        String friendPublicToken = selectedUserSplit[0];
+
+        NetworkClient.sendRequest(new ClientRequest("addFriend", friendPublicToken, UserSession.getUserToken().getToken()));
+    }
+
+    @FXML
+    private void acceptFriend(){
+        String selectedUser = requestList.getSelectionModel().getSelectedItem();
+        String[] selectedUserSplit = selectedUser.split(" ");
+        String friendPublicToken = selectedUserSplit[0];
+
+        NetworkClient.sendRequest(new ClientRequest("acceptFriend", friendPublicToken, UserSession.getUserToken().getToken()));
+        updateFriendRequestList();
+    }
+
+    @FXML
+    private void initialize(){
+        updateFriendRequestList();
+    }
+
+
+    private void updateFriendRequestList(){
+        ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest("getFriends", false, UserSession.getUserToken().getToken()));
+        List<BasicUserData> friends = (List<BasicUserData>) serverResponse.getData();
+
+        ObservableList<String> userDisplayList = FXCollections.observableArrayList();
+
+        for (BasicUserData basicUserData : friends) {
+            String displayText = basicUserData.getUserModel().getPublicToken() + " " + basicUserData.getUserModel().getFirstName() + " " + basicUserData.getUserModel().getLastName();
             userDisplayList.add(displayText);
         }
-        userListView.setItems(userDisplayList);
+        requestList.setItems(userDisplayList);
     }
+
+
 
 }

@@ -4,17 +4,13 @@ import java.io.Serializable;
 
 public class UserToken implements Serializable {
 
-    private int token;
+    private Integer token;
 
-    public UserToken(int token) {
+    public UserToken(Integer token) {
         this.token = token;
     }
 
-    public int getToken() {
+    public Integer getToken() {
         return token;
-    }
-
-    public void setToken(int token) {
-        this.token = token;
     }
 }

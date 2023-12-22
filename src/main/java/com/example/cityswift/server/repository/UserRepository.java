@@ -38,8 +38,8 @@ public class UserRepository {
         return repository.fetchSingleRow(sql, mapper, params);
     }
 
-    public int insertUser(CreateUserData createUserData) {
-        String sql = "INSERT INTO app_user (mail, password, first_name, last_name, mobile, date_of_birth) VALUES (?, ?, ?, ?, ?, ?)";
+    public int insertUser(CreateUserData createUserData, String privateToken, String publicToken) {
+        String sql = "INSERT INTO app_user (mail, password, first_name, last_name, mobile, date_of_birth, private_token, public_token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         List<Object> params = new ArrayList<>();
         params.add(createUserData.getMail());
         params.add(createUserData.getPassword());
@@ -47,6 +47,8 @@ public class UserRepository {
         params.add(createUserData.getLastName());
         params.add(createUserData.getMobile());
         params.add(createUserData.getDateOfBirth());
+        params.add(privateToken);
+        params.add(publicToken);
         return repository.insert(sql, params);
     }
 
@@ -57,13 +59,31 @@ public class UserRepository {
         return repository.fetchSingleRow(sql, mapper, params);
     }
 
-    public List<UserModel> fetchUserSearch(String userSearch) {
-        String sql = "SELECT * FROM app_user WHERE first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ?";
+    public List<UserModel> fetchUserSearch(String userSearch, Integer privateToken) {
+        String sql = "SELECT * FROM app_user WHERE (first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ? OR private_token LIKE ?)" +
+                "AND id != ?";
         List<Object> params = new ArrayList<>();
         params.add('%'+userSearch+'%');
         params.add('%'+userSearch+'%');
         params.add('%'+userSearch+'%');
         params.add('%'+userSearch+'%');
+        params.add('%'+userSearch+'%');
+        params.add(privateToken);
+        return repository.fetchMultipleRow(sql, mapper, params);
+    }
+
+    public Optional<UserModel> getUserByPublicToken(String data) {
+        String sql = "SELECT * FROM app_user WHERE public_token = ? ";
+        List<Object> params = new ArrayList<>();
+        params.add(data);
+        return repository.fetchSingleRow(sql, mapper, params);
+    }
+
+    public List<UserModel> getFriends(Boolean accepted, Integer privateToken) {
+        String sql = "SELECT * FROM app_user WHERE id IN (SELECT app_user_id_1 FROM friendship WHERE app_user_id_2 = ? AND accepted = ?)";
+        List<Object> params = new ArrayList<>();
+        params.add(privateToken);
+        params.add(accepted);
         return repository.fetchMultipleRow(sql, mapper, params);
     }
 }

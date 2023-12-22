@@ -9,6 +9,7 @@ public class ClientRequest implements Serializable {
 
     private String action;
     private Serializable data;
+    private Integer privateToken;
 
     public ClientRequest() {
     }
@@ -18,19 +19,21 @@ public class ClientRequest implements Serializable {
         this.data = data;
     }
 
-    public String getAction() {
-        return action;
+    public ClientRequest(String action, Serializable data, Integer privateToken) {
+        this.action = action;
+        this.data = data;
+        this.privateToken = privateToken;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public String getAction() {
+        return action;
     }
 
     public Serializable getData() {
         return data;
     }
 
-    public void setData(Serializable data) {
-        this.data = data;
+    public Integer getPrivateToken() {
+        return privateToken;
     }
 }
