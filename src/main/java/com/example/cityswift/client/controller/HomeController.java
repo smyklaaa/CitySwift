@@ -31,6 +31,10 @@ public class HomeController {
     private void initialize() {
         ServerResponse userBasicData = NetworkClient.sendRequest(new ClientRequest("getUserBasicData", UserSession.getUserToken().getToken()));
         BasicUserData basicUserData = (BasicUserData) userBasicData.getData();
+        setBasicUserData(basicUserData);
+    }
+
+    private void setBasicUserData(BasicUserData basicUserData) {
         nameLabel.setText(basicUserData.getUserModel().getFirstName());
         surnameLabel.setText(basicUserData.getUserModel().getLastName());
         birthLabel.setText(String.valueOf(basicUserData.getUserModel().getDateOfBirth()));

@@ -23,7 +23,7 @@ public class AddressService {
     public static ServerResponse signup(CreateUserData createUserData, Integer userId){
         int insertUserAddress = addressRepository.insertUserAddress(createUserData, userId);
         if(insertUserAddress > 0){
-            return ServerResponseService.createPositiveServerResponse(new UserToken(userId));
+            return ServerResponseService.createPositiveServerResponse(null);
         }else{
             return ServerResponseService.userExistErrorResponse();
         }

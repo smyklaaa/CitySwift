@@ -7,6 +7,8 @@ public class UserModel implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
+    private String publicToken;
+    private String privateToken;
     private String mail;
     private String mobile;
     private LocalDate dateOfBirth;
@@ -14,10 +16,11 @@ public class UserModel implements Serializable {
     public UserModel() {
     }
 
-    public UserModel(int id, String firstName, String lastName, String mail, String mobile, LocalDate dateOfBirth) {
+    public UserModel(int id, String firstName, String lastName, String publicToken, String mail, String mobile, LocalDate dateOfBirth) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.publicToken = publicToken;
         this.mail = mail;
         this.mobile = mobile;
         this.dateOfBirth = dateOfBirth;
@@ -70,4 +73,17 @@ public class UserModel implements Serializable {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+    public String getPublicToken() {
+        return publicToken;
+    }
+
+    public void setPublicToken(String publicToken) {
+        this.publicToken = publicToken;
+    }
+
+    public String getPrivateToken() {
+        return privateToken;
+    }
+
 }
