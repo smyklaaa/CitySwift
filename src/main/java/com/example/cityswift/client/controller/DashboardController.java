@@ -32,6 +32,18 @@ public class DashboardController {
     }
 
     @FXML
+    private void loadOrderHistory(){loadContent("/view/orderHistory/orderHistoryView.fxml",
+                                                "Historia zamówień");}
+
+    @FXML
+    private void loadSendPackage(){loadContent("/view/sendPackage/sendPackageView.fxml",
+                                                "Nadaj Paczkę");}
+
+    @FXML
+    private void loadBecomeCourier(){loadContent("/view/becomeCourier/becomeCourierView.fxml",
+            "Zostań kurierem");}
+
+    @FXML
     private void initialize() {
         loadContent("/view/home/homeView.fxml", "Home");
     }
