@@ -3,6 +3,7 @@ package com.example.cityswift.server.util;
 
 import com.example.cityswift.dto.*;
 import com.example.cityswift.server.service.AddressService;
+import com.example.cityswift.server.service.OrderService;
 import com.example.cityswift.server.service.UserService;
 
 public class HandleClientAction {
@@ -35,13 +36,15 @@ public class HandleClientAction {
                 case "getFriends":
                     serverResponse = UserService.getFriends((Boolean) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
+                case "crateOrder":
+                    serverResponse = OrderService.createOrder((CreateOrderRequest) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
+                    break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");
                     break;
             }
         } catch (Exception e) {
-            System.out.println("ASDSAASASDDASSDAASDDASD");
             serverResponse.setResultCode(500);
             serverResponse.setResultMessage("Internal server error");
         }
