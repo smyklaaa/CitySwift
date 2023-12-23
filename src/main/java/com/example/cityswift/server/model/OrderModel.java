@@ -1,8 +1,9 @@
 package com.example.cityswift.server.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderModel {
+public class OrderModel implements Serializable {
     private Integer id;
     private Integer senderId;
     private Integer recipientId;
