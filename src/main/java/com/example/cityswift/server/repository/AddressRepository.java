@@ -27,7 +27,7 @@ public class AddressRepository {
         return repository.fetchMultipleRow(sql, mapper, params);
     }
 
-    public int insertUserAddress(CreateUserData createUserData, Integer userId) {
+    public int insertAddress(CreateUserData createUserData, Integer userId) {
         String sql = "INSERT INTO address (street, postal_code, home_number, door_key, is_main, user_id,city) " +
                 "VALUES (?,?, ?, ?, ?, ?, ?)";
         List<Object> params = new ArrayList<>();
