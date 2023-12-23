@@ -11,8 +11,26 @@ public class OrderModel implements Serializable {
     private BigDecimal price;
     private Integer packageId;
     private Integer statusId;
+    private String message;
 
-    public OrderModel() {
+    public OrderModel(Integer id, Integer senderId, Integer recipientId, Integer courierId, BigDecimal price,
+                      Integer packageId, Integer statusId, String message) {
+        this.id = id;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.courierId = courierId;
+        this.price = price;
+        this.packageId = packageId;
+        this.statusId = statusId;
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Integer getId() {
