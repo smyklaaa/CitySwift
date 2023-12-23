@@ -13,22 +13,22 @@
             <children>
                 <VBox alignment="TOP_CENTER" prefHeight="375.0" prefWidth="300.0">
                     <children>
-                        <Label style="-fx-padding: 5px;" text="Ostatnie paczki">
+                        <Label style="-fx-padding: 5px;" text="Moje zamówienia">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                  <ListView fx:id="historyOfPackageListView" layoutX="10.0" layoutY="47.0" prefHeight="350.0" prefWidth="300.0" stylesheets="@orderHistoryStyle.css" />
+                  <ListView fx:id="receivedPackageListView" layoutX="10.0" layoutY="47.0" prefHeight="350.0" prefWidth="300.0" stylesheets="@orderHistoryStyle.css" />
                     </children>
                 </VBox>
                 <VBox alignment="TOP_CENTER" prefHeight="396.0" prefWidth="300.0">
                     <children>
-                        <Label style="-fx-padding: 5px;" stylesheets="@orderHistoryStyle.css" text="Aktualne zlecenia">
+                        <Label style="-fx-padding: 5px;" stylesheets="@orderHistoryStyle.css" text="Paczki nadane">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <ListView fx:id="currentPacagesListView" prefHeight="350.0" prefWidth="300.0" />
+                        <ListView fx:id="sendPackagesListView" prefHeight="350.0" prefWidth="300.0" />
                     </children>
                 </VBox>
             </children>

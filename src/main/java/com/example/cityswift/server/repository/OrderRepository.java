@@ -17,8 +17,9 @@ public class OrderRepository {
 
 
     public List<OrderModel> fetchUserOrderData(int currentUserId) {
-        String sql = "SELECT * FROM orders WHERE sender_id = ?";
+        String sql = "SELECT * FROM orders WHERE sender_id = ? OR recipient_id = ?";
         List<Object> params = new ArrayList<>();
+        params.add(currentUserId);
         params.add(currentUserId);
         return repository.fetchMultipleRow(sql, mapper, params);
     }
