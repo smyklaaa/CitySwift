@@ -25,7 +25,7 @@ public class OrderHistoryController {
 
     }
 
-    public void getListOfPackages(){
+    public void displayListOfPackages(){
         ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest("getUserOrdersHistory",
                null, UserSession.getUserToken().getToken()));
 
@@ -71,6 +71,6 @@ public class OrderHistoryController {
 
     @FXML
     public void initialize(){
-        getListOfPackages();
+        displayListOfPackages();
     }
 }
