@@ -1,6 +1,7 @@
 package com.example.cityswift.server.service;
 
 import com.example.cityswift.dto.CreateOrderRequest;
+import com.example.cityswift.dto.CreateUserData;
 import com.example.cityswift.dto.ServerResponse;
 import com.example.cityswift.server.repository.AddressRepository;
 import com.example.cityswift.server.repository.OrderRepository;
@@ -15,6 +16,7 @@ public class OrderService {
     public static  void getAllUserOrders(){}
 
     public static ServerResponse createOrder(CreateOrderRequest data, Integer privateToken) {
-        addressRepository.insertAddress(data.getAddressModel())
+        // addressRepository.insertAddress();
+        return null;
     }
 }
