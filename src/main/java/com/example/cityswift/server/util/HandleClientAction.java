@@ -6,12 +6,14 @@ import com.example.cityswift.server.service.AddressService;
 import com.example.cityswift.server.service.OrderService;
 import com.example.cityswift.server.service.UserService;
 
+import java.util.List;
+
 public class HandleClientAction {
     public static ServerResponse handleClientAction(ClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse();
 
         try {
-            switch (clientRequest.getAction()) {
+             switch (clientRequest.getAction()) {
                 case "getUserBasicData":
                     serverResponse = UserService.getUserBasicData((int) clientRequest.getData());
                     break;
@@ -39,6 +41,9 @@ public class HandleClientAction {
                 case "crateOrder":
                     serverResponse = OrderService.createOrder((CreateOrderRequest) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
+                case "getUserOrdersHistory":
+                    serverResponse = OrderService.getAllUserOrders( (Integer) clientRequest.getPrivateToken());
+                    break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");
@@ -48,6 +53,7 @@ public class HandleClientAction {
             serverResponse.setResultCode(500);
             serverResponse.setResultMessage("Internal server error");
         }
+
 
         return serverResponse;
     }

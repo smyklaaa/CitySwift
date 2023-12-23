@@ -18,11 +18,11 @@ public class ToOrderModelMapper implements RowMapper<OrderModel> {
         return new OrderModel(
                 rs.getInt("id"),
                 rs.getInt("sender_id"),
+                rs.getInt("recipient_id"),
                 rs.getInt("courier_id"),
-                rs.getInt("price"),
+                rs.getBigDecimal("price"),
                 rs.getInt("package_id"),
                 rs.getInt("status_id"),
-                rs.getInt("recipient_id"),
                 rs.getString("message")
         );    }
 }

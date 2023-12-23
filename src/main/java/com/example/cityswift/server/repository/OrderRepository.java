@@ -16,10 +16,10 @@ public class OrderRepository {
     ToOrderModelMapper mapper = new ToOrderModelMapper();
 
 
-    public List<OrderModel> fetchUserOrderData(OrderData orderData) {
-        String sql = "SELECT * FROM ORDER WHERE recipient_id = ?";
+    public List<OrderModel> fetchUserOrderData(int currentUserId) {
+        String sql = "SELECT * FROM orders WHERE sender_id = ?";
         List<Object> params = new ArrayList<>();
-        params.add(orderData.getRecipientId());
+        params.add(currentUserId);
         return repository.fetchMultipleRow(sql, mapper, params);
     }
 }
