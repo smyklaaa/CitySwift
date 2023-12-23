@@ -42,9 +42,9 @@ public class OrderHistoryController {
 
         for(OrderModel order :orders){
             String status = getStatusDescription(order.getStatusId());
-            String showData = "id:"+order.getId()+"  | id nadawcy:"+order.getSenderId()+"  | id odbiorcy:"+order.getRecipientId()
-                    +"  | id kuriera:"+order.getCourierId()+"  | cena zł:"+ order.getPrice()+"  | id paczki:"+order.getPackageId()
-                    +"  | status:"+status+"  | wiadomość:"+order.getMessage();
+            String showData = "id:"+order.getId()+"    id nadawcy:"+order.getSenderId()+"    id odbiorcy:"+order.getRecipientId()
+                    +"    id kuriera:"+order.getCourierId()+"    cena zł:"+ order.getPrice()+"    id paczki:"+order.getPackageId()
+                    +"    status:"+status+"    wiadomość:"+order.getMessage();
             if(order.getStatusId() == 1 || order.getStatusId() == 2){
                 currentPacagesListView.getItems().add(showData);
             } else {
