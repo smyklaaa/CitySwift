@@ -10,10 +10,10 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.OrderHistoryController">
     <children>
-        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="599.0">
+        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="599.0" stylesheets="@orderHistoryStyle.css">
             <children>
-                <TextField fx:id="orderHistorySerchTextField" prefHeight="34.0" prefWidth="520.0" promptText="Podaj nr paczki" />
-                <Button fx:id="orderHistorySerchButton" mnemonicParsing="false" onAction="#searchPackageFriends" text="Szukaj" />
+                <TextField fx:id="orderHistorySerchTextField" prefHeight="34.0" prefWidth="520.0" promptText="Podaj nr paczki" stylesheets="@orderHistoryStyle.css" />
+                <Button fx:id="orderHistorySerchButton" mnemonicParsing="false" onAction="#searchPackageFriends" stylesheets="@orderHistoryStyle.css" text="Szukaj" />
             </children>
         </HBox>
         <HBox prefHeight="396.0" prefWidth="599.0">
@@ -25,12 +25,12 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                  <ListView fx:id="historyOfPackageListView" layoutX="10.0" layoutY="47.0" prefHeight="350.0" prefWidth="300.0" />
+                  <ListView fx:id="historyOfPackageListView" layoutX="10.0" layoutY="47.0" prefHeight="350.0" prefWidth="300.0" stylesheets="@orderHistoryStyle.css" />
                     </children>
                 </VBox>
                 <VBox alignment="TOP_CENTER" prefHeight="396.0" prefWidth="300.0">
                     <children>
-                        <Label style="-fx-padding: 5px;" text="Zlecenia trwające">
+                        <Label style="-fx-padding: 5px;" stylesheets="@orderHistoryStyle.css" text="Aktualne zlecenia">
                             <font>
                                 <Font size="18.0" />
                             </font>

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class UserService {
+public class UserService  {
     private static final UserRepository userRepository = new UserRepository();
     private static final FriendsRepository friendsRepository = new FriendsRepository();
 

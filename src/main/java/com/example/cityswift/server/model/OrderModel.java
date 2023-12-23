@@ -11,7 +11,7 @@ public class OrderModel {
     private Integer packageId;
     private Integer statusId;
 
-    public OrderModel() {
+    public OrderModel(int id, int senderId, int courierId, int price, int packageId, int statusId, int recipientId, String message) {
     }
 
     public Integer getId() {
