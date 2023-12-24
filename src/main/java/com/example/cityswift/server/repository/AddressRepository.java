@@ -1,6 +1,7 @@
 package com.example.cityswift.server.repository;
 
 
+import com.example.cityswift.dto.CreateAddressDTO;
 import com.example.cityswift.dto.CreateUserData;
 import com.example.cityswift.dto.ParticularArea;
 import com.example.cityswift.server.mapper.ToAddressModelMapper;
@@ -39,5 +40,20 @@ public class AddressRepository {
         params.add(userId);
         params.add(createUserData.getCity());
         return repository.insert(sql, params);
+    }
+
+    public int createAddress(CreateAddressDTO createAddressDTO) {
+        String sql = "INSERT INTO address (street, postal_code, home_number, door_key, is_main, user_id,city) " +
+                "VALUES (?,?, ?, ?, ?, ?, ?)";
+        List<Object> params = new ArrayList<>();
+        params.add(createAddressDTO.getStreet());
+        params.add(createAddressDTO.getPostalCode());
+        params.add(createAddressDTO.getHomeNumber());
+        params.add(createAddressDTO.getDoorKey());
+        params.add(null);
+        params.add(null);
+        params.add(createAddressDTO.getCity());
+        return repository.insert(sql, params);
+
     }
 }

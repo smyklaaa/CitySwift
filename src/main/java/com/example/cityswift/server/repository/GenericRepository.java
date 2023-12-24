@@ -6,10 +6,7 @@ import com.example.cityswift.server.exceptions.SimpleException;
 import com.example.cityswift.server.interfaces.RowMapper;
 import com.example.cityswift.server.util.AppLogger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,21 +67,41 @@ public class GenericRepository<T> {
     public int insert(String sql, List<Object> params) {
         AppLogger.info("Executing insert statement: " + sql);
         Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet generatedKeys = null;
 
         try {
             connection = Server.getConnectionPool().borrowConnection();
-            PreparedStatement stmt = prepareStatement(connection, sql, params);
+            stmt = prepareStatement(connection, sql, params, Statement.RETURN_GENERATED_KEYS);
             int affectedRows = stmt.executeUpdate();
 
-            AppLogger.info("Insert executed, number of affected rows: " + affectedRows);
-            return affectedRows;
-
+            if (affectedRows == 0) {
+                throw new SimpleException(500, "Creating user failed, no rows affected.");
+            }
+            generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            } else {
+                return 1;
+            }
         } catch (SQLException e) {
             AppLogger.severe("SQLException in GenericRepository.insert", e);
             throw new SimpleException(500, "Error executing insert");
         } finally {
+            // Clean up resources
+            if (generatedKeys != null) try { generatedKeys.close(); } catch (SQLException logOrIgnore) {}
+            if (stmt != null) try { stmt.close(); } catch (SQLException logOrIgnore) {}
             Server.getConnectionPool().returnConnection(connection);
         }
+    }
+
+
+    private PreparedStatement prepareStatement(Connection connection, String sql, List<Object> params, int flags) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(sql, flags);
+        for (int i = 0; i < params.size(); i++) {
+            stmt.setObject(i + 1, params.get(i));
+        }
+        return stmt;
     }
 
 

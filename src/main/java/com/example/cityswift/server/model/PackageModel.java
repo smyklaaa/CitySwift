@@ -10,6 +10,13 @@ public class PackageModel implements Serializable {
     private BigDecimal depth;
     private BigDecimal weight;
 
+    public PackageModel(BigDecimal height, BigDecimal width, BigDecimal depth, BigDecimal weight) {
+        this.height = height;
+        this.width = width;
+        this.depth = depth;
+        this.weight = weight;
+    }
+
     public PackageModel() {
     }
 
