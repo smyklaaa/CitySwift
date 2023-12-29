@@ -80,7 +80,7 @@ public class UserRepository {
     }
 
     public List<UserModel> getFriends(Boolean accepted, Integer privateToken) {
-        String sql = "SELECT * FROM app_user WHERE id IN (SELECT app_user_id_1 FROM friendship WHERE app_user_id_2 = ? AND accepted = ?)";
+        String sql = "SELECT * FROM app_user WHERE id IN (SELECT app_user_id_2 FROM friendship WHERE app_user_id_1 = ? AND accepted = ?)";
         List<Object> params = new ArrayList<>();
         params.add(privateToken);
         params.add(accepted);

@@ -13,7 +13,7 @@ public class HandleClientAction {
         ServerResponse serverResponse = new ServerResponse();
 
         try {
-             switch (clientRequest.getAction()) {
+            switch (clientRequest.getAction()) {
                 case "getUserBasicData":
                     serverResponse = UserService.getUserBasicData((int) clientRequest.getData());
                     break;
@@ -38,11 +38,11 @@ public class HandleClientAction {
                 case "getFriends":
                     serverResponse = UserService.getFriends((Boolean) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
-                case "crateOrder":
-                    serverResponse = OrderService.createOrder((CreateOrderRequest) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
-                    break;
                 case "getUserOrdersHistory":
-                    serverResponse = OrderService.getAllUserOrders( (Integer) clientRequest.getPrivateToken());
+                    serverResponse = OrderService.getAllUserOrders((Integer) clientRequest.getPrivateToken());
+                    break;
+                case "createOrder":
+                    serverResponse = OrderService.createOrder((CreateOrderDTO) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
                 default:
                     serverResponse.setResultCode(404);
