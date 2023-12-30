@@ -12,9 +12,12 @@ public class OrderModel implements Serializable {
     private Integer packageId;
     private Integer statusId;
     private String message;
+    private String firstName;
+    private String lastName;
+
 
     public OrderModel(Integer id, Integer senderId, Integer recipientId, Integer courierId, BigDecimal price,
-                      Integer packageId, Integer statusId, String message) {
+                      Integer packageId, Integer statusId, String message, String firstName, String lastName) {
         this.id = id;
         this.senderId = senderId;
         this.recipientId = recipientId;
@@ -23,6 +26,8 @@ public class OrderModel implements Serializable {
         this.packageId = packageId;
         this.statusId = statusId;
         this.message = message;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getMessage() {
@@ -88,4 +93,11 @@ public class OrderModel implements Serializable {
     public void setStatusId(Integer statusId) {
         this.statusId = statusId;
     }
+    public String getFirstName() {return firstName;}
+
+    public void setFirstName(String firstName) {this.firstName = firstName;}
+
+    public String getLastName() {return lastName;}
+
+    public void setLastName(String lastName) {this.lastName = lastName;}
 }

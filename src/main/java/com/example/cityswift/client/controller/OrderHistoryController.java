@@ -30,33 +30,24 @@ public class OrderHistoryController {
                null, UserSession.getUserToken().getToken()));
 
         List<OrderModel> orders = (List<OrderModel>) serverResponse.getData();
+        showRecipientOrders(orders);
+    }
 
+    public  void showRecipientOrders(List<OrderModel> orders){
         for(OrderModel order :orders){
             String status = getStatusDescription(order.getStatusId());
-            String showData = "id:"+order.getId()
-                    +"    id nadawcy:"+order.getSenderId()
-                    +"    id odbiorcy:"+order.getRecipientId()
-                    +"    id kuriera:"+order.getCourierId()
-                    +"    cena zł:"+ order.getPrice()
-                    +"    id paczki:"+order.getPackageId()
-                    +"    status:"+status
-                    +"    wiadomość:"+order.getMessage();
-
-            if(order.getSenderId().equals(UserSession.getUserToken().getToken())
-                    && order.getRecipientId().equals(UserSession.getUserToken().getToken())){
-                sendPackagesListView.getItems().add(showData);
-                receivedPackageListView.getItems().add(showData);
-
-            } else if (order.getRecipientId().equals(UserSession.getUserToken().getToken())) {
-                receivedPackageListView.getItems().add(showData);
-            } else if (order.getSenderId().equals(UserSession.getUserToken().getToken())) {
-                sendPackagesListView.getItems().add(showData);
-            }
+            String showData = "Nadawca: "+order.getFirstName()+" "+order.getLastName()
+                    +"    Id kuriera: "+order.getCourierId()
+                    +"    Cena zł: "+ order.getPrice()
+                    +"    Id paczki: "+order.getPackageId()
+                    +"    Status: "+status
+                    +"    Wiadomość: "+order.getMessage();
 
 
+            receivedPackageListView.getItems().add(showData);
         }
-
     }
+
 
     public String getStatusDescription(int status){
         if(status == 1){
