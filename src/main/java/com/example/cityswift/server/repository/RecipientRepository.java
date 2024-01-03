@@ -13,7 +13,7 @@ public class RecipientRepository {
 
 
     public int createRecipient(String mobile, String mail) {
-        String sql = "INSERT INTO recipient (mobile, email) VALUES (?, ?)";
+        String sql = "INSERT INTO recipient (mobile, mail) VALUES (?, ?)";
         List<Object> params = new ArrayList<>();
         params.add(mobile);
         params.add(mail);
@@ -21,7 +21,7 @@ public class RecipientRepository {
     }
 
     public Optional<RecipientModel> fetchRecipientData(String mobile, String mail) {
-        String sql = "SELECT * FROM recipient WHERE mobile = ? AND email = ?";
+        String sql = "SELECT * FROM recipient WHERE mobile = ? AND mail = ?";
         List<Object> params = new ArrayList<>();
         params.add(mobile);
         params.add(mail);

@@ -14,7 +14,7 @@ public class ToRecipientModelMapper implements RowMapper<RecipientModel> {
     public RecipientModel mapRow(ResultSet rs) throws SQLException {
         return new RecipientModel(
                 rs.getString("mobile"),
-                rs.getString("email")
+                rs.getString("mail")
         );
     }
 }
