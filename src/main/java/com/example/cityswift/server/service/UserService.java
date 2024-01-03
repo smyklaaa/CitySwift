@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class UserService  {
+public class UserService {
     private static final UserRepository userRepository = new UserRepository();
     private static final FriendsRepository friendsRepository = new FriendsRepository();
 
@@ -73,9 +73,11 @@ public class UserService  {
     public static ServerResponse addFriend(String data, Integer privateToken) {
         Optional<UserModel> userModel = userRepository.getUserByPublicToken(data);
         if (userModel.isPresent()) {
-            int isAdded = friendsRepository.addFriend(userModel.get().getId(), privateToken);
-            if (isAdded > 0) {
-                return ServerResponseService.createPositiveServerResponse(null);
+            if (!friendsRepository.checkIfFriends(userModel.get().getId(), privateToken)) {
+                int isAdded = friendsRepository.addFriend(userModel.get().getId(), privateToken);
+                if (isAdded > 0) {
+                    return ServerResponseService.createPositiveServerResponse(null);
+                }
             }
         }
 
@@ -95,7 +97,12 @@ public class UserService  {
     }
 
     public static ServerResponse getFriends(Boolean accepted, Integer privateToken) {
-        List<UserModel> userModels = userRepository.getFriends(accepted, privateToken);
+        List<UserModel> userModels = new ArrayList<>();
+        if(accepted == false){
+            userModels = userRepository.getFriends(true, privateToken);
+        } else{
+            userModels = userRepository.getAcceptedFriends(privateToken);
+        }
         List<BasicUserData> result = new ArrayList<>();
         for (UserModel userModel : userModels) {
             AddressRepository addressRepository = new AddressRepository();

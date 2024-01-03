@@ -12,8 +12,8 @@ public class ToFriendshipModelMapper implements RowMapper<FriendshipModel> {
     @Override
     public FriendshipModel mapRow(ResultSet rs) throws SQLException {
         return new FriendshipModel(
-                rs.getInt("user_id"),
-                rs.getInt("friend_id"),
+                rs.getInt("app_user_id_1"),
+                rs.getInt("app_user_id_2"),
                 rs.getDate("friendship_date"),
                 rs.getBoolean("accepted")
         );    }
