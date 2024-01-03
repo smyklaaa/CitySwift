@@ -1,7 +1,10 @@
 package com.example.cityswift.server.repository;
 
+import com.example.cityswift.dto.OrderData;
+import com.example.cityswift.dto.ParticularArea;
+import com.example.cityswift.server.mapper.ToAddressModelMapper;
 import com.example.cityswift.server.mapper.ToOrderModelMapper;
-import com.example.cityswift.server.mapper.ToSendPackagesMapper;
+import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.model.OrderModel;
 
 import java.util.ArrayList;
@@ -34,5 +37,18 @@ public class OrderRepository {
         List<Object> params = new ArrayList<>();
         params.add(currentUserId);
         return repository.fetchMultipleRow(sql, toSendPackagesMapper, params);
+    }
+
+    public void createOrder(Integer privateToken, int id, int packageId, int address) {
+        String sql = "INSERT INTO orders (sender_id, recipient_id, package_id, address_id, status_id, price) VALUES (?, ?, ?, ?, ?, ?)";
+        List<Object> params = new ArrayList<>();
+        params.add(privateToken);
+        params.add(id);
+        params.add(packageId);
+        params.add(address);
+        params.add(1);
+        params.add(1);
+
+        repository.insert(sql, params);
     }
 }

@@ -44,4 +44,24 @@ public class CreateOrderRequest implements Serializable {
     public String getMessage() {
         return message;
     }
+
+    public void setOrderModel(OrderModel orderModel) {
+        this.orderModel = orderModel;
+    }
+
+    public void setPackageModel(PackageModel packageModel) {
+        this.packageModel = packageModel;
+    }
+
+    public void setAddressModel(AddressModel addressModel) {
+        this.addressModel = addressModel;
+    }
+
+    public void setRecipientModel(RecipientModel recipientModel) {
+        this.recipientModel = recipientModel;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

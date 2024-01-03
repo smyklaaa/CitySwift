@@ -6,12 +6,14 @@ import com.example.cityswift.server.service.AddressService;
 import com.example.cityswift.server.service.OrderService;
 import com.example.cityswift.server.service.UserService;
 
+import java.util.List;
+
 public class HandleClientAction {
     public static ServerResponse handleClientAction(ClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse();
 
         try {
-            switch (clientRequest.getAction()) {
+             switch (clientRequest.getAction()) {
                 case "getUserBasicData":
                     serverResponse = UserService.getUserBasicData((int) clientRequest.getData());
                     break;
@@ -25,20 +27,16 @@ public class HandleClientAction {
                     serverResponse = UserService.signup((CreateUserData) clientRequest.getData());
                     break;
                 case "searchUser":
-                    serverResponse = UserService.userSearch((String) clientRequest.getData(),
-                            (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.userSearch((String) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
                 case "addFriend":
-                    serverResponse = UserService.addFriend((String) clientRequest.getData(),
-                            (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.addFriend((String) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
                 case "acceptFriend":
-                    serverResponse = UserService.acceptFriend((String) clientRequest.getData(),
-                            (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.acceptFriend((String) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
                 case "getFriends":
-                    serverResponse = UserService.getFriends((Boolean) clientRequest.getData(),
-                            (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.getFriends((Boolean) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
                 case "crateOrder":
                     serverResponse = OrderService.createOrder((CreateOrderRequest) clientRequest.getData(),

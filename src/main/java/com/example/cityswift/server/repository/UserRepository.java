@@ -86,4 +86,12 @@ public class UserRepository {
         params.add(accepted);
         return repository.fetchMultipleRow(sql, mapper, params);
     }
+
+    public List<UserModel> getAcceptedFriends(Integer privateToken) {
+        String sql = "SELECT * FROM app_user WHERE id IN (SELECT CASE WHEN app_user_id_2 = ? THEN app_user_id_1 WHEN app_user_id_1 = ? THEN app_user_id_2 END FROM friendship WHERE accepted = true);";
+        List<Object> params = new ArrayList<>();
+        params.add(privateToken);
+        params.add(privateToken);
+        return repository.fetchMultipleRow(sql, mapper, params);
+    }
 }

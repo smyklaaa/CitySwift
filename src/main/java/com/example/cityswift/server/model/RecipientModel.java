@@ -30,4 +30,8 @@ public class RecipientModel implements Serializable {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+
+        public String getMail() {
+        return mail;
+    }
 }
