@@ -1,11 +1,8 @@
 package com.example.cityswift.server.repository;
 
-import com.example.cityswift.dto.OrderData;
-import com.example.cityswift.dto.ParticularArea;
-import com.example.cityswift.server.mapper.ToAddressModelMapper;
-import com.example.cityswift.server.mapper.ToOrderModelMapper;
-import com.example.cityswift.server.model.AddressModel;
+import com.example.cityswift.server.mapper.ToReceivedPackagesMapper;
 import com.example.cityswift.server.model.OrderModel;
+import com.example.cityswift.server.mapper.ToSendPackagesMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 public class OrderRepository {
 
     GenericRepository<OrderModel> repository = new GenericRepository<>();
-    ToOrderModelMapper toOrderModelMapper = new ToOrderModelMapper();
+    ToReceivedPackagesMapper toReceivedPackagesMapper = new ToReceivedPackagesMapper();
     ToSendPackagesMapper toSendPackagesMapper = new ToSendPackagesMapper();
 
 
@@ -24,7 +21,7 @@ public class OrderRepository {
                     " WHERE orders.recipient_id = ?";
         List<Object> params = new ArrayList<>();
         params.add(currentUserId);
-        return repository.fetchMultipleRow(sql, toOrderModelMapper, params);
+        return repository.fetchMultipleRow(sql, toReceivedPackagesMapper, params);
     }
 
     public List<OrderModel> fetchUserSendOrderData(int currentUserId) {

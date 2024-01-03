@@ -5,13 +5,12 @@ package com.example.cityswift.server.mapper;
 
 
 import com.example.cityswift.server.interfaces.RowMapper;
-import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.model.OrderModel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ToOrderModelMapper implements RowMapper<OrderModel> {
+public class ToReceivedPackagesMapper implements RowMapper<OrderModel> {
 
     @Override
     public OrderModel mapRow(ResultSet rs) throws SQLException {

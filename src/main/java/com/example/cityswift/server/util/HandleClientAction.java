@@ -39,7 +39,7 @@ public class HandleClientAction {
                     serverResponse = UserService.getFriends((Boolean) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
                     break;
                 case "crateOrder":
-                    serverResponse = OrderService.createOrder((CreateOrderRequest) clientRequest.getData(),
+                    serverResponse = OrderService.createOrder((CreateOrderDTO) clientRequest.getData(),
                             (Integer) clientRequest.getPrivateToken());
                     break;
                 case "getUserReceivedOrdersHistory":
