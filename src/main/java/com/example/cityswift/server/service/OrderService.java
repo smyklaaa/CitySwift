@@ -16,8 +16,16 @@ public class OrderService {
     private static final AddressRepository addressRepository = new AddressRepository();
 
 
-    public static ServerResponse getAllUserOrders(int currentUserId){
-        List<OrderModel> listOfOrders = orderRepository.fetchUserOrderData(currentUserId);
+    public static ServerResponse getReceivedUserOrders(int currentUserId){
+        List<OrderModel> listOfOrders = orderRepository.fetchUserReceivedOrderData(currentUserId);
+        ServerResponse serverResponse = new ServerResponse();
+        serverResponse.setData((Serializable) listOfOrders);
+        serverResponse.setResultCode(200);
+        return serverResponse;
+    }
+
+    public static ServerResponse getSendUserOrders(int currentUserId){
+        List<OrderModel> listOfOrders = orderRepository.fetchUserSendOrderData(currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setData((Serializable) listOfOrders);
         serverResponse.setResultCode(200);
