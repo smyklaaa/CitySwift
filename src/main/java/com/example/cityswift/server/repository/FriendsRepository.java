@@ -32,7 +32,7 @@ public class FriendsRepository {
     }
 
     public int acceptFriend(int id, Integer privateToken) {
-        String sql = "UPDATE friendship SET accepted = true WHERE app_user_id_1 = ? AND app_user_id_2 = ?";
+        String sql = "UPDATE friendship SET accepted = true WHERE app_user_id_2 = ? AND app_user_id_1 = ?";
         List<Object> params = new ArrayList<>();
         params.add(privateToken);
         params.add(id);

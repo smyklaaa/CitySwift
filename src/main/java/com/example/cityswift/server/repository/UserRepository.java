@@ -80,7 +80,7 @@ public class UserRepository {
     }
 
     public List<UserModel> getFriends(Boolean accepted, Integer privateToken) {
-        String sql = "SELECT * FROM app_user WHERE id IN (SELECT app_user_id_2 FROM friendship WHERE app_user_id_1 = ? AND accepted = ?)";
+        String sql = "SELECT * FROM app_user WHERE id IN (SELECT app_user_id_1 FROM friendship WHERE app_user_id_2 = ? AND accepted = ?)";
         List<Object> params = new ArrayList<>();
         params.add(privateToken);
         params.add(accepted);
@@ -88,16 +88,8 @@ public class UserRepository {
     }
 
     public List<UserModel> getAcceptedFriends(Integer privateToken) {
-        String sql = "SELECT * FROM app_user " +
-                "WHERE id IN ( " +
-                "SELECT CASE WHEN app_user_id_1 = ? " +
-                "THEN app_user_id_2 " +
-                "ELSE app_user_id_1 END " +
-                "FROM friendship " +
-                "WHERE (app_user_id_1 = ? OR app_user_id_2 = ?) " +
-                "AND accepted = true )";
+        String sql = "SELECT * FROM app_user WHERE id IN (SELECT CASE WHEN app_user_id_2 = ? THEN app_user_id_1 WHEN app_user_id_1 = ? THEN app_user_id_2 END FROM friendship WHERE accepted = true);";
         List<Object> params = new ArrayList<>();
-        params.add(privateToken);
         params.add(privateToken);
         params.add(privateToken);
         return repository.fetchMultipleRow(sql, mapper, params);

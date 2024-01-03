@@ -99,7 +99,7 @@ public class UserService {
     public static ServerResponse getFriends(Boolean accepted, Integer privateToken) {
         List<UserModel> userModels = new ArrayList<>();
         if(accepted == false){
-            userModels = userRepository.getFriends(true, privateToken);
+            userModels = userRepository.getFriends(false, privateToken);
         } else{
             userModels = userRepository.getAcceptedFriends(privateToken);
         }
