@@ -12,16 +12,37 @@ public class OrderData implements Serializable {
     private  Integer status;
     private Integer recipientId;
     private String message;
+    private String firstName;
+    private String lastName;
 
-    public OrderData(Integer packageId, Integer semderId, Integer courierId, Integer price, Integer orderId, Integer status, Integer recipientId, String message) {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public OrderData(Integer packageId, Integer senderId, Integer courierId, Integer price, Integer orderId,
+                     Integer status, Integer recipientId, String message, String firstName, String lastName) {
         this.packageId = packageId;
-        this.senderId = semderId;
+        this.senderId = senderId;
         this.courierId = courierId;
         this.price = price;
         this.orderId = orderId;
         this.status = status;
         this.recipientId = recipientId;
         this.message = message;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Integer getPackageId() {

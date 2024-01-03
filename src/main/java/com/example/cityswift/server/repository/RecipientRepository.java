@@ -1,8 +1,6 @@
 package com.example.cityswift.server.repository;
 
-import com.example.cityswift.server.mapper.ToOrderModelMapper;
 import com.example.cityswift.server.mapper.ToRecipientModelMapper;
-import com.example.cityswift.server.model.OrderModel;
 import com.example.cityswift.server.model.RecipientModel;
 
 import java.util.ArrayList;

@@ -19,58 +19,64 @@ public class OrderHistoryController {
 
     @FXML
     private ListView<String> receivedPackageListView;
+    private static final int RECEIVED_ORDERS = 1;
+    private static final int SEND_ORDERS = 2;
 
 
     public void searchPackageFriends(ActionEvent event) {
 
     }
 
-    public void displayListOfPackages(){
-        ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest("getUserOrdersHistory",
-               null, UserSession.getUserToken().getToken()));
+    public void displayListOfPackages() {
+        ServerResponse serverResponseReceivedOrders = NetworkClient.sendRequest(new ClientRequest(
+                "getUserReceivedOrdersHistory",
+                null, UserSession.getUserToken().getToken()));
 
-        List<OrderModel> orders = (List<OrderModel>) serverResponse.getData();
+        ServerResponse serverResponseSendOrders = NetworkClient.sendRequest(new ClientRequest(
+                "getUserSendOrdersHistory",
+                null, UserSession.getUserToken().getToken()));
 
-        for(OrderModel order :orders){
-            String status = getStatusDescription(order.getStatusId());
-            String showData = "id:"+order.getId()
-                    +"    id nadawcy:"+order.getSenderId()
-                    +"    id odbiorcy:"+order.getRecipientId()
-                    +"    id kuriera:"+order.getCourierId()
-                    +"    cena zł:"+ order.getPrice()
-                    +"    id paczki:"+order.getPackageId()
-                    +"    status:"+status
-                    +"    wiadomość:"+order.getMessage();
+        List<OrderModel> receivedOrders = (List<OrderModel>) serverResponseReceivedOrders.getData();
+        List<OrderModel> sendOrders = (List<OrderModel>) serverResponseSendOrders.getData();
 
-            if(order.getSenderId().equals(UserSession.getUserToken().getToken())
-                    && order.getRecipientId().equals(UserSession.getUserToken().getToken())){
-                sendPackagesListView.getItems().add(showData);
-                receivedPackageListView.getItems().add(showData);
-
-            } else if (order.getRecipientId().equals(UserSession.getUserToken().getToken())) {
-                receivedPackageListView.getItems().add(showData);
-            } else if (order.getSenderId().equals(UserSession.getUserToken().getToken())) {
-                sendPackagesListView.getItems().add(showData);
-            }
-
-
-        }
-
+        showOrders(receivedOrders, RECEIVED_ORDERS);
+        showOrders(sendOrders,SEND_ORDERS);
     }
 
-    public String getStatusDescription(int status){
-        if(status == 1){
+    public void showOrders(List<OrderModel> orders, int whichOrders) {
+        for (OrderModel order : orders) {
+            String status = getStatusDescription(order.getStatusId());
+            String showData = "    Id kuriera: " + order.getCourierId()
+                    + "    Cena zł: " + order.getPrice()
+                    + "    Id paczki: " + order.getPackageId()
+                    + "    Status: " + status
+                    + "    Wiadomość: " + order.getMessage();
+
+            if (whichOrders == 1) {
+                receivedPackageListView.getItems().add("Nadawca: " + order.getFirstName() + " " + order.getLastName()
+                        + showData);
+            } else if (whichOrders == 2) {
+                sendPackagesListView.getItems().add("Odbiorca: " + order.getFirstName() + " " + order.getLastName()
+                        +"Mail: "+ order.getMail()+ showData);
+            }
+
+        }
+    }
+
+
+    public String getStatusDescription(int status) {
+        if (status == 1) {
             return "Oczekiwanie na kuriera";
         } else if (status == 2) {
             return "W trakcie dostawy";
-        }else if(status == 3){
+        } else if (status == 3) {
             return "Dostarczona";
-        }else return"Błąc odczytu";
+        } else return "Błąc odczytu";
     }
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         displayListOfPackages();
     }
 }

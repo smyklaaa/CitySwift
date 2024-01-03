@@ -13,7 +13,7 @@
             <children>
                 <VBox alignment="TOP_CENTER" prefHeight="375.0" prefWidth="300.0">
                     <children>
-                        <Label style="-fx-padding: 5px;" text="Moje zamówienia">
+                        <Label style="-fx-padding: 5px;" text="Paczki odebrane">
                             <font>
                                 <Font size="18.0" />
                             </font>

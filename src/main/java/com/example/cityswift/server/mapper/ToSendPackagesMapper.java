@@ -11,7 +11,7 @@ import com.example.cityswift.server.model.OrderModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ToOrderModelMapper implements RowMapper<OrderModel> {
+public class ToSendPackagesMapper implements RowMapper<OrderModel> {
 
     @Override
     public OrderModel mapRow(ResultSet rs) throws SQLException {
@@ -23,6 +23,9 @@ public class ToOrderModelMapper implements RowMapper<OrderModel> {
                 rs.getBigDecimal("price"),
                 rs.getInt("package_id"),
                 rs.getInt("status_id"),
-                rs.getString("message")
+                rs.getString("message"),
+                rs.getString("first_name"),
+                rs.getString("last_name"),
+                rs.getString("mail")
         );    }
 }
