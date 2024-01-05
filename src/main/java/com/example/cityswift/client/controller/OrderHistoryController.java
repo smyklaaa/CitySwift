@@ -56,8 +56,7 @@ public class OrderHistoryController {
                 receivedPackageListView.getItems().add("Nadawca: " + order.getFirstName() + " " + order.getLastName()
                         + showData);
             } else if (whichOrders == 2) {
-                sendPackagesListView.getItems().add("Odbiorca: " + order.getFirstName() + " " + order.getLastName()
-                        +"Mail: "+ order.getMail()+ showData);
+                sendPackagesListView.getItems().add("Mail odbiorcy: "+ order.getMail()+ showData);
             }
 
         }
