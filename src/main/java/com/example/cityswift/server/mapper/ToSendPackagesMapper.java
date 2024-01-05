@@ -24,8 +24,6 @@ public class ToSendPackagesMapper implements RowMapper<OrderModel> {
                 rs.getInt("package_id"),
                 rs.getInt("status_id"),
                 rs.getString("message"),
-                rs.getString("first_name"),
-                rs.getString("last_name"),
                 rs.getString("mail")
         );    }
 }

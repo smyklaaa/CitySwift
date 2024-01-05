@@ -18,18 +18,19 @@ public class OrderRepository {
         String sql = "SELECT orders.*, app_user.first_name, app_user.last_name" +
                     " FROM orders" +
                     " JOIN app_user ON app_user.id = orders.sender_id" +
-                    " WHERE orders.recipient_id = ?";
+                    " JOIN recipient ON recipient.id = orders.recipient_id" +
+                    " WHERE recipient.mail = (Select app_user.mail FROM app_user WHERE app_user.id = ?)";
         List<Object> params = new ArrayList<>();
         params.add(currentUserId);
         return repository.fetchMultipleRow(sql, toReceivedPackagesMapper, params);
     }
 
     public List<OrderModel> fetchUserSendOrderData(int currentUserId) {
-        String sql = "SELECT orders.*, COALESCE(app_user.first_name,'Brak Danych') as first_name,COALESCE( app_user.last_name,'Brak Danych')as last_name," +
+        String sql = "SELECT orders.*," +
                 "COALESCE( recipient.mail,'Brak Danych') as mail"  +
                 " FROM orders" +
-                " JOIN app_user ON app_user.id = orders.sender_id" +
-                " JOIN recipient ON recipient.id = orders.sender_id"+
+                " JOIN recipient ON recipient.id = orders.recipient_id"+
+                " LEFT JOIN app_user ON  app_user.mail = recipient.mail "+
                 " WHERE orders.sender_id = ?";
         List<Object> params = new ArrayList<>();
         params.add(currentUserId);
