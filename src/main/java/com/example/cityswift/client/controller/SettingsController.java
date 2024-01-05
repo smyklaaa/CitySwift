@@ -37,29 +37,40 @@ public class SettingsController {
     @FXML
     private Label incorrectDataMessageLabel;
 
-    public void changePasswordButtonOn(ActionEvent event) {
-        if(!passwordTextField.getText().isBlank()
+    public void changePasswordButtonOn() {
+        if (!passwordTextField.getText().isBlank()
                 && !repeatPasswordTextField.getText().isBlank()
-                && checkPasswordRequirements(passwordTextField.getText(),repeatPasswordTextField.getText())){
+                && checkPasswordRequirements(passwordTextField.getText(), repeatPasswordTextField.getText())) {
 
             ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest(
-                    "changePassword",passwordTextField.getText(), UserSession.getUserToken().getToken()));
+                    "changePassword", passwordTextField.getText(), UserSession.getUserToken().getToken()));
 
 
-            if(serverResponse.getResultCode() == 200){
+            if (serverResponse.getResultCode() == 200) {
                 reactionMessageLabel.setText("Hasło zostało pomyślnie zmnienione");
-            }else reactionMessageLabel.setText("Błąd przy zmianie hasła 1");
-        }else reactionMessageLabel.setText("Najpierw wypełnij pola");
+            } else reactionMessageLabel.setText("Błąd przy zmianie hasła");
+        } else reactionMessageLabel.setText("Najpierw wypełnij pola");
     }
 
-    public void changeMobileButtonOn(ActionEvent event) {
+    public void changeMobileButtonOn() {
+        if (!mobileTextField.getText().isBlank()
+                && checkMobileRequirements(mobileTextField.getText())) {
+
+            ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest(
+                    "changeMobile", mobileTextField.getText(), UserSession.getUserToken().getToken()));
+
+
+            if (serverResponse.getResultCode() == 200) {
+                reactionMessageLabel.setText("Nr telefonu został pomyślnie zmnieniony");
+            } else reactionMessageLabel.setText("Błąd przy zmianie numeru");
+        } else reactionMessageLabel.setText("Najpierw wypełnij pola");
     }
 
     public void changeAddressButtonOn(ActionEvent event) {
     }
 
 
-    public boolean checkPasswordRequirements(String password,String repeatedPassword) {
+    public boolean checkPasswordRequirements(String password, String repeatedPassword) {
 
         Pattern pattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
         Matcher matcher = pattern.matcher(password);
@@ -81,6 +92,22 @@ public class SettingsController {
             passwordTextField.clear();
             repeatPasswordTextField.clear();
 
+            return false;
+        } else {
+            incorrectDataMessageLabel.setText("");
+            return true;
+        }
+    }
+
+    public boolean checkMobileRequirements(String mobile) {
+
+        if (mobile.length() != 9) {
+            incorrectDataMessageLabel.setText("Twój nr telefonu ma nieodpowiednia długość");
+            mobileTextField.clear();
+            return false;
+        } else if (!mobile.matches("\\d+")) {
+            incorrectDataMessageLabel.setText("Twój nr telefonu zawiera inne znaki niż cyfry");
+            mobileTextField.clear();
             return false;
         } else {
             incorrectDataMessageLabel.setText("");

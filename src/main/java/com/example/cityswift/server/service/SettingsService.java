@@ -20,5 +20,10 @@ public class SettingsService {
         return serverResponse;
     }
 
-
+    public static ServerResponse changeMobile(String mobile, int currentUserId) {
+        settingsRepository.changeMobile(mobile, currentUserId);
+        ServerResponse serverResponse = new ServerResponse();
+        serverResponse.setResultCode(200);
+        return serverResponse;
+    }
 }

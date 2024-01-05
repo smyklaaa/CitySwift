@@ -17,4 +17,13 @@ public class SettingsRepository {
 
         repository.insert(sql, params);
     }
+
+    public void changeMobile(String mobile, Integer privateToken) {
+        String sql = "UPDATE app_user SET mobile = ? WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(mobile);
+        params.add(privateToken);
+
+        repository.insert(sql, params);
+    }
 }

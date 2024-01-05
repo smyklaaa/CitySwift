@@ -11,12 +11,12 @@
       <TextField fx:id="mobileTextField" layoutX="32.0" layoutY="369.0" prefHeight="39.0" prefWidth="302.0" promptText="numer telefonu" />
       <TextField fx:id="streetNameTextField" layoutX="32.0" layoutY="238.0" prefHeight="39.0" prefWidth="302.0" promptText="nazwa ulicy" />
       <PasswordField fx:id="repeatPasswordTextField" layoutX="32.0" layoutY="107.0" prefHeight="39.0" prefWidth="302.0" promptText="powtórz hasło" />
-      <Label fx:id="reactionMessageLabel" layoutX="32.0" layoutY="10.0" prefHeight="52.0" prefWidth="215.0" styleClass="signup_label_text" stylesheets="@settingsStyle.css" text="Wypełnij, aby dokonać zmian danych " />
+      <Label fx:id="reactionMessageLabel" layoutX="32.0" layoutY="-2.0" prefHeight="64.0" prefWidth="261.0" styleClass="signup_label_text" stylesheets="@settingsStyle.css" text="Wypełnij, aby dokonać zmian danych " />
       <TextField fx:id="postalCodeTextField" layoutX="32.0" layoutY="284.0" prefHeight="39.0" prefWidth="103.0" promptText="kod pocztowy" />
       <TextField fx:id="homeNrTextField" layoutX="153.0" layoutY="284.0" prefHeight="39.0" prefWidth="83.0" promptText="nr budynku" />
       <TextField fx:id="doorKeyTextField" layoutX="251.0" layoutY="284.0" prefHeight="39.0" prefWidth="83.0" promptText="nr mieszkania" />
       <TextField fx:id="cityTextField" layoutX="32.0" layoutY="192.0" prefHeight="39.0" prefWidth="302.0" promptText="miasto" />
-      <Label fx:id="incorrectDataMessageLabel" layoutX="278.0" layoutY="23.0" prefHeight="39.0" prefWidth="261.0" styleClass="signup_label_text" />
+      <Label fx:id="incorrectDataMessageLabel" layoutX="311.0" layoutY="11.0" prefHeight="39.0" prefWidth="261.0" styleClass="signup_label_text" />
       <Button fx:id="changePasswordButton" layoutX="380.0" layoutY="56.0" mnemonicParsing="false" onAction="#changePasswordButtonOn" prefHeight="39.0" prefWidth="179.0" styleClass="basic_button" stylesheets="@settingsStyle.css" text="Zmień hasło" />
       <Button fx:id="changeMobileButton" layoutX="380.0" layoutY="369.0" mnemonicParsing="false" onAction="#changeMobileButtonOn" prefHeight="39.0" prefWidth="179.0" styleClass="basic_button" stylesheets="@settingsStyle.css" text="Zmień nr telefonu" />
       <Button fx:id="changeAddressButton" layoutX="380.0" layoutY="192.0" mnemonicParsing="false" onAction="#changeAddressButtonOn" prefHeight="39.0" prefWidth="179.0" styleClass="basic_button" stylesheets="@settingsStyle.css" text="Zmień adres" />

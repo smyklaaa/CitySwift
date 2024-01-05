@@ -57,6 +57,10 @@ public class HandleClientAction {
                      serverResponse = SettingsService.changePassword((String) clientRequest.getData(),
                              (Integer) clientRequest.getPrivateToken());
                      break;
+                 case "changeMobile":
+                     serverResponse = SettingsService.changeMobile((String) clientRequest.getData(),
+                             (Integer) clientRequest.getPrivateToken());
+                     break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");
