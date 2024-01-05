@@ -1,5 +1,6 @@
 package com.example.cityswift.server.service;
 
+import com.example.cityswift.dto.AddressDTO;
 import com.example.cityswift.dto.ServerResponse;
 import com.example.cityswift.dto.UserCredential;
 import com.example.cityswift.server.model.OrderModel;
@@ -22,6 +23,13 @@ public class SettingsService {
 
     public static ServerResponse changeMobile(String mobile, int currentUserId) {
         settingsRepository.changeMobile(mobile, currentUserId);
+        ServerResponse serverResponse = new ServerResponse();
+        serverResponse.setResultCode(200);
+        return serverResponse;
+    }
+
+    public static ServerResponse changeAddress(AddressDTO newAddress, int currentUserId) {
+        settingsRepository.changeAddress(newAddress, currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setResultCode(200);
         return serverResponse;

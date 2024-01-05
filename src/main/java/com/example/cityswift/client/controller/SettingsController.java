@@ -2,6 +2,7 @@ package com.example.cityswift.client.controller;
 
 import com.example.cityswift.client.util.NetworkClient;
 import com.example.cityswift.client.util.UserSession;
+import com.example.cityswift.dto.AddressDTO;
 import com.example.cityswift.dto.ClientRequest;
 import com.example.cityswift.dto.ServerResponse;
 import com.example.cityswift.dto.UserCredential;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,7 +49,7 @@ public class SettingsController {
 
 
             if (serverResponse.getResultCode() == 200) {
-                reactionMessageLabel.setText("Hasło zostało pomyślnie zmnienione");
+                reactionMessageLabel.setText("Twoje hasło zostało pomyślnie zmnienione");
             } else reactionMessageLabel.setText("Błąd przy zmianie hasła");
         } else reactionMessageLabel.setText("Najpierw wypełnij pola");
     }
@@ -61,12 +63,32 @@ public class SettingsController {
 
 
             if (serverResponse.getResultCode() == 200) {
-                reactionMessageLabel.setText("Nr telefonu został pomyślnie zmnieniony");
+                reactionMessageLabel.setText("Twój numer został pomyślnie zmnieniony");
             } else reactionMessageLabel.setText("Błąd przy zmianie numeru");
         } else reactionMessageLabel.setText("Najpierw wypełnij pola");
     }
 
-    public void changeAddressButtonOn(ActionEvent event) {
+    public void changeAddressButtonOn() {
+        if (!cityTextField.getText().isBlank()
+                && !postalCodeTextField.getText().isBlank()
+                && !streetNameTextField.getText().isBlank()
+                && !homeNrTextField.getText().isBlank()
+                && !doorKeyTextField.getText().isBlank()
+                && checkPostalCodeRequirements(postalCodeTextField.getText())) {
+
+            AddressDTO newAddress = new AddressDTO(postalCodeTextField.getText(),
+                    cityTextField.getText(),
+                    streetNameTextField.getText(),
+                    homeNrTextField.getText(),
+                    doorKeyTextField.getText());
+
+            ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest(
+                    "changeAddress", newAddress, UserSession.getUserToken().getToken()));
+
+            if (serverResponse.getResultCode() == 200) {
+                reactionMessageLabel.setText("Twój adres został pomyślnie zmnieniony");
+            } else reactionMessageLabel.setText("Błąd przy zmianie adresu");
+        } else reactionMessageLabel.setText("Najpierw wypełnij pola");
     }
 
 
@@ -108,6 +130,22 @@ public class SettingsController {
         } else if (!mobile.matches("\\d+")) {
             incorrectDataMessageLabel.setText("Twój nr telefonu zawiera inne znaki niż cyfry");
             mobileTextField.clear();
+            return false;
+        } else {
+            incorrectDataMessageLabel.setText("");
+            return true;
+        }
+    }
+
+    public boolean checkPostalCodeRequirements(String postalCode) {
+
+        if (postalCode.length() != 5) {
+            incorrectDataMessageLabel.setText("Twój kod pocztowy ma nieodpowiednia długość");
+            postalCodeTextField.clear();
+            return false;
+        } else if (!postalCode.matches("\\d+")) {
+            incorrectDataMessageLabel.setText("Twój kod pocztowy zawiera inne znaki niż cyfry");
+            postalCodeTextField.clear();
             return false;
         } else {
             incorrectDataMessageLabel.setText("");

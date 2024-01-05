@@ -61,6 +61,10 @@ public class HandleClientAction {
                      serverResponse = SettingsService.changeMobile((String) clientRequest.getData(),
                              (Integer) clientRequest.getPrivateToken());
                      break;
+                 case "changeAddress":
+                     serverResponse = SettingsService.changeAddress((AddressDTO) clientRequest.getData(),
+                             (Integer) clientRequest.getPrivateToken());
+                     break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");
