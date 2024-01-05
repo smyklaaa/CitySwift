@@ -1,6 +1,8 @@
 package com.example.cityswift.dto;
 
-public class AddressDTO {
+import java.io.Serializable;
+
+public class AddressDTO implements Serializable {
     private String postalCode;
     private String city;
     private String streetName;

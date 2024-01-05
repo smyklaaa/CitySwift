@@ -4,6 +4,7 @@ package com.example.cityswift.server.util;
 import com.example.cityswift.dto.*;
 import com.example.cityswift.server.service.AddressService;
 import com.example.cityswift.server.service.OrderService;
+import com.example.cityswift.server.service.SettingsService;
 import com.example.cityswift.server.service.UserService;
 
 import java.util.List;
@@ -27,16 +28,20 @@ public class HandleClientAction {
                     serverResponse = UserService.signup((CreateUserData) clientRequest.getData());
                     break;
                 case "searchUser":
-                    serverResponse = UserService.userSearch((String) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.userSearch((String) clientRequest.getData(),
+                            (Integer) clientRequest.getPrivateToken());
                     break;
                 case "addFriend":
-                    serverResponse = UserService.addFriend((String) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.addFriend((String) clientRequest.getData(),
+                            (Integer) clientRequest.getPrivateToken());
                     break;
                 case "acceptFriend":
-                    serverResponse = UserService.acceptFriend((String) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.acceptFriend((String) clientRequest.getData(),
+                            (Integer) clientRequest.getPrivateToken());
                     break;
                 case "getFriends":
-                    serverResponse = UserService.getFriends((Boolean) clientRequest.getData(), (Integer) clientRequest.getPrivateToken());
+                    serverResponse = UserService.getFriends((Boolean) clientRequest.getData(),
+                            (Integer) clientRequest.getPrivateToken());
                     break;
                 case "createOrder":
                     serverResponse = OrderService.createOrder((CreateOrderDTO) clientRequest.getData(),
@@ -48,6 +53,18 @@ public class HandleClientAction {
                 case "getUserSendOrdersHistory":
                     serverResponse = OrderService.getSendUserOrders((Integer) clientRequest.getPrivateToken());
                     break;
+                 case "changePassword":
+                     serverResponse = SettingsService.changePassword((String) clientRequest.getData(),
+                             (Integer) clientRequest.getPrivateToken());
+                     break;
+                 case "changeMobile":
+                     serverResponse = SettingsService.changeMobile((String) clientRequest.getData(),
+                             (Integer) clientRequest.getPrivateToken());
+                     break;
+                 case "changeAddress":
+                     serverResponse = SettingsService.changeAddress((AddressDTO) clientRequest.getData(),
+                             (Integer) clientRequest.getPrivateToken());
+                     break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");
