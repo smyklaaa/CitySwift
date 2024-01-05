@@ -18,7 +18,7 @@ public class DashboardController {
 
     @FXML
     private void loadHome() {
-        loadContent("/view/home/homeView.fxml", "Home");
+        loadContent("/view/home/homeView.fxml", "Strona główna");
     }
 
     @FXML
