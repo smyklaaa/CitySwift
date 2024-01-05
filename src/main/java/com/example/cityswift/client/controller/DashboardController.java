@@ -1,5 +1,7 @@
 package com.example.cityswift.client.controller;
 
+import com.example.cityswift.client.util.SceneSwitcher;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -7,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.nio.channels.AcceptPendingException;
 import java.util.Objects;
 
 public class DashboardController {
@@ -38,6 +41,10 @@ public class DashboardController {
     @FXML
     private void loadSendPackage(){loadContent("/view/sendPackage/sendPackageView.fxml",
                                                 "Nadaj Paczkę");}
+
+    @FXML
+    private void loadLogout(ActionEvent event) throws IOException {
+        SceneSwitcher.switchScene(event,"/view/login/loginView.fxml");}
 
     @FXML
     private void loadBecomeCourier(){loadContent("/view/becomeCourier/becomeCourierView.fxml",
