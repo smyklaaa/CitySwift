@@ -9,9 +9,9 @@ import com.example.cityswift.server.repository.AddressRepository;
 import java.util.List;
 
 public class AddressService {
-    private static final AddressRepository  addressRepository = new AddressRepository();
+    private final AddressRepository  addressRepository = new AddressRepository();
 
-    public static ServerResponse ifUsersInParticularArea(ParticularArea userArea){
+    public ServerResponse ifUsersInParticularArea(ParticularArea userArea){
         List<AddressModel> givenUserArea = addressRepository.fetchUsersInAddressArea(userArea);
         if(!givenUserArea.isEmpty()){
             return ServerResponseService.createPositiveServerResponse(new ListOfAddressInArea(givenUserArea));
@@ -20,7 +20,7 @@ public class AddressService {
         }
     }
 
-    public static ServerResponse signup(CreateUserData createUserData, Integer userId){
+    public ServerResponse signup(CreateUserData createUserData, Integer userId){
         int insertUserAddress = addressRepository.insertAddress(createUserData, userId);
         if(insertUserAddress > 0){
             return ServerResponseService.createPositiveServerResponse(new UserToken(userId));

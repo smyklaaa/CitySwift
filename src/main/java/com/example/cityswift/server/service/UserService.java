@@ -15,15 +15,16 @@ import java.util.Optional;
 import java.util.Random;
 
 public class UserService {
-    private static final UserRepository userRepository = new UserRepository();
-    private static final FriendsRepository friendsRepository = new FriendsRepository();
+    private final UserRepository userRepository = new UserRepository();
+    private final FriendsRepository friendsRepository = new FriendsRepository();
+    private final AddressService addressService = new AddressService();
 
-    public static ServerResponse getUserBasicData(int userId) {
+    public ServerResponse getUserBasicData(int userId) {
         BasicUserData basicUserData = userRepository.fetchBasicUserDataById(userId);
         return ServerResponseService.createPositiveServerResponse(basicUserData);
     }
 
-    public static ServerResponse login(UserCredential userCredential) {
+    public ServerResponse login(UserCredential userCredential) {
         Optional<UserModel> givenCredentials = userRepository.fetchUserCredentials(userCredential.getMail(),
                 userCredential.getPassword());
         if (givenCredentials.isPresent()) {
@@ -36,12 +37,12 @@ public class UserService {
         }
     }
 
-    public static ServerResponse signup(CreateUserData createUserData) {
+    public ServerResponse signup(CreateUserData createUserData) {
         String privateToken = generateRandomToken();
         String publicToken = generateRandomToken();
         int isUserInserted = userRepository.insertUser(createUserData, privateToken, publicToken);
         Optional<UserModel> userByMail = userRepository.getUserByMail(createUserData.getMail());
-        AddressService.signup(createUserData, userByMail.get().getId());
+        addressService.signup(createUserData, userByMail.get().getId());
         if (isUserInserted > 0) {
             return ServerResponseService.createPositiveServerResponse(new UserToken(isUserInserted));
         } else {
@@ -49,7 +50,7 @@ public class UserService {
         }
     }
 
-    public static ServerResponse userSearch(String userSearch, Integer privateToken) {
+    public ServerResponse userSearch(String userSearch, Integer privateToken) {
         List<UserModel> userModels = userRepository.fetchUserSearch(userSearch, privateToken);
         List<BasicUserData> result = new ArrayList<>();
         for (UserModel userModel : userModels) {
@@ -60,7 +61,7 @@ public class UserService {
         return ServerResponseService.createPositiveServerResponse((Serializable) result);
     }
 
-    private static String generateRandomToken() {
+    private String generateRandomToken() {
         String characters = "0123456789";
         Random random = new Random();
         StringBuilder stringBuilder = new StringBuilder(12);
@@ -70,7 +71,7 @@ public class UserService {
         return stringBuilder.toString();
     }
 
-    public static ServerResponse addFriend(String data, Integer privateToken) {
+    public ServerResponse addFriend(String data, Integer privateToken) {
         Optional<UserModel> userModel = userRepository.getUserByPublicToken(data);
         if (userModel.isPresent()) {
             if (!friendsRepository.checkIfFriends(userModel.get().getId(), privateToken)) {
@@ -84,7 +85,7 @@ public class UserService {
         return ServerResponseService.notFoundServerResponse();
     }
 
-    public static ServerResponse acceptFriend(String data, Integer privateToken) {
+    public ServerResponse acceptFriend(String data, Integer privateToken) {
         Optional<UserModel> userModel = userRepository.getUserByPublicToken(data);
         if (userModel.isPresent()) {
             int isAdded = friendsRepository.acceptFriend(userModel.get().getId(), privateToken);
@@ -96,7 +97,7 @@ public class UserService {
         return ServerResponseService.notFoundServerResponse();
     }
 
-    public static ServerResponse getFriends(Boolean accepted, Integer privateToken) {
+    public ServerResponse getFriends(Boolean accepted, Integer privateToken) {
         List<UserModel> userModels = new ArrayList<>();
         if(accepted == false){
             userModels = userRepository.getFriends(false, privateToken);

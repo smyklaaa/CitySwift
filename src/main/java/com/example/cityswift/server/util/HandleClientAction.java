@@ -13,65 +13,70 @@ import java.util.List;
 import java.util.Optional;
 
 public class HandleClientAction {
-    private static final UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
+    private final UserService userService = new UserService();
+    private final OrderService orderService = new OrderService();
+    private final SettingsService settingsService = new SettingsService();
+    private final AddressService addressService = new AddressService();
 
-    public static ServerResponse handleClientAction(ClientRequest clientRequest) {
+    public ServerResponse handleClientAction(ClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse();
+
 
         try {
             switch (clientRequest.getAction()) {
                 case "getUserBasicData":
-                    serverResponse = UserService.getUserBasicData(
+                    serverResponse = userService.getUserBasicData(
                             clientTokenToUserId((int) clientRequest.getData())
                     );
                     break;
                 case "login":
-                    serverResponse = UserService.login((UserCredential) clientRequest.getData());
+                    serverResponse = userService.login((UserCredential) clientRequest.getData());
                     break;
                 case "getUsersLivingInArea":
-                    serverResponse = AddressService.ifUsersInParticularArea((ParticularArea) clientRequest.getData());
+                    serverResponse = addressService.ifUsersInParticularArea((ParticularArea) clientRequest.getData());
                     break;
                 case "signup":
-                    serverResponse = UserService.signup((CreateUserData) clientRequest.getData());
+                    serverResponse = userService.signup((CreateUserData) clientRequest.getData());
                     break;
                 case "searchUser":
-                    serverResponse = UserService.userSearch((String) clientRequest.getData(),
+                    serverResponse = userService.userSearch((String) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "addFriend":
-                    serverResponse = UserService.addFriend((String) clientRequest.getData(),
+                    serverResponse = userService.addFriend((String) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "acceptFriend":
-                    serverResponse = UserService.acceptFriend((String) clientRequest.getData(),
+                    serverResponse = userService.acceptFriend((String) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "getFriends":
-                    serverResponse = UserService.getFriends((Boolean) clientRequest.getData(),
+                    serverResponse = userService.getFriends((Boolean) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "createOrder":
-                    serverResponse = OrderService.createOrder((CreateOrderDTO) clientRequest.getData(),
+                    serverResponse = orderService.createOrder((CreateOrderDTO) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "getUserReceivedOrdersHistory":
-                    serverResponse = OrderService.getReceivedUserOrders(
+                    serverResponse = orderService.getReceivedUserOrders(
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "getUserSendOrdersHistory":
-                    serverResponse = OrderService.getSendUserOrders(
+                    serverResponse = orderService.getSendUserOrders(
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "changePassword":
-                    serverResponse = SettingsService.changePassword((String) clientRequest.getData(),
+                    serverResponse = settingsService.changePassword((String) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "changeMobile":
-                    serverResponse = SettingsService.changeMobile((String) clientRequest.getData(),
+                    serverResponse = settingsService.changeMobile((String) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "changeAddress":
-                    serverResponse = SettingsService.changeAddress((AddressDTO) clientRequest.getData(),
+                    serverResponse = settingsService.changeAddress((AddressDTO) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 default:
@@ -87,7 +92,7 @@ public class HandleClientAction {
         return serverResponse;
     }
 
-    public static int clientTokenToUserId(Integer clientToken) {
+    public int clientTokenToUserId(Integer clientToken) {
         Optional<UserModel> userByPrivateToken = userRepository.getUserByPrivateToken(clientToken);
         return userByPrivateToken.map(UserModel::getId).orElse(-1);
     }
