@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderService {
-    private static final OrderRepository orderRepository = new OrderRepository();
-    private static final PackageRepository packageRepository = new PackageRepository();
-    private static final AddressRepository addressRepository = new AddressRepository();
-    private static final RecipientRepository recipientRepository = new RecipientRepository();
+    private final OrderRepository orderRepository = new OrderRepository();
+    private final PackageRepository packageRepository = new PackageRepository();
+    private final AddressRepository addressRepository = new AddressRepository();
+    private final RecipientRepository recipientRepository = new RecipientRepository();
 
 
-    public static ServerResponse getReceivedUserOrders(int currentUserId){
+    public ServerResponse getReceivedUserOrders(int currentUserId){
         List<OrderModel> listOfOrders = orderRepository.fetchUserReceivedOrderData(currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setData((Serializable) listOfOrders);
@@ -29,7 +29,7 @@ public class OrderService {
         return serverResponse;
     }
 
-    public static ServerResponse getSendUserOrders(int currentUserId){
+    public ServerResponse getSendUserOrders(int currentUserId){
         List<OrderModel> listOfOrders = orderRepository.fetchUserSendOrderData(currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setData((Serializable) listOfOrders);
@@ -39,7 +39,7 @@ public class OrderService {
     }
 
 
-    public static ServerResponse createOrder(CreateOrderDTO data, Integer privateToken) {
+    public ServerResponse createOrder(CreateOrderDTO data, Integer privateToken) {
         int recipient = recipientRepository.createRecipient(data.getRecipientMobile(), data.getRecipientMail());
         int packageId = packageRepository.createPackage(data.getCreatePackageDTO());
         int address = addressRepository.createAddress(data.getCreateAddressDTO());

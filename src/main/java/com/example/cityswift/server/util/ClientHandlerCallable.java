@@ -23,8 +23,9 @@ public class ClientHandlerCallable implements Callable<ServerResponse> {
     public ServerResponse call() {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
+            HandleClientAction handleClientAction = new HandleClientAction();
             ClientRequest clientRequest = (ClientRequest) objectInputStream.readObject();
-            ServerResponse response = HandleClientAction.handleClientAction(clientRequest);
+            ServerResponse response = handleClientAction.handleClientAction(clientRequest);
             objectOutputStream.writeObject(response);
             return response;
         } catch (Exception e) {

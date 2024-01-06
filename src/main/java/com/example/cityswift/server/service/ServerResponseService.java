@@ -8,7 +8,7 @@ import com.example.cityswift.dto.ServerResponse;
 import java.io.Serializable;
 
 public class ServerResponseService {
-    public static ServerResponse createServerResponse(int resultCode, String resultMessage, Serializable data) {
+    public ServerResponse createServerResponse(int resultCode, String resultMessage, Serializable data) {
         ServerResponse serverResponse = new ServerResponse();
 
         serverResponse.setResultCode(resultCode);

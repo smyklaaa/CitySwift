@@ -62,7 +62,7 @@ public class UserRepository {
     }
 
     public List<UserModel> fetchUserSearch(String userSearch, Integer privateToken) {
-        String sql = "SELECT * FROM app_user WHERE (first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ? OR private_token LIKE ?)" +
+        String sql = "SELECT * FROM app_user WHERE (first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ? OR public_token LIKE ?)" +
                 "AND id != ?";
         List<Object> params = new ArrayList<>();
         params.add('%'+userSearch+'%');
