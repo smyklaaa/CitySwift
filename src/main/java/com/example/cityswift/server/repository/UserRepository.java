@@ -5,6 +5,7 @@ package com.example.cityswift.server.repository;
 import com.example.cityswift.dto.BasicUserData;
 import com.example.cityswift.dto.CreateUserData;
 import com.example.cityswift.server.mapper.ToUserModelMapper;
+import com.example.cityswift.server.mapper.UserLoginMapper;
 import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.model.UserModel;
 
@@ -16,6 +17,7 @@ public class UserRepository {
     GenericRepository<UserModel> repository = new GenericRepository<>();
     AddressRepository addressRepository = new AddressRepository();
     ToUserModelMapper mapper = new ToUserModelMapper();
+    UserLoginMapper userLoginMapper = new UserLoginMapper();
 
     public Optional<UserModel> fetchUserById(int userId) {
         String sql = "SELECT * FROM app_user WHERE id = ?";
@@ -35,7 +37,7 @@ public class UserRepository {
         List<Object> params = new ArrayList<>();
         params.add(username);
         params.add(password);
-        return repository.fetchSingleRow(sql, mapper, params);
+        return repository.fetchSingleRow(sql, userLoginMapper, params);
     }
 
     public int insertUser(CreateUserData createUserData, String privateToken, String publicToken) {
@@ -74,6 +76,13 @@ public class UserRepository {
 
     public Optional<UserModel> getUserByPublicToken(String data) {
         String sql = "SELECT * FROM app_user WHERE public_token = ? ";
+        List<Object> params = new ArrayList<>();
+        params.add(data);
+        return repository.fetchSingleRow(sql, mapper, params);
+    }
+
+    public Optional<UserModel> getUserByPrivateToken(Integer data) {
+        String sql = "SELECT * FROM app_user WHERE private_token = ? ";
         List<Object> params = new ArrayList<>();
         params.add(data);
         return repository.fetchSingleRow(sql, mapper, params);

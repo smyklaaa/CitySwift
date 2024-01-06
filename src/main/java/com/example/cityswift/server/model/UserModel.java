@@ -8,12 +8,16 @@ public class UserModel implements Serializable {
     private String firstName;
     private String lastName;
     private String publicToken;
-    private String privateToken;
+    private Integer privateToken;
     private String mail;
     private String mobile;
     private LocalDate dateOfBirth;
 
     public UserModel() {
+    }
+
+    public UserModel(Integer privateToken) {
+        this.privateToken = privateToken;
     }
 
     public UserModel(int id, String firstName, String lastName, String publicToken, String mail, String mobile, LocalDate dateOfBirth) {
@@ -78,12 +82,7 @@ public class UserModel implements Serializable {
         return publicToken;
     }
 
-    public void setPublicToken(String publicToken) {
-        this.publicToken = publicToken;
-    }
-
-    public String getPrivateToken() {
+    public Integer getPrivateToken() {
         return privateToken;
     }
-
 }

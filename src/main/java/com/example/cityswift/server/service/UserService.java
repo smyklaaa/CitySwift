@@ -28,7 +28,7 @@ public class UserService {
                 userCredential.getPassword());
         if (givenCredentials.isPresent()) {
 
-            return ServerResponseService.createPositiveServerResponse(new UserToken(givenCredentials.get().getId()));
+            return ServerResponseService.createPositiveServerResponse(new UserToken(givenCredentials.get().getPrivateToken()));
 
 
         } else {
@@ -61,10 +61,10 @@ public class UserService {
     }
 
     private static String generateRandomToken() {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String characters = "0123456789";
         Random random = new Random();
-        StringBuilder stringBuilder = new StringBuilder(8);
-        for (int i = 0; i < 8; i++) {
+        StringBuilder stringBuilder = new StringBuilder(12);
+        for (int i = 0; i < 12; i++) {
             stringBuilder.append(characters.charAt(random.nextInt(characters.length())));
         }
         return stringBuilder.toString();

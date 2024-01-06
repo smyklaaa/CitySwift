@@ -19,16 +19,6 @@ public class NetworkClient {
     public NetworkClient() {
     }
 
-//    public ServerResponse sendRequest(ClientRequest request) throws Exception {
-//        try (Socket socket = new Socket(serverAddress, serverPort);
-//             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-//             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
-//
-//            outputStream.writeObject(request);
-//            return (ServerResponse) inputStream.readObject();
-//        }
-//    }
-
     public static ServerResponse sendRequest(ClientRequest request) {
         try (Socket socket = new Socket(serverAddress, serverPort);
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
