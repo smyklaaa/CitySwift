@@ -6,6 +6,7 @@ import com.example.cityswift.server.service.UserService;
 import com.example.cityswift.server.util.AppLogger;
 import com.example.cityswift.server.util.ClientHandlerCallable;
 import com.example.cityswift.server.util.ConnectionPool;
+import com.example.cityswift.server.util.MailSender;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -21,6 +22,8 @@ public class Server {
     private static final int THREAD_POOL_SIZE = 10;
 
     public static void main(String[] args) throws SQLException {
+        MailSender mailSender = new MailSender();
+        mailSender.sendMail();
         AppLogger.info("Starting application");
         connectionPool = new ConnectionPool();
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
