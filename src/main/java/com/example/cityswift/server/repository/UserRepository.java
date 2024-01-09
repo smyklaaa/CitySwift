@@ -81,6 +81,13 @@ public class UserRepository {
         return repository.fetchSingleRow(sql, mapper, params);
     }
 
+    public Optional<UserModel> getUserById(int id) {
+        String sql = "SELECT * FROM app_user WHERE id = ? ";
+        List<Object> params = new ArrayList<>();
+        params.add(id);
+        return repository.fetchSingleRow(sql, mapper, params);
+    }
+
     public Optional<UserModel> getUserByPrivateToken(Integer data) {
         String sql = "SELECT * FROM app_user WHERE private_token = ? ";
         List<Object> params = new ArrayList<>();

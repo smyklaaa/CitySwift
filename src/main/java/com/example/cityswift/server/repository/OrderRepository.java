@@ -92,6 +92,17 @@ public class OrderRepository {
         return orderDetailsDTOGenericRepository.fetchSingleRow(sql, toOrderDetailsDTOMapper, params);
     }
 
+    public Optional<OrderModel> getOrderById(int orderId) {
+        String sql = "SELECT orders.*, app_user.first_name, app_user.last_name" +
+                " FROM orders" +
+                " JOIN app_user ON app_user.id = orders.sender_id" +
+                " JOIN recipient ON recipient.id = orders.recipient_id" +
+                " AND orders.id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(orderId);
+        return repository.fetchSingleRow(sql, toReceivedPackagesMapper, params);
+    }
+
     public void takePackage(int userId, int orderId) {
         String sql = "UPDATE orders SET status_id = 2, courier_id = ? WHERE id = ?";
         List<Object> params = new ArrayList<>();

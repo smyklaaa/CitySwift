@@ -22,7 +22,6 @@ public class HandleClientAction {
     public ServerResponse handleClientAction(ClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse();
 
-
         try {
             switch (clientRequest.getAction()) {
                 case "getUserBasicData":
@@ -86,7 +85,7 @@ public class HandleClientAction {
                     serverResponse = orderService.getOrderById((int) clientRequest.getData());
                     break;
                 case "takePackage":
-                    serverResponse = orderService.takePackage(clientTokenToUserId((int) clientRequest.getPrivateToken()), (int) clientRequest.getData());
+                    serverResponse = orderService.takePackage((String) clientRequest.getData(), clientTokenToUserId(clientRequest.getPrivateToken()));
                     break;
                 default:
                     serverResponse.setResultCode(404);

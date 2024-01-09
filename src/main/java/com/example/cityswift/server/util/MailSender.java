@@ -4,7 +4,7 @@ import javax.mail.internet.*;
 import java.util.Properties;
 
 public class MailSender {
-    public void sendMail(String email, String subject, String text, String from) {
+    public void sendMail(String to, String subject, String text){
         Properties props = new Properties();
         props.put("mail.smtp.host", "localhost");
         props.put("mail.smtp.port", "1025");
@@ -12,9 +12,9 @@ public class MailSender {
         Session session = Session.getInstance(props, null);
         try {
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(from));
+            msg.setFrom(new InternetAddress("test@example.com"));
             msg.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(email, false));
+                    InternetAddress.parse(to, false));
             msg.setSubject(subject);
             msg.setText(text);
             Transport.send(msg);

@@ -27,8 +27,6 @@ public class Server {
         connectionPool = new ConnectionPool();
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         ServerSocket serverSocket = null;
-        OrderService orderService = new OrderService();
-        ServerResponse orderList = orderService.getOrderList(1);
 
         try {
             serverSocket = new ServerSocket(PORT);

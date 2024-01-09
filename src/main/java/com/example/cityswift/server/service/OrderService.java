@@ -7,10 +7,9 @@ import com.example.cityswift.dto.ServerResponse;
 import com.example.cityswift.server.Server;
 import com.example.cityswift.server.model.OrderModel;
 import com.example.cityswift.server.model.RecipientModel;
-import com.example.cityswift.server.repository.AddressRepository;
-import com.example.cityswift.server.repository.OrderRepository;
-import com.example.cityswift.server.repository.PackageRepository;
-import com.example.cityswift.server.repository.RecipientRepository;
+import com.example.cityswift.server.model.UserModel;
+import com.example.cityswift.server.repository.*;
+import com.example.cityswift.server.util.MailSender;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +20,7 @@ public class OrderService {
     private final PackageRepository packageRepository = new PackageRepository();
     private final AddressRepository addressRepository = new AddressRepository();
     private final RecipientRepository recipientRepository = new RecipientRepository();
+    private final UserRepository userRepository = new UserRepository();
 
 
     public ServerResponse getReceivedUserOrders(int currentUserId) {
@@ -55,13 +55,26 @@ public class OrderService {
         return ServerResponseService.createPositiveServerResponse((Serializable) orderDetailsDTOS);
     }
 
-    public ServerResponse getOrderById(int orderId){
+    public ServerResponse getOrderById(int orderId) {
         Optional<OrderDetailsDTO> orderModel = orderRepository.fetchOrderById(orderId);
         return orderModel.map(ServerResponseService::createPositiveServerResponse).orElseGet(ServerResponseService::notFoundServerResponse);
     }
 
-    public ServerResponse takePackage(int i, int data) {
-        orderRepository.takePackage(i, data);
+    public ServerResponse takePackage(String orderId, int userId) {
+        orderRepository.takePackage(userId, Integer.parseInt(orderId));
+        Optional<OrderModel> orderDetailsDTOOptional = orderRepository.getOrderById(Integer.parseInt(orderId));
+        if (orderDetailsDTOOptional.isPresent()) {
+            OrderModel orderDetailsDTO = orderDetailsDTOOptional.get();
+            Optional<RecipientModel> recipientOptional = recipientRepository.fetchRecipientData(orderDetailsDTO.getRecipientId());
+            Optional<UserModel> courierOptional = userRepository.getUserById(orderDetailsDTO.getCourierId());
+
+            if(recipientOptional.isPresent() && courierOptional.isPresent()){
+                RecipientModel recipient = recipientOptional.get();
+                UserModel courier = courierOptional.get();
+                MailSender mailSender = new MailSender();
+                mailSender.sendMail(recipient.getMail(), "Zamówienie zostało odebrane", "Twoje zamówienie zostało odebrane przez kuriera: " + courier.getFirstName() + " " + courier.getLastName());
+            }
+        }
         return ServerResponseService.createPositiveServerResponse(null);
     }
 }
