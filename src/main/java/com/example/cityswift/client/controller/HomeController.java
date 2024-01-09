@@ -29,7 +29,8 @@ public class HomeController {
 
     @FXML
     private void initialize() {
-        ServerResponse userBasicData = NetworkClient.sendRequest(new ClientRequest("getUserBasicData", UserSession.getUserToken().getToken()));
+        ServerResponse userBasicData = NetworkClient.sendRequest
+                (new ClientRequest("getUserBasicData", UserSession.getUserToken().getToken()));
         BasicUserData basicUserData = (BasicUserData) userBasicData.getData();
         setBasicUserData(basicUserData);
     }

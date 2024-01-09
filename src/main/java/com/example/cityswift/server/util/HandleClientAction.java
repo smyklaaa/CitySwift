@@ -79,6 +79,15 @@ public class HandleClientAction {
                     serverResponse = settingsService.changeAddress((AddressDTO) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
+                case "getOrderList":
+                    serverResponse = orderService.getOrderList((int) clientRequest.getData());
+                    break;
+                case "getOrderById":
+                    serverResponse = orderService.getOrderById((int) clientRequest.getData());
+                    break;
+                case "takePackage":
+                    serverResponse = orderService.takePackage(clientTokenToUserId((int) clientRequest.getPrivateToken()), (int) clientRequest.getData());
+                    break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");
@@ -93,7 +102,8 @@ public class HandleClientAction {
     }
 
     public int clientTokenToUserId(Integer clientToken) {
-        Optional<UserModel> userByPrivateToken = userRepository.getUserByPrivateToken(clientToken);
+        Optional<UserModel> userByPrivateToken =
+                userRepository.getUserByPrivateToken(clientToken);
         return userByPrivateToken.map(UserModel::getId).orElse(-1);
     }
 }

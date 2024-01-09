@@ -2,7 +2,9 @@ package com.example.cityswift.server.service;
 
 import com.example.cityswift.dto.CreateOrderDTO;
 import com.example.cityswift.dto.CreateOrderRequest;
+import com.example.cityswift.dto.OrderDetailsDTO;
 import com.example.cityswift.dto.ServerResponse;
+import com.example.cityswift.server.Server;
 import com.example.cityswift.server.model.OrderModel;
 import com.example.cityswift.server.model.RecipientModel;
 import com.example.cityswift.server.repository.AddressRepository;
@@ -21,7 +23,7 @@ public class OrderService {
     private final RecipientRepository recipientRepository = new RecipientRepository();
 
 
-    public ServerResponse getReceivedUserOrders(int currentUserId){
+    public ServerResponse getReceivedUserOrders(int currentUserId) {
         List<OrderModel> listOfOrders = orderRepository.fetchUserReceivedOrderData(currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setData((Serializable) listOfOrders);
@@ -29,7 +31,7 @@ public class OrderService {
         return serverResponse;
     }
 
-    public ServerResponse getSendUserOrders(int currentUserId){
+    public ServerResponse getSendUserOrders(int currentUserId) {
         List<OrderModel> listOfOrders = orderRepository.fetchUserSendOrderData(currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setData((Serializable) listOfOrders);
@@ -43,8 +45,23 @@ public class OrderService {
         int recipient = recipientRepository.createRecipient(data.getRecipientMobile(), data.getRecipientMail());
         int packageId = packageRepository.createPackage(data.getCreatePackageDTO());
         int address = addressRepository.createAddress(data.getCreateAddressDTO());
-            orderRepository.createOrder(privateToken, recipient, packageId, address);
+        orderRepository.createOrder(privateToken, recipient, packageId, address);
 
         return null;
+    }
+
+    public ServerResponse getOrderList(int statusId) {
+        List<OrderDetailsDTO> orderDetailsDTOS = orderRepository.fetchOrderList(statusId);
+        return ServerResponseService.createPositiveServerResponse((Serializable) orderDetailsDTOS);
+    }
+
+    public ServerResponse getOrderById(int orderId){
+        Optional<OrderDetailsDTO> orderModel = orderRepository.fetchOrderById(orderId);
+        return orderModel.map(ServerResponseService::createPositiveServerResponse).orElseGet(ServerResponseService::notFoundServerResponse);
+    }
+
+    public ServerResponse takePackage(int i, int data) {
+        orderRepository.takePackage(i, data);
+        return ServerResponseService.createPositiveServerResponse(null);
     }
 }

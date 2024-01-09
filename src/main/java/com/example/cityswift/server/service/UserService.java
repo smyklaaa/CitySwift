@@ -71,18 +71,20 @@ public class UserService {
         return stringBuilder.toString();
     }
 
-    public ServerResponse addFriend(String data, Integer privateToken) {
-        Optional<UserModel> userModel = userRepository.getUserByPublicToken(data);
-        if (userModel.isPresent()) {
-            if (!friendsRepository.checkIfFriends(userModel.get().getId(), privateToken)) {
-                int isAdded = friendsRepository.addFriend(userModel.get().getId(), privateToken);
-                if (isAdded > 0) {
-                    return ServerResponseService.createPositiveServerResponse(null);
-                }
-            }
-        }
+    public ServerResponse addFriend(String publicToken, Integer privateToken) {
+        return userRepository.getUserByPublicToken(publicToken)
+                .filter(user -> !friendsRepository.checkIfFriends(user.getId(), privateToken))
+                .map(user -> addFriendshipAndRespond(user, privateToken))
+                .orElseGet(ServerResponseService::notFoundServerResponse);
+    }
 
-        return ServerResponseService.notFoundServerResponse();
+    private ServerResponse addFriendshipAndRespond(UserModel user, Integer privateToken) {
+        int isAdded = friendsRepository.addFriend(user.getId(), privateToken);
+        if (isAdded > 0) {
+            return ServerResponseService.createPositiveServerResponse(null);
+        } else {
+            return ServerResponseService.notFoundServerResponse();
+        }
     }
 
     public ServerResponse acceptFriend(String data, Integer privateToken) {

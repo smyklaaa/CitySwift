@@ -82,13 +82,12 @@ public class GenericRepository<T> {
             if (generatedKeys.next()) {
                 return generatedKeys.getInt(1);
             } else {
-                return 1;
+                return -1;
             }
         } catch (SQLException e) {
             AppLogger.severe("SQLException in GenericRepository.insert", e);
             throw new SimpleException(500, "Error executing insert");
         } finally {
-            // Clean up resources
             if (generatedKeys != null) try { generatedKeys.close(); } catch (SQLException logOrIgnore) {}
             if (stmt != null) try { stmt.close(); } catch (SQLException logOrIgnore) {}
             Server.getConnectionPool().returnConnection(connection);

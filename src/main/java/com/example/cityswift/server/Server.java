@@ -2,6 +2,7 @@ package com.example.cityswift.server;
 
 
 import com.example.cityswift.dto.ServerResponse;
+import com.example.cityswift.server.service.OrderService;
 import com.example.cityswift.server.service.UserService;
 import com.example.cityswift.server.util.AppLogger;
 import com.example.cityswift.server.util.ClientHandlerCallable;
@@ -22,12 +23,12 @@ public class Server {
     private static final int THREAD_POOL_SIZE = 10;
 
     public static void main(String[] args) throws SQLException {
-        MailSender mailSender = new MailSender();
-        mailSender.sendMail();
         AppLogger.info("Starting application");
         connectionPool = new ConnectionPool();
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         ServerSocket serverSocket = null;
+        OrderService orderService = new OrderService();
+        ServerResponse orderList = orderService.getOrderList(1);
 
         try {
             serverSocket = new ServerSocket(PORT);
