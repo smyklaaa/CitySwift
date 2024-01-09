@@ -68,11 +68,11 @@ public class OrderService {
             Optional<RecipientModel> recipientOptional = recipientRepository.fetchRecipientData(orderDetailsDTO.getRecipientId());
             Optional<UserModel> courierOptional = userRepository.getUserById(orderDetailsDTO.getCourierId());
 
-            if(recipientOptional.isPresent() && courierOptional.isPresent()){
+            if (recipientOptional.isPresent() && courierOptional.isPresent()) {
                 RecipientModel recipient = recipientOptional.get();
                 UserModel courier = courierOptional.get();
                 MailSender mailSender = new MailSender();
-                mailSender.sendMail(recipient.getMail(), "Zamówienie zostało odebrane", "Twoje zamówienie zostało odebrane przez kuriera: " + courier.getFirstName() + " " + courier.getLastName());
+                mailSender.sendMail(recipient.getMail(), "Zamówienie zostało odebrane", "Twoje zamówienie zostało odebrane przez kuriera: " + courier.getFirstName() + " " + courier.getLastName() + " kod odbioru: " + orderDetailsDTO.getOrderCode());
             }
         }
         return ServerResponseService.createPositiveServerResponse(null);

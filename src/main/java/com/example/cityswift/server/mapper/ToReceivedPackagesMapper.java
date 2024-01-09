@@ -24,6 +24,7 @@ public class ToReceivedPackagesMapper implements RowMapper<OrderModel> {
                 rs.getInt("status_id"),
                 rs.getString("message"),
                 rs.getString("first_name"),
-                rs.getString("last_name")
+                rs.getString("last_name"),
+                rs.getInt("order_code")
         );    }
 }
