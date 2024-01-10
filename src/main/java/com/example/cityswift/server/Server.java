@@ -20,12 +20,6 @@ public class Server {
     private static final int THREAD_POOL_SIZE = 10;
 
     public static void main(String[] args) throws SQLException {
-        DistanceCalculator distanceCalculator = new DistanceCalculator();
-        try {
-            DistanceCalculator.geocodeAddress("Warszawa");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         AppLogger.info("Starting application");
         connectionPool = new ConnectionPool();
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
