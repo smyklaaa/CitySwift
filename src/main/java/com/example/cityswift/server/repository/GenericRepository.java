@@ -131,4 +131,29 @@ public class GenericRepository<T> {
             Server.getConnectionPool().returnConnection(connection);
         }
     }
+
+    public int fetchCount(String sql, List<Object> params) {
+        AppLogger.info("Executing count statement: " + sql);
+        Connection connection = null;
+
+        try {
+            connection = Server.getConnectionPool().borrowConnection();
+            PreparedStatement stmt = prepareStatement(connection, sql, params);
+            ResultSet resultSet = stmt.executeQuery();
+
+            if (resultSet.next()) {
+                AppLogger.info("Count executed, result found");
+                return resultSet.getInt(1);
+            } else {
+                AppLogger.info("Count executed, no result found");
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            AppLogger.severe("SQLException in GenericRepository.fetchCount", e);
+            throw new SimpleException(500, "Error fetching count");
+        } finally {
+            Server.getConnectionPool().returnConnection(connection);
+        }
+    }
 }

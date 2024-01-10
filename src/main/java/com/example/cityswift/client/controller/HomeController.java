@@ -4,6 +4,7 @@ import com.example.cityswift.client.util.NetworkClient;
 import com.example.cityswift.client.util.UserSession;
 import com.example.cityswift.dto.BasicUserData;
 import com.example.cityswift.dto.ClientRequest;
+import com.example.cityswift.dto.HomeViewDetailsDTO;
 import com.example.cityswift.dto.ServerResponse;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -26,13 +27,23 @@ public class HomeController {
     private Label codeLabel;
     @FXML
     private Label homeNumberLabel;
+    @FXML
+    private Label pricePerKm;
+    @FXML
+    private Label packageOverall;
+    @FXML
+    private Label yourPackage;
 
     @FXML
     private void initialize() {
         ServerResponse userBasicData = NetworkClient.sendRequest
-                (new ClientRequest("getUserBasicData", UserSession.getUserToken().getToken()));
-        BasicUserData basicUserData = (BasicUserData) userBasicData.getData();
+                (new ClientRequest("getHomeViewData", UserSession.getUserToken().getToken()));
+        HomeViewDetailsDTO homeViewDetailsDTO = (HomeViewDetailsDTO) userBasicData.getData();
+        BasicUserData basicUserData = homeViewDetailsDTO.getBasicUserData();
         setBasicUserData(basicUserData);
+        packageOverall.setText(String.valueOf(homeViewDetailsDTO.getTotalNumberOfOrders()));
+        yourPackage.setText(String.valueOf(homeViewDetailsDTO.getYourNumberOfOrders()));
+        pricePerKm.setText(homeViewDetailsDTO.getPricePerKm()+" PLN");
     }
 
     private void setBasicUserData(BasicUserData basicUserData) {

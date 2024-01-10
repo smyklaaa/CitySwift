@@ -35,6 +35,9 @@ public class HandleClientAction {
                 case "getUsersLivingInArea":
                     serverResponse = addressService.ifUsersInParticularArea((ParticularArea) clientRequest.getData());
                     break;
+                case "getHomeViewData":
+                    serverResponse = userService.getHomeViewData(clientTokenToUserId((int) clientRequest.getData()));
+                    break;
                 case "signup":
                     serverResponse = userService.signup((CreateUserData) clientRequest.getData());
                     break;
