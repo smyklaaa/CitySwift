@@ -87,6 +87,18 @@ public class HandleClientAction {
                 case "takePackage":
                     serverResponse = orderService.takePackage((String) clientRequest.getData(), clientTokenToUserId(clientRequest.getPrivateToken()));
                     break;
+                case "getCourierCurrentOrder":
+                    serverResponse = orderService.getCourierCurrentOrder(clientTokenToUserId(clientRequest.getPrivateToken()));
+                    break;
+                case "cancelOrder":
+                    serverResponse = orderService.cancelOrderDelivery((int) clientRequest.getData());
+                    break;
+                case "sendDeliveryNotification":
+                    serverResponse = orderService.sendDeliveryNotification((int) clientRequest.getData());
+                    break;
+                case "endDelivery":
+                    serverResponse = orderService.endDelivery((EndDeliveryData) clientRequest.getData());
+                    break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");

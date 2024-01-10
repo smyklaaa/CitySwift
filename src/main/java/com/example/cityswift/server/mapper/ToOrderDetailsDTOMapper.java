@@ -30,6 +30,10 @@ public class ToOrderDetailsDTOMapper implements RowMapper<OrderDetailsDTO> {
         orderDetails.setSenderCity(rs.getString("sender_city"));
         orderDetails.setSenderHomeNumber(rs.getString("sender_home_number"));
 
+        orderDetails.setSenderName(rs.getString("sender_name"));
+        orderDetails.setSenderMobile(rs.getString("sender_mobile"));
+
+
         return orderDetails;
     }
 }

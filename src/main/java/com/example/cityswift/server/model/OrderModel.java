@@ -33,6 +33,18 @@ public class OrderModel implements Serializable {
         this.orderCode = orderCode;
     }
 
+    public OrderModel(Integer id, Integer senderId, Integer recipientId, Integer courierId, BigDecimal price,
+                      Integer packageId, Integer statusId, String message) {
+        this.id = id;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.courierId = courierId;
+        this.price = price;
+        this.packageId = packageId;
+        this.statusId = statusId;
+        this.message = message;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -96,14 +108,26 @@ public class OrderModel implements Serializable {
     public void setStatusId(Integer statusId) {
         this.statusId = statusId;
     }
-    public String getFirstName() {return firstName;}
 
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getLastName() {return lastName;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setLastName(String lastName) {this.lastName = lastName;}
-    public String getMail() {return mail;}
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMail() {
+        return mail;
+    }
 
     public int getOrderCode() {
         return orderCode;
@@ -113,7 +137,8 @@ public class OrderModel implements Serializable {
         this.orderCode = orderCode;
     }
 
-    public void setMail(String mail) {this.mail = mail;
+    public void setMail(String mail) {
+        this.mail = mail;
 
 
     }

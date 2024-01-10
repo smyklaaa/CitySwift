@@ -9,6 +9,7 @@ import com.example.cityswift.server.mapper.UserLoginMapper;
 import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.model.UserModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -109,5 +110,13 @@ public class UserRepository {
         params.add(privateToken);
         params.add(privateToken);
         return repository.fetchMultipleRow(sql, mapper, params);
+    }
+
+    public void updateUserMoney(int id, BigDecimal v) {
+        String sql = "UPDATE app_user SET money = ? WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(v);
+        params.add(id);
+        repository.update(sql, params);
     }
 }

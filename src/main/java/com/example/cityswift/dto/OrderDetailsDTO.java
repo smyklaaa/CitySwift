@@ -22,6 +22,9 @@ public class OrderDetailsDTO implements Serializable {
     private String senderStreet;
     private String senderCity;
     private String senderHomeNumber;
+    private String senderName;
+    private String recipientName;
+    private String senderMobile;
 
     public OrderDetailsDTO() {
     }
@@ -179,5 +182,29 @@ public class OrderDetailsDTO implements Serializable {
 
     public void setSenderHomeNumber(String senderHomeNumber) {
         this.senderHomeNumber = senderHomeNumber;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getRecipientName() {
+        return recipientName;
+    }
+
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
+    }
+
+    public String getSenderMobile() {
+        return senderMobile;
+    }
+
+    public void setSenderMobile(String senderMobile) {
+        this.senderMobile = senderMobile;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.cityswift.server.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class UserModel implements Serializable {
@@ -12,6 +13,7 @@ public class UserModel implements Serializable {
     private String mail;
     private String mobile;
     private LocalDate dateOfBirth;
+    private BigDecimal money;
 
     public UserModel() {
     }
@@ -28,6 +30,17 @@ public class UserModel implements Serializable {
         this.mail = mail;
         this.mobile = mobile;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public UserModel(int id, String firstName, String lastName, String publicToken, String mail, String mobile, LocalDate dateOfBirth, BigDecimal money) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.publicToken = publicToken;
+        this.mail = mail;
+        this.mobile = mobile;
+        this.dateOfBirth = dateOfBirth;
+        this.money = money;
     }
 
     public int getId() {
@@ -84,5 +97,21 @@ public class UserModel implements Serializable {
 
     public Integer getPrivateToken() {
         return privateToken;
+    }
+
+    public void setPublicToken(String publicToken) {
+        this.publicToken = publicToken;
+    }
+
+    public void setPrivateToken(Integer privateToken) {
+        this.privateToken = privateToken;
+    }
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
     }
 }

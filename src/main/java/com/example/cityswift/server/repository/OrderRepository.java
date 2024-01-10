@@ -95,7 +95,7 @@ public class OrderRepository {
         String[] recipientCoords = DistanceCalculator.geocodeAddress(recipientAddressString);
 
         double v = DistanceCalculator.calculateDistance(senderCoords, recipientCoords);
-        return v* Double.parseDouble(currentPrice.get().getConfigValue());
+        return v * Double.parseDouble(currentPrice.get().getConfigValue());
     }
 
     public List<OrderDetailsDTO> fetchOrderList(int statusId) {
@@ -104,12 +104,15 @@ public class OrderRepository {
                         "       package.height as package_height, package.width as package_width, package.depth as package_depth, package.weight as package_weight, " +
                         "       recipient.mail as recipient_mail, recipient.mobile as recipient_mobile, " +
                         "       recipient_address.street as recipient_street, recipient_address.city as recipient_city, recipient_address.home_number as recipient_home_number, " +
-                        "       sender_address.street as sender_street, sender_address.city as sender_city, sender_address.home_number as sender_home_number " +
+                        "       sender_address.street as sender_street, sender_address.city as sender_city, sender_address.home_number as sender_home_number, " +
+                        "       app_user.mobile as sender_mobile, " +
+                        "       concat(app_user.first_name, ' ', app_user.last_name) as sender_name " +
                         "       FROM orders " +
                         "       INNER JOIN recipient ON orders.recipient_id = recipient.id " +
                         "       INNER JOIN address as recipient_address ON orders.address_id = recipient_address.id " +
                         "       INNER JOIN address as sender_address ON orders.sender_id = sender_address.id " +
                         "       INNER JOIN package ON orders.package_id = package.id " +
+                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       WHERE status_id = ?;";
 
         List<Object> params = new ArrayList<>();
@@ -123,12 +126,15 @@ public class OrderRepository {
                         "       package.height as package_height, package.width as package_width, package.depth as package_depth, package.weight as package_weight, " +
                         "       recipient.mail as recipient_mail, recipient.mobile as recipient_mobile, " +
                         "       recipient_address.street as recipient_street, recipient_address.city as recipient_city, recipient_address.home_number as recipient_home_number, " +
-                        "       sender_address.street as sender_street, sender_address.city as sender_city, sender_address.home_number as sender_home_number " +
+                        "       sender_address.street as sender_street, sender_address.city as sender_city, sender_address.home_number as sender_home_number, " +
+                        "       app_user.mobile as sender_mobile, " +
+                        "       concat(app_user.first_name, ' ', app_user.last_name) as sender_name " +
                         "       FROM orders " +
                         "       INNER JOIN recipient ON orders.recipient_id = recipient.id " +
                         "       INNER JOIN address as recipient_address ON orders.address_id = recipient_address.id " +
                         "       INNER JOIN address as sender_address ON orders.sender_id = sender_address.id " +
                         "       INNER JOIN package ON orders.package_id = package.id " +
+                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       WHERE orders.id = ?;";
 
         List<Object> params = new ArrayList<>();
@@ -159,4 +165,39 @@ public class OrderRepository {
         return (int) (Math.random() * 1000000);
     }
 
+    public Optional<OrderDetailsDTO> getCourierCurrentOrder(int courierId) {
+        String sql =
+                "SELECT orders.message, orders.price, orders.id as order_id, " +
+                        "       package.height as package_height, package.width as package_width, package.depth as package_depth, package.weight as package_weight, " +
+                        "       recipient.mail as recipient_mail, recipient.mobile as recipient_mobile, " +
+                        "       recipient_address.street as recipient_street, recipient_address.city as recipient_city, recipient_address.home_number as recipient_home_number, " +
+                        "       sender_address.street as sender_street, sender_address.city as sender_city, sender_address.home_number as sender_home_number, " +
+                        "       app_user.mobile as sender_mobile, " +
+                        "       concat(app_user.first_name, ' ', app_user.last_name) as sender_name " +
+                        "       FROM orders " +
+                        "       INNER JOIN recipient ON orders.recipient_id = recipient.id " +
+                        "       INNER JOIN address as recipient_address ON orders.address_id = recipient_address.id " +
+                        "       INNER JOIN address as sender_address ON orders.sender_id = sender_address.id " +
+                        "       INNER JOIN package ON orders.package_id = package.id " +
+                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
+                        "       WHERE orders.courier_id = ? AND orders.status_id = 2;";
+
+        List<Object> params = new ArrayList<>();
+        params.add(courierId);
+        return orderDetailsDTOGenericRepository.fetchSingleRow(sql, toOrderDetailsDTOMapper, params);
+    }
+
+    public void cancelOrderDelivery(int orderId) {
+        String sql = "UPDATE orders SET status_id = 1 WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(orderId);
+        repository.update(sql, params);
+    }
+
+    public void endDelivery(int orderId) {
+        String sql = "UPDATE orders SET status_id = 3 WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(orderId);
+        repository.update(sql, params);
+    }
 }
