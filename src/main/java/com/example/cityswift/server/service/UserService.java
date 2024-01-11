@@ -3,9 +3,11 @@ package com.example.cityswift.server.service;
 
 import com.example.cityswift.dto.*;
 import com.example.cityswift.server.model.AddressModel;
+import com.example.cityswift.server.model.GlobalConfigModel;
 import com.example.cityswift.server.model.UserModel;
 import com.example.cityswift.server.repository.AddressRepository;
 import com.example.cityswift.server.repository.FriendsRepository;
+import com.example.cityswift.server.repository.GlobalConfigRepository;
 import com.example.cityswift.server.repository.UserRepository;
 
 import java.io.Serializable;
@@ -18,6 +20,8 @@ public class UserService {
     private final UserRepository userRepository = new UserRepository();
     private final FriendsRepository friendsRepository = new FriendsRepository();
     private final AddressService addressService = new AddressService();
+    private final GlobalConfigRepository globalConfigRepository = new GlobalConfigRepository();
+
 
     public ServerResponse getUserBasicData(int userId) {
         BasicUserData basicUserData = userRepository.fetchBasicUserDataById(userId);
@@ -71,18 +75,20 @@ public class UserService {
         return stringBuilder.toString();
     }
 
-    public ServerResponse addFriend(String data, Integer privateToken) {
-        Optional<UserModel> userModel = userRepository.getUserByPublicToken(data);
-        if (userModel.isPresent()) {
-            if (!friendsRepository.checkIfFriends(userModel.get().getId(), privateToken)) {
-                int isAdded = friendsRepository.addFriend(userModel.get().getId(), privateToken);
-                if (isAdded > 0) {
-                    return ServerResponseService.createPositiveServerResponse(null);
-                }
-            }
-        }
+    public ServerResponse addFriend(String publicToken, Integer privateToken) {
+        return userRepository.getUserByPublicToken(publicToken)
+                .filter(user -> !friendsRepository.checkIfFriends(user.getId(), privateToken))
+                .map(user -> addFriendshipAndRespond(user, privateToken))
+                .orElseGet(ServerResponseService::notFoundServerResponse);
+    }
 
-        return ServerResponseService.notFoundServerResponse();
+    private ServerResponse addFriendshipAndRespond(UserModel user, Integer privateToken) {
+        int isAdded = friendsRepository.addFriend(user.getId(), privateToken);
+        if (isAdded > 0) {
+            return ServerResponseService.createPositiveServerResponse(null);
+        } else {
+            return ServerResponseService.notFoundServerResponse();
+        }
     }
 
     public ServerResponse acceptFriend(String data, Integer privateToken) {
@@ -112,4 +118,16 @@ public class UserService {
         }
         return ServerResponseService.createPositiveServerResponse((Serializable) result);
     }
+
+    public ServerResponse getHomeViewData(int userId){
+        HomeViewDetailsDTO homeViewDetailsDTO = new HomeViewDetailsDTO();
+        BasicUserData basicUserData = userRepository.fetchBasicUserDataById(userId);
+        homeViewDetailsDTO.setBasicUserData(basicUserData);
+        Optional<GlobalConfigModel> globalConfig = globalConfigRepository.getGlobalConfig(globalConfigRepository.PRICE_PER_KILOMETER_PLN);
+        homeViewDetailsDTO.setPricePerKm(globalConfig.get().getConfigValue());
+        homeViewDetailsDTO.setTotalNumberOfOrders(userRepository.fetchTotalNumberOfOrders(userId));
+        homeViewDetailsDTO.setYourNumberOfOrders(userRepository.fetchYourNumberOfOrders(userId));
+        return ServerResponseService.createPositiveServerResponse(homeViewDetailsDTO);
+    }
+
 }

@@ -23,7 +23,6 @@ public class ToSendPackagesMapper implements RowMapper<OrderModel> {
                 rs.getBigDecimal("price"),
                 rs.getInt("package_id"),
                 rs.getInt("status_id"),
-                rs.getString("message"),
-                rs.getString("mail")
+                rs.getString("message")
         );    }
 }

@@ -19,7 +19,8 @@ public class ToUserModelMapper implements RowMapper<UserModel> {
                 rs.getString("public_token"),
                 rs.getString("mail"),
                 rs.getString("mobile"),
-                rs.getDate("date_of_birth").toLocalDate()
+                rs.getDate("date_of_birth").toLocalDate(),
+                rs.getBigDecimal("money")
         );
     }
 }

@@ -2,11 +2,9 @@ package com.example.cityswift.server;
 
 
 import com.example.cityswift.dto.ServerResponse;
+import com.example.cityswift.server.service.OrderService;
 import com.example.cityswift.server.service.UserService;
-import com.example.cityswift.server.util.AppLogger;
-import com.example.cityswift.server.util.ClientHandlerCallable;
-import com.example.cityswift.server.util.ConnectionPool;
-import com.example.cityswift.server.util.EmailSender;
+
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -35,7 +33,6 @@ public class Server {
         try {
             serverSocket = new ServerSocket(PORT);
             AppLogger.info("Server started on port: " + PORT);
-
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 AppLogger.info("New client connected");

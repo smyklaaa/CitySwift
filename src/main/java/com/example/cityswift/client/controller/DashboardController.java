@@ -1,6 +1,10 @@
 package com.example.cityswift.client.controller;
 
+import com.example.cityswift.client.util.NetworkClient;
 import com.example.cityswift.client.util.SceneSwitcher;
+import com.example.cityswift.client.util.UserSession;
+import com.example.cityswift.dto.ClientRequest;
+import com.example.cityswift.dto.ServerResponse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,27 +39,42 @@ public class DashboardController {
     }
 
     @FXML
-    private void loadOrderHistory(){loadContent("/view/orderHistory/orderHistoryView.fxml",
-                                                "Historia zamówień");}
+    private void loadOrderHistory() {
+        loadContent("/view/orderHistory/orderHistoryView.fxml",
+                "Historia zamówień");
+    }
 
     @FXML
-    private void loadSendPackage(){loadContent("/view/sendPackage/sendPackageView.fxml",
-                                                "Nadaj Paczkę");}
+    private void loadSendPackage() {
+        loadContent("/view/sendPackage/sendPackageView.fxml",
+                "Nadaj Paczkę");
+    }
 
     @FXML
     private void loadLogout(ActionEvent event) throws IOException {
-        SceneSwitcher.switchScene(event,"/view/login/loginView.fxml");}
+        SceneSwitcher.switchScene(event, "/view/login/loginView.fxml");
+    }
 
     @FXML
-    private void loadBecomeCourier(){loadContent("/view/becomeCourier/becomeCourierView.fxml",
-            "Zostań kurierem");}
+    private void loadBecomeCourier() {
+        ServerResponse serverResponse = NetworkClient.sendRequest(new ClientRequest("getCourierCurrentOrder", null, UserSession.getUserToken().getToken()));
+        if (serverResponse.getResultCode() == 200) {
+            loadContent("/view/becomeCourier/currentOrder.fxml",
+                    "Zostań kurierem");
+        } else{
+            loadContent("/view/becomeCourier/becomeCourierView.fxml",
+                    "Zostań kurierem");
+        }
+
+
+    }
 
     @FXML
     private void initialize() {
         loadContent("/view/home/homeView.fxml", "Home");
     }
 
-    private void loadContent(String fxml, String panelNameText) {
+    public void loadContent(String fxml, String panelNameText) {
         try {
             routerPane.getChildren().clear();
             Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxml)));
