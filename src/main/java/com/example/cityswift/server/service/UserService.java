@@ -42,8 +42,8 @@ public class UserService {
     }
 
     public ServerResponse signup(CreateUserData createUserData) {
-        int privateToken = generateRandomToken();
-        int publicToken = generateRandomToken();
+        String privateToken = generateRandomToken();
+        String publicToken = generateRandomToken();
         int isUserInserted = userRepository.insertUser(createUserData, privateToken, publicToken);
         Optional<UserModel> userByMail = userRepository.getUserByMail(createUserData.getMail());
         addressService.signup(createUserData, userByMail.get().getId());
@@ -65,12 +65,17 @@ public class UserService {
         return ServerResponseService.createPositiveServerResponse((Serializable) result);
     }
 
-    private int generateRandomToken() {
+    private String generateRandomToken() {
+        String characters = "0123456789";
         Random random = new Random();
-        return random.nextInt(1000000000);
+        StringBuilder stringBuilder = new StringBuilder(12);
+        for (int i = 0; i < 12; i++) {
+            stringBuilder.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return stringBuilder.toString();
     }
 
-    public ServerResponse addFriend(int publicToken, Integer privateToken) {
+    public ServerResponse addFriend(String publicToken, Integer privateToken) {
         return userRepository.getUserByPublicToken(publicToken)
                 .filter(user -> !friendsRepository.checkIfFriends(user.getId(), privateToken))
                 .map(user -> addFriendshipAndRespond(user, privateToken))
@@ -86,7 +91,7 @@ public class UserService {
         }
     }
 
-    public ServerResponse acceptFriend(int data, Integer privateToken) {
+    public ServerResponse acceptFriend(String data, Integer privateToken) {
         Optional<UserModel> userModel = userRepository.getUserByPublicToken(data);
         if (userModel.isPresent()) {
             int isAdded = friendsRepository.acceptFriend(userModel.get().getId(), privateToken);

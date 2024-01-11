@@ -46,11 +46,11 @@ public class HandleClientAction {
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "addFriend":
-                    serverResponse = userService.addFriend((int) clientRequest.getData(),
+                    serverResponse = userService.addFriend((String) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "acceptFriend":
-                    serverResponse = userService.acceptFriend((int) clientRequest.getData(),
+                    serverResponse = userService.acceptFriend((String) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
                 case "getFriends":

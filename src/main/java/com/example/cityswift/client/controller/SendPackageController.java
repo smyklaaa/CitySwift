@@ -46,7 +46,6 @@ public class SendPackageController {
         mailTextField.setText(selectedUser.getUserModel().getMail());
         mobileTextField.setText(selectedUser.getUserModel().getMobile());
         postalCodeTextField.setText(selectedUser.getAddressModel().get(0).getPostalCode());
-        cityTextField.setText(selectedUser.getAddressModel().get(0).getCity());
         streetNameTextField.setText(selectedUser.getAddressModel().get(0).getStreet());
         homeNrTextField.setText(selectedUser.getAddressModel().get(0).getHomeNumber());
         doorKeyTextField.setText(selectedUser.getAddressModel().get(0).getDoorKey());
