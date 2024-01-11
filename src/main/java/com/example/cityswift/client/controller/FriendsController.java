@@ -45,7 +45,7 @@ public class FriendsController {
         String[] selectedUserSplit = selectedUser.split(" ");
         String friendPublicToken = selectedUserSplit[0];
 
-        NetworkClient.sendRequest(new ClientRequest("addFriend", friendPublicToken, UserSession.getUserToken().getToken()));
+        NetworkClient.sendRequest(new ClientRequest("addFriend", Integer.parseInt(friendPublicToken), UserSession.getUserToken().getToken()));
     }
 
     @FXML
@@ -54,7 +54,7 @@ public class FriendsController {
         String[] selectedUserSplit = selectedUser.split(" ");
         String friendPublicToken = selectedUserSplit[0];
 
-        NetworkClient.sendRequest(new ClientRequest("acceptFriend", friendPublicToken, UserSession.getUserToken().getToken()));
+        NetworkClient.sendRequest(new ClientRequest("acceptFriend", Integer.parseInt(friendPublicToken), UserSession.getUserToken().getToken()));
         updateFriendRequestList();
     }
 
