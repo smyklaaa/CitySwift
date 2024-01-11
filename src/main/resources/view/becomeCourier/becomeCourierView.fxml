@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="466.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityswift.client.controller.BecomeCourierController">
-    <children>
-        <Label layoutX="158.0" layoutY="206.0" text="zmiana na kuriera">
-            <font>
-                <Font size="36.0" />
-            </font>
-        </Label>
-    </children>
+   <children>
+      <HBox prefHeight="466.0" prefWidth="599.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="466.0" prefWidth="600.0">
+               <children>
+                  <Label style="-fx-padding: 10px;" text="Lista paczek do zabrania" />
+                  <ListView fx:id="packageList" prefHeight="336.0" prefWidth="600.0" />
+                  <Button fx:id="showOrderDetails" mnemonicParsing="false" onAction="#showOrderDetails" text="Weź zlecenie" />
+               </children></VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

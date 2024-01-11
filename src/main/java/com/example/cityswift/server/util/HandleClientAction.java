@@ -22,7 +22,6 @@ public class HandleClientAction {
     public ServerResponse handleClientAction(ClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse();
 
-
         try {
             switch (clientRequest.getAction()) {
                 case "getUserBasicData":
@@ -35,6 +34,9 @@ public class HandleClientAction {
                     break;
                 case "getUsersLivingInArea":
                     serverResponse = addressService.ifUsersInParticularArea((ParticularArea) clientRequest.getData());
+                    break;
+                case "getHomeViewData":
+                    serverResponse = userService.getHomeViewData(clientTokenToUserId((int) clientRequest.getData()));
                     break;
                 case "signup":
                     serverResponse = userService.signup((CreateUserData) clientRequest.getData());
@@ -79,6 +81,27 @@ public class HandleClientAction {
                     serverResponse = settingsService.changeAddress((AddressDTO) clientRequest.getData(),
                             clientTokenToUserId((int) clientRequest.getPrivateToken()));
                     break;
+                case "getOrderList":
+                    serverResponse = orderService.getOrderList((int) clientRequest.getData());
+                    break;
+                case "getOrderById":
+                    serverResponse = orderService.getOrderById((int) clientRequest.getData());
+                    break;
+                case "takePackage":
+                    serverResponse = orderService.takePackage((String) clientRequest.getData(), clientTokenToUserId(clientRequest.getPrivateToken()));
+                    break;
+                case "getCourierCurrentOrder":
+                    serverResponse = orderService.getCourierCurrentOrder(clientTokenToUserId(clientRequest.getPrivateToken()));
+                    break;
+                case "cancelOrder":
+                    serverResponse = orderService.cancelOrderDelivery((int) clientRequest.getData());
+                    break;
+                case "sendDeliveryNotification":
+                    serverResponse = orderService.sendDeliveryNotification((int) clientRequest.getData());
+                    break;
+                case "endDelivery":
+                    serverResponse = orderService.endDelivery((EndDeliveryData) clientRequest.getData());
+                    break;
                 default:
                     serverResponse.setResultCode(404);
                     serverResponse.setResultMessage("Action not found");
@@ -93,7 +116,8 @@ public class HandleClientAction {
     }
 
     public int clientTokenToUserId(Integer clientToken) {
-        Optional<UserModel> userByPrivateToken = userRepository.getUserByPrivateToken(clientToken);
+        Optional<UserModel> userByPrivateToken =
+                userRepository.getUserByPrivateToken(clientToken);
         return userByPrivateToken.map(UserModel::getId).orElse(-1);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.cityswift.server.repository;
 
 
-
 import com.example.cityswift.dto.BasicUserData;
 import com.example.cityswift.dto.CreateUserData;
 import com.example.cityswift.server.mapper.ToUserModelMapper;
@@ -9,6 +8,7 @@ import com.example.cityswift.server.mapper.UserLoginMapper;
 import com.example.cityswift.server.model.AddressModel;
 import com.example.cityswift.server.model.UserModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +26,7 @@ public class UserRepository {
         return repository.fetchSingleRow(sql, mapper, params);
     }
 
-    public BasicUserData fetchBasicUserDataById(int userId){
+    public BasicUserData fetchBasicUserDataById(int userId) {
         Optional<UserModel> userModel = fetchUserById(userId);
         List<AddressModel> addressModel = addressRepository.fetchAddressesByUserId(userId);
         return userModel.map(model -> new BasicUserData(model, addressModel)).orElseGet(() -> new BasicUserData(null, null));
@@ -54,7 +54,7 @@ public class UserRepository {
         return repository.insert(sql, params);
     }
 
-    public Optional<UserModel> getUserByMail(String mail){
+    public Optional<UserModel> getUserByMail(String mail) {
         String sql = "SELECT * FROM app_user WHERE mail = ? ";
         List<Object> params = new ArrayList<>();
         params.add(mail);
@@ -65,11 +65,11 @@ public class UserRepository {
         String sql = "SELECT * FROM app_user WHERE (first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ? OR public_token LIKE ?)" +
                 "AND id != ?";
         List<Object> params = new ArrayList<>();
-        params.add('%'+userSearch+'%');
-        params.add('%'+userSearch+'%');
-        params.add('%'+userSearch+'%');
-        params.add('%'+userSearch+'%');
-        params.add('%'+userSearch+'%');
+        params.add('%' + userSearch + '%');
+        params.add('%' + userSearch + '%');
+        params.add('%' + userSearch + '%');
+        params.add('%' + userSearch + '%');
+        params.add('%' + userSearch + '%');
         params.add(privateToken);
         return repository.fetchMultipleRow(sql, mapper, params);
     }
@@ -78,6 +78,13 @@ public class UserRepository {
         String sql = "SELECT * FROM app_user WHERE public_token = ? ";
         List<Object> params = new ArrayList<>();
         params.add(data);
+        return repository.fetchSingleRow(sql, mapper, params);
+    }
+
+    public Optional<UserModel> getUserById(int id) {
+        String sql = "SELECT * FROM app_user WHERE id = ? ";
+        List<Object> params = new ArrayList<>();
+        params.add(id);
         return repository.fetchSingleRow(sql, mapper, params);
     }
 
@@ -102,5 +109,26 @@ public class UserRepository {
         params.add(privateToken);
         params.add(privateToken);
         return repository.fetchMultipleRow(sql, mapper, params);
+    }
+
+    public void updateUserMoney(int id, BigDecimal v) {
+        String sql = "UPDATE app_user SET money = ? WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(v);
+        params.add(id);
+        repository.update(sql, params);
+    }
+
+    public int fetchTotalNumberOfOrders(int userId) {
+        String sql = "SELECT COUNT(*) FROM orders";
+        List<Object> params = new ArrayList<>();
+        return repository.fetchCount(sql, params);
+    }
+
+    public int fetchYourNumberOfOrders(int userId) {
+        String sql = "SELECT COUNT(*) FROM orders WHERE sender_id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(userId);
+        return repository.fetchCount(sql, params);
     }
 }

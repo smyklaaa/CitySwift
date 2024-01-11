@@ -20,6 +20,7 @@ public class ToAddressModelMapper implements RowMapper<AddressModel> {
                 rs.getString("postal_code"),
                 rs.getString("home_number"),
                 rs.getString("door_key"),
+                rs.getString("city"),
                 rs.getBoolean("is_main")
         );    }
 }

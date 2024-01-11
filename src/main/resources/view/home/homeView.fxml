@@ -16,7 +16,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
                      <children>
-                        <Label styleClass="header_label" text="2.23 PLN">
+                        <Label fx:id="pricePerKm" styleClass="header_label" text="2.23 PLN">
                            <font>
                               <Font name="System Bold" size="19.0" />
                            </font></Label>
@@ -29,7 +29,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
                      <children>
-                        <Label styleClass="header_label" text="732">
+                        <Label fx:id="packageOverall" styleClass="header_label" text="732">
                            <font>
                               <Font name="System Bold" size="19.0" />
                            </font>
@@ -43,7 +43,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="127.0" prefWidth="200.0" styleClass="tile">
                      <children>
-                        <Label styleClass="header_label" text="28">
+                        <Label fx:id="yourPackage" styleClass="header_label" text="28">
                            <font>
                               <Font name="System Bold" size="19.0" />
                            </font>

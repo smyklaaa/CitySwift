@@ -27,4 +27,11 @@ public class RecipientRepository {
         params.add(mail);
         return repository.fetchSingleRow(sql, mapper, params);
     }
+
+    public Optional<RecipientModel> fetchRecipientData(int id) {
+        String sql = "SELECT * FROM recipient WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(id);
+        return repository.fetchSingleRow(sql, mapper, params);
+    }
 }

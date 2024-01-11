@@ -4,7 +4,7 @@ import javax.mail.internet.*;
 import java.util.Properties;
 
 public class MailSender {
-    public void sendMail(){
+    public void sendMail(String to, String subject, String text){
         Properties props = new Properties();
         props.put("mail.smtp.host", "localhost");
         props.put("mail.smtp.port", "1025");
@@ -14,9 +14,9 @@ public class MailSender {
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress("test@example.com"));
             msg.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("recipient@example.com", false));
-            msg.setSubject("Test Mail");
-            msg.setText("Hello, this is a test mail sent from Java without Spring Boot!");
+                    InternetAddress.parse(to, false));
+            msg.setSubject(subject);
+            msg.setText(text);
             Transport.send(msg);
             System.out.println("Email sent successfully!");
         } catch (MessagingException e) {

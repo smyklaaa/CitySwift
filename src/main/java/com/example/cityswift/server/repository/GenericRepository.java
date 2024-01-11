@@ -82,13 +82,12 @@ public class GenericRepository<T> {
             if (generatedKeys.next()) {
                 return generatedKeys.getInt(1);
             } else {
-                return 1;
+                return -1;
             }
         } catch (SQLException e) {
             AppLogger.severe("SQLException in GenericRepository.insert", e);
             throw new SimpleException(500, "Error executing insert");
         } finally {
-            // Clean up resources
             if (generatedKeys != null) try { generatedKeys.close(); } catch (SQLException logOrIgnore) {}
             if (stmt != null) try { stmt.close(); } catch (SQLException logOrIgnore) {}
             Server.getConnectionPool().returnConnection(connection);
@@ -128,6 +127,31 @@ public class GenericRepository<T> {
         } catch (SQLException e) {
             AppLogger.severe("SQLException in GenericRepository.update", e);
             throw new SimpleException(500, "Error executing update");
+        } finally {
+            Server.getConnectionPool().returnConnection(connection);
+        }
+    }
+
+    public int fetchCount(String sql, List<Object> params) {
+        AppLogger.info("Executing count statement: " + sql);
+        Connection connection = null;
+
+        try {
+            connection = Server.getConnectionPool().borrowConnection();
+            PreparedStatement stmt = prepareStatement(connection, sql, params);
+            ResultSet resultSet = stmt.executeQuery();
+
+            if (resultSet.next()) {
+                AppLogger.info("Count executed, result found");
+                return resultSet.getInt(1);
+            } else {
+                AppLogger.info("Count executed, no result found");
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            AppLogger.severe("SQLException in GenericRepository.fetchCount", e);
+            throw new SimpleException(500, "Error fetching count");
         } finally {
             Server.getConnectionPool().returnConnection(connection);
         }

@@ -12,7 +12,8 @@ public class FriendsRepository {
     ToFriendshipModelMapper mapper = new ToFriendshipModelMapper();
 
     public int addFriend(int id, Integer privateToken) {
-        String sql = "INSERT INTO friendship (app_user_id_1, app_user_id_2, friendship_date, accepted) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO friendship (app_user_id_1, app_user_id_2, friendship_date, accepted)" +
+                " VALUES (?, ?, ?, ?)";
         List<Object> params = new ArrayList<>();
         params.add(privateToken);
         params.add(id);
@@ -22,7 +23,7 @@ public class FriendsRepository {
         return repository.insert(sql, params);
     }
 
-    public boolean checkIfFriends(int id, Integer privateToken) {
+        public boolean checkIfFriends(int id, Integer privateToken) {
         String sql = "SELECT * FROM friendship WHERE app_user_id_1 = ? AND app_user_id_2 = ?";
         List<Object> params = new ArrayList<>();
         params.add(privateToken);

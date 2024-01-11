@@ -8,6 +8,7 @@ public class AddressModel implements Serializable {
     private String postalCode;
     private String homeNumber;
     private String doorKey;
+    private String city;
     private boolean isMain;
 
     public AddressModel() {
@@ -19,6 +20,16 @@ public class AddressModel implements Serializable {
         this.postalCode = postalCode;
         this.homeNumber = homeNumber;
         this.doorKey = doorKey;
+        this.isMain = isMain;
+    }
+
+    public AddressModel(int id, String street, String postalCode, String homeNumber, String doorKey, String city, boolean isMain) {
+        this.id = id;
+        this.street = street;
+        this.postalCode = postalCode;
+        this.homeNumber = homeNumber;
+        this.doorKey = doorKey;
+        this.city = city;
         this.isMain = isMain;
     }
 
@@ -68,5 +79,13 @@ public class AddressModel implements Serializable {
 
     public void setMain(boolean main) {
         isMain = main;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

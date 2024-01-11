@@ -15,10 +15,11 @@ public class OrderModel implements Serializable {
     private String firstName;
     private String lastName;
     private String mail;
+    private int orderCode;
 
 
     public OrderModel(Integer id, Integer senderId, Integer recipientId, Integer courierId, BigDecimal price,
-                      Integer packageId, Integer statusId, String message, String firstName, String lastName) {
+                      Integer packageId, Integer statusId, String message, String firstName, String lastName, int orderCode) {
         this.id = id;
         this.senderId = senderId;
         this.recipientId = recipientId;
@@ -29,11 +30,11 @@ public class OrderModel implements Serializable {
         this.message = message;
         this.firstName = firstName;
         this.lastName = lastName;
-
+        this.orderCode = orderCode;
     }
 
     public OrderModel(Integer id, Integer senderId, Integer recipientId, Integer courierId, BigDecimal price,
-                      Integer packageId, Integer statusId, String message, String mail) {
+                      Integer packageId, Integer statusId, String message) {
         this.id = id;
         this.senderId = senderId;
         this.recipientId = recipientId;
@@ -42,7 +43,6 @@ public class OrderModel implements Serializable {
         this.packageId = packageId;
         this.statusId = statusId;
         this.message = message;
-        this.mail = mail;
     }
 
     public String getMessage() {
@@ -108,15 +108,39 @@ public class OrderModel implements Serializable {
     public void setStatusId(Integer statusId) {
         this.statusId = statusId;
     }
-    public String getFirstName() {return firstName;}
 
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getLastName() {return lastName;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setLastName(String lastName) {this.lastName = lastName;}
-    public String getMail() {return mail;}
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setMail(String mail) {this.mail = mail;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public int getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(int orderCode) {
+        this.orderCode = orderCode;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+
+
+    }
 }
 

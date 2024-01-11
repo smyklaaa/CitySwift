@@ -9,6 +9,7 @@ import com.example.cityswift.server.model.AddressModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AddressRepository {
     GenericRepository<AddressModel> repository = new GenericRepository<>();
@@ -19,6 +20,20 @@ public class AddressRepository {
         List<Object> params = new ArrayList<>();
         params.add(userId);
         return repository.fetchMultipleRow(sql, mapper, params);
+    }
+
+    public Optional<AddressModel> fetchAddressByUserId(Integer userId) {
+        String sql = "SELECT * FROM ADDRESS WHERE user_id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(userId);
+        return repository.fetchSingleRow(sql, mapper, params);
+    }
+
+    public Optional<AddressModel> fetchAddressById(Integer addressId) {
+        String sql = "SELECT * FROM ADDRESS WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(addressId);
+        return repository.fetchSingleRow(sql, mapper, params);
     }
 
     public List<AddressModel> fetchUsersInAddressArea(ParticularArea userArea) {
