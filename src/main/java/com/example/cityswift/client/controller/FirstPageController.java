@@ -18,8 +18,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class FirstPageController {
-    @FXML
-    private Button cancelButton;
+
     @FXML
     private Label ReactionMessageLabel;
     @FXML
@@ -76,6 +75,15 @@ public class FirstPageController {
         }
 
 
+    }
+
+    public void forgotPasswordButtonOn(ActionEvent event) {
+        try {
+            SceneSwitcher.switchScene(event, "/view/forgotPassword/forgotPasswordView.fxml");
+        } catch (IOException e) {
+            ReactionMessageLabel.setText("Błąd ładowania sceny");
+            System.out.println(e);
+        }
     }
 
 
