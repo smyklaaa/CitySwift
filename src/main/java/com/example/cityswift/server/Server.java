@@ -4,7 +4,7 @@ package com.example.cityswift.server;
 import com.example.cityswift.dto.ServerResponse;
 import com.example.cityswift.server.service.OrderService;
 import com.example.cityswift.server.service.UserService;
-import com.example.cityswift.server.util.*;
+
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -20,6 +20,11 @@ public class Server {
     private static final int THREAD_POOL_SIZE = 10;
 
     public static void main(String[] args) throws SQLException {
+
+        EmailSender emailSender = new EmailSender();
+        emailSender.sendEmail("smyklawspolpracafm@gmail.com", "Testowa wiadomość",
+                "To jest treść testowej wiadomości.");
+
         AppLogger.info("Starting application");
         connectionPool = new ConnectionPool();
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
