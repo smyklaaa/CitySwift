@@ -1,8 +1,14 @@
 .background{
-    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #a65fce, #3D5AFE);
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #c291de, #304ae7);
 
 }
 
 .signup_label_text{
     -fx-text-fill:white;
+}
+
+.basic_button{
+    -fx-background-color: #3D5AFE;
+    -fx-text-fill: white;
+    -fx-padding: 8px 30px;
 }
