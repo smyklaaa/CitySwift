@@ -108,11 +108,11 @@ public class OrderRepository {
                         "       app_user.mobile as sender_mobile, " +
                         "       concat(app_user.first_name, ' ', app_user.last_name) as sender_name " +
                         "       FROM orders " +
+                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       INNER JOIN recipient ON orders.recipient_id = recipient.id " +
                         "       INNER JOIN address as recipient_address ON orders.address_id = recipient_address.id " +
-                        "       INNER JOIN address as sender_address ON orders.sender_id = sender_address.id " +
+                        "       INNER JOIN address as sender_address ON app_user.id = sender_address.user_id " +
                         "       INNER JOIN package ON orders.package_id = package.id " +
-                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       WHERE status_id = ?;";
 
         List<Object> params = new ArrayList<>();
@@ -130,11 +130,11 @@ public class OrderRepository {
                         "       app_user.mobile as sender_mobile, " +
                         "       concat(app_user.first_name, ' ', app_user.last_name) as sender_name " +
                         "       FROM orders " +
+                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       INNER JOIN recipient ON orders.recipient_id = recipient.id " +
                         "       INNER JOIN address as recipient_address ON orders.address_id = recipient_address.id " +
-                        "       INNER JOIN address as sender_address ON orders.sender_id = sender_address.id " +
+                        "       INNER JOIN address as sender_address ON app_user.id = sender_address.user_id " +
                         "       INNER JOIN package ON orders.package_id = package.id " +
-                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       WHERE orders.id = ?;";
 
         List<Object> params = new ArrayList<>();
@@ -175,11 +175,11 @@ public class OrderRepository {
                         "       app_user.mobile as sender_mobile, " +
                         "       concat(app_user.first_name, ' ', app_user.last_name) as sender_name " +
                         "       FROM orders " +
+                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       INNER JOIN recipient ON orders.recipient_id = recipient.id " +
                         "       INNER JOIN address as recipient_address ON orders.address_id = recipient_address.id " +
-                        "       INNER JOIN address as sender_address ON orders.sender_id = sender_address.id " +
+                        "       INNER JOIN address as sender_address ON app_user.id = sender_address.user_id " +
                         "       INNER JOIN package ON orders.package_id = package.id " +
-                        "       INNER JOIN app_user ON orders.sender_id = app_user.id " +
                         "       WHERE orders.courier_id = ? AND orders.status_id = 2;";
 
         List<Object> params = new ArrayList<>();

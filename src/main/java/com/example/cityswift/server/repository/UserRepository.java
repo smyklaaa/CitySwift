@@ -40,7 +40,7 @@ public class UserRepository {
         return repository.fetchSingleRow(sql, userLoginMapper, params);
     }
 
-    public int insertUser(CreateUserData createUserData, String privateToken, String publicToken) {
+    public int insertUser(CreateUserData createUserData, int privateToken, int publicToken) {
         String sql = "INSERT INTO app_user (mail, password, first_name, last_name, mobile, date_of_birth, private_token, public_token) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         List<Object> params = new ArrayList<>();
         params.add(createUserData.getMail());
@@ -62,7 +62,7 @@ public class UserRepository {
     }
 
     public List<UserModel> fetchUserSearch(String userSearch, Integer privateToken) {
-        String sql = "SELECT * FROM app_user WHERE (first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ? OR public_token LIKE ?)" +
+        String sql = "SELECT * FROM app_user WHERE (first_name LIKE ? OR last_name LIKE ? OR mail LIKE ? OR mobile LIKE ? OR CAST(public_token AS TEXT) LIKE ?)" +
                 "AND id != ?";
         List<Object> params = new ArrayList<>();
         params.add('%' + userSearch + '%');
@@ -74,8 +74,8 @@ public class UserRepository {
         return repository.fetchMultipleRow(sql, mapper, params);
     }
 
-    public Optional<UserModel> getUserByPublicToken(String data) {
-        String sql = "SELECT * FROM app_user WHERE public_token = ? ";
+    public Optional<UserModel> getUserByPublicToken(int data) {
+        String sql = "SELECT * FROM app_user WHERE public_token = ?";
         List<Object> params = new ArrayList<>();
         params.add(data);
         return repository.fetchSingleRow(sql, mapper, params);
