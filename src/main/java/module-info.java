@@ -3,7 +3,6 @@ module com.example.cityswift {
     requires javafx.fxml;
     requires java.sql;
     requires java.mail;
-    requires java.net.http;
 
     opens com.example.cityswift.client to javafx.fxml;
     opens com.example.cityswift.client.controller to javafx.fxml;
