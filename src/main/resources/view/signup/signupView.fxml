@@ -15,7 +15,7 @@
       <TextField fx:id="mobileTextField" layoutX="63.0" layoutY="210.0" prefHeight="39.0" prefWidth="261.0" promptText="numer telefonu" />
       <TextField fx:id="streetNameTextField" layoutX="344.0" layoutY="210.0" prefHeight="39.0" prefWidth="255.0" promptText="nazwa ulicy" />
       <PasswordField fx:id="passwordField" layoutX="340.0" layoutY="94.0" prefHeight="39.0" prefWidth="261.0" promptText="hasło" />
-      <Button fx:id="signupButton" layoutX="211.0" layoutY="421.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="32.0" prefWidth="242.0" text="Zarejstruj się" />
+      <Button fx:id="signupButton" layoutX="63.0" layoutY="411.0" mnemonicParsing="false" onAction="#signupButtonOn" prefHeight="33.0" prefWidth="255.0" styleClass="basic_button" stylesheets="@signupStyle.css" text="Zarejstruj się" />
       <DatePicker fx:id="birthdayDatePicker" layoutX="340.0" layoutY="278.0" prefHeight="39.0" prefWidth="261.0" promptText="data urodzenia" />
       <Label fx:id="reactionMessageLabel" layoutX="63.0" layoutY="36.0" prefHeight="32.0" prefWidth="261.0" styleClass="signup_label_text" stylesheets="@signupStyle.css" text="Wypełnij dane aby dokonać rejstracji" />
       <TextField fx:id="postalCodeTextField" layoutX="63.0" layoutY="339.0" prefHeight="39.0" prefWidth="255.0" promptText="kod pocztowy" />
@@ -23,5 +23,6 @@
       <TextField fx:id="doorKeyTextField" layoutX="483.0" layoutY="339.0" prefHeight="39.0" prefWidth="121.0" promptText="nr mieszkania" />
       <TextField fx:id="cityTextField" layoutX="66.0" layoutY="272.0" prefHeight="39.0" prefWidth="255.0" promptText="miasto" />
       <Label fx:id="incorrectDataMessageLabel" layoutX="341.0" layoutY="36.0" prefHeight="52.0" prefWidth="261.0" styleClass="signup_label_text" stylesheets="@signupStyle.css" />
+      <Button fx:id="goToLoginPageButton" layoutX="343.0" layoutY="411.0" mnemonicParsing="false" onAction="#goToLoginPageButtonOn" prefHeight="33.0" prefWidth="261.0" styleClass="basic_button" stylesheets="@signupStyle.css" text="Powrót" />
    </children>
 </AnchorPane>

@@ -8,8 +8,8 @@ import com.example.cityswift.server.service.AddressService;
 import com.example.cityswift.server.service.OrderService;
 import com.example.cityswift.server.service.SettingsService;
 import com.example.cityswift.server.service.UserService;
+import com.example.cityswift.server.service.ForgotPasswordService;
 
-import java.util.List;
 import java.util.Optional;
 
 public class HandleClientAction {
@@ -18,6 +18,7 @@ public class HandleClientAction {
     private final OrderService orderService = new OrderService();
     private final SettingsService settingsService = new SettingsService();
     private final AddressService addressService = new AddressService();
+    private final ForgotPasswordService forgotPasswordService = new ForgotPasswordService();
 
     public ServerResponse handleClientAction(ClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse();
@@ -101,6 +102,9 @@ public class HandleClientAction {
                     break;
                 case "endDelivery":
                     serverResponse = orderService.endDelivery((EndDeliveryData) clientRequest.getData());
+                    break;
+                case "forgotPassword":
+                    serverResponse = forgotPasswordService.changeForgotPasswordIfUserRegistered((UserModel) clientRequest.getData());
                     break;
                 default:
                     serverResponse.setResultCode(404);

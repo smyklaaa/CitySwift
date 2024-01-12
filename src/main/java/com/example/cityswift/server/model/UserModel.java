@@ -32,6 +32,10 @@ public class UserModel implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public UserModel( String mail) {
+        this.mail = mail;
+    }
+
     public UserModel(int id, String firstName, String lastName, String publicToken, String mail, String mobile, LocalDate dateOfBirth, BigDecimal money) {
         this.id = id;
         this.firstName = firstName;

@@ -200,4 +200,13 @@ public class SignupController {
         }
     }
 
+    public void goToLoginPageButtonOn(ActionEvent event) {
+        try {
+            SceneSwitcher.switchScene(event, "/view/login/loginView.fxml");
+        } catch (IOException e) {
+            reactionMessageLabel.setText("Błąd ładowania sceny");
+            System.out.println(e);
+        }
+    }
+
 }
