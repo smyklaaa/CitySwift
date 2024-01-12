@@ -133,10 +133,10 @@ public class OrderService {
                     UserModel courier = courierOptional.get();
                     UserModel sender = senderOptional.get();
 
-                    BigDecimal add = sender.getMoney().add(orderModel.getPrice());
-                    BigDecimal subtract = courier.getMoney().subtract(orderModel.getPrice());
-                    userRepository.updateUserMoney(sender.getId(), add);
-                    userRepository.updateUserMoney(courier.getId(), subtract);
+                    BigDecimal add = courier.getMoney().add(orderModel.getPrice());
+                    BigDecimal subtract = sender.getMoney().subtract(orderModel.getPrice());
+                    userRepository.updateUserMoney(sender.getId(), subtract);
+                    userRepository.updateUserMoney(courier.getId(), add);
 
                     MailSender mailSender = new MailSender();
                     mailSender.sendMail(recipient.getMail(), "Dostawa została zakończona", "Twoja dostawa została zakończona przez kuriera: " + courier.getFirstName() + " " + courier.getLastName());
