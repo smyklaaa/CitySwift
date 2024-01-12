@@ -104,7 +104,7 @@ public class HandleClientAction {
                     serverResponse = orderService.endDelivery((EndDeliveryData) clientRequest.getData());
                     break;
                 case "forgotPassword":
-                    serverResponse = forgotPasswordService.changeIfUserRegistered((UserModel) clientRequest.getData());
+                    serverResponse = forgotPasswordService.changeForgotPasswordIfUserRegistered((UserModel) clientRequest.getData());
                     break;
                 default:
                     serverResponse.setResultCode(404);

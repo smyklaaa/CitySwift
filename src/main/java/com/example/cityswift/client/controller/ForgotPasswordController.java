@@ -32,6 +32,7 @@ public class ForgotPasswordController {
 
             ServerResponse serverResponseForgotPassword = NetworkClient.sendRequest(new ClientRequest(
                     "forgotPassword", userModel));
+
             if(serverResponseForgotPassword.getResultCode() == 200){
                 reactionMessageLabel.setText("Kod został pomyślnie wysłany");
             }else if(serverResponseForgotPassword.getResultCode() == 404) {
