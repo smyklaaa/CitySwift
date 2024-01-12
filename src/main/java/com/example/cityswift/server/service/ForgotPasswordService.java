@@ -2,22 +2,21 @@ package com.example.cityswift.server.service;
 
 import com.example.cityswift.dto.ServerResponse;
 import com.example.cityswift.server.model.UserModel;
-import com.example.cityswift.server.repository.ForgotPasswordRepository;
-import com.example.cityswift.server.repository.SettingsRepository;
+import com.example.cityswift.server.repository.UserRepository;
 import com.example.cityswift.server.util.MailSender;
 
 import java.security.SecureRandom;
 import java.util.Optional;
 
 public class ForgotPasswordService {
-    private final ForgotPasswordRepository forgotPasswordRepository = new ForgotPasswordRepository();
+    private final UserRepository userRepository= new UserRepository();
 
     public ServerResponse changeForgotPasswordIfUserRegistered(UserModel data) {
-        Optional<UserModel> userInDatabase = forgotPasswordRepository.getUserMail(data.getMail());
+        Optional<UserModel> userInDatabase = userRepository.getUserMail(data.getMail());
 
         if(userInDatabase.isPresent()){
             String newPassword  = generateRandomPassword();
-            forgotPasswordRepository.changePassword(userInDatabase.get().getMail(),newPassword);
+            userRepository.changePassword(userInDatabase.get().getMail(),newPassword);
 
             MailSender mailSender = new MailSender();
             mailSender.sendMail(userInDatabase.get().getMail(),"Nowe hasło do platformy CitySwift",
