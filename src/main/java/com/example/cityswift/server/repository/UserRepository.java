@@ -1,8 +1,10 @@
 package com.example.cityswift.server.repository;
 
 
+import com.example.cityswift.dto.AddressDTO;
 import com.example.cityswift.dto.BasicUserData;
 import com.example.cityswift.dto.CreateUserData;
+import com.example.cityswift.server.mapper.ToMailModelMapper;
 import com.example.cityswift.server.mapper.ToUserModelMapper;
 import com.example.cityswift.server.mapper.UserLoginMapper;
 import com.example.cityswift.server.model.AddressModel;
@@ -18,6 +20,7 @@ public class UserRepository {
     AddressRepository addressRepository = new AddressRepository();
     ToUserModelMapper mapper = new ToUserModelMapper();
     UserLoginMapper userLoginMapper = new UserLoginMapper();
+    ToMailModelMapper toMailModelMapper = new ToMailModelMapper();
 
     public Optional<UserModel> fetchUserById(int userId) {
         String sql = "SELECT * FROM app_user WHERE id = ?";
@@ -130,5 +133,53 @@ public class UserRepository {
         List<Object> params = new ArrayList<>();
         params.add(userId);
         return repository.fetchCount(sql, params);
+    }
+
+
+    public Optional<UserModel> getUserMail(String mail) {
+        String sql = "SELECT app_user.mail FROM app_user WHERE mail = ? ";
+        List<Object> params = new ArrayList<>();
+        params.add(mail);
+        return repository.fetchSingleRow(sql, toMailModelMapper, params);
+    }
+
+    public void changePassword(String mail, String password) {
+        String sql = "UPDATE app_user SET password = ? WHERE mail = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(password);
+        params.add(mail);
+
+        repository.insert(sql, params);
+    }
+
+    public void changePassword(String password, Integer privateToken) {
+        String sql = "UPDATE app_user SET password = ? WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(password);
+        params.add(privateToken);
+
+        repository.insert(sql, params);
+    }
+
+    public void changeMobile(String mobile, Integer privateToken) {
+        String sql = "UPDATE app_user SET mobile = ? WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(mobile);
+        params.add(privateToken);
+
+        repository.insert(sql, params);
+    }
+
+    public void changeAddress(AddressDTO newAddress, Integer privateToken) {
+        String sql = "UPDATE address SET city = ?, street = ?, postal_code = ?, home_number = ?, door_key = ?  WHERE id = ?";
+        List<Object> params = new ArrayList<>();
+        params.add(newAddress.getCity());
+        params.add(newAddress.getStreetName());
+        params.add(newAddress.getPostalCode());
+        params.add(newAddress.getHomeNr());
+        params.add(newAddress.getDoorKey());
+        params.add(privateToken);
+
+        repository.insert(sql, params);
     }
 }

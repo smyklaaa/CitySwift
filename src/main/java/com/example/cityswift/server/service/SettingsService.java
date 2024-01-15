@@ -2,34 +2,28 @@ package com.example.cityswift.server.service;
 
 import com.example.cityswift.dto.AddressDTO;
 import com.example.cityswift.dto.ServerResponse;
-import com.example.cityswift.dto.UserCredential;
-import com.example.cityswift.server.model.OrderModel;
-import com.example.cityswift.server.repository.RecipientRepository;
-import com.example.cityswift.server.repository.SettingsRepository;
-
-import java.io.Serializable;
-import java.util.List;
+import com.example.cityswift.server.repository.UserRepository;
 
 public class SettingsService {
 
-    private final SettingsRepository settingsRepository = new SettingsRepository();
+    private final UserRepository userRepository = new UserRepository();
 
     public ServerResponse changePassword(String password, int currentUserId) {
-        settingsRepository.changePassword(password, currentUserId);
+        userRepository.changePassword(password, currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setResultCode(200);
         return serverResponse;
     }
 
     public ServerResponse changeMobile(String mobile, int currentUserId) {
-        settingsRepository.changeMobile(mobile, currentUserId);
+        userRepository.changeMobile(mobile, currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setResultCode(200);
         return serverResponse;
     }
 
     public ServerResponse changeAddress(AddressDTO newAddress, int currentUserId) {
-        settingsRepository.changeAddress(newAddress, currentUserId);
+        userRepository.changeAddress(newAddress, currentUserId);
         ServerResponse serverResponse = new ServerResponse();
         serverResponse.setResultCode(200);
         return serverResponse;
